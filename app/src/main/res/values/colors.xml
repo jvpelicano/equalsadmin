@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#035297</color>
+    <color name="colorPrimaryDark">#035297</color>
+    <color name="colorPrimaryLight">#AFC7DB</color>
+    <color name="colorAccent">#035297</color>
+    <color name="statusBar">#035297</color>
+    <color name="colorPrimary1">#035297</color>
+    <color name="colorPrimaryDark1">#ffffff</color>
+    <color name="colorAccent1">#ffffff</color>
+    <color name="statusBar1">#ffffff</color>
+    <color name="white">#ffffff</color>
+    <color name="btnColor">#177ad0</color>
+    <color name="background">#DADEE1</color>
+    <color name="gray">#808080</color>
+    <color name="textColor">#000000</color>
+    <color name="postBackground">#FFFFFF</color>
+    <color name="red">#FF1414</color>
+    <color name="red1">#FD4A4A</color>
 </resources>

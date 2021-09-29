@@ -3,7 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/selector.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/user.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable/emp.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable/home.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable/jobs.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable/profile.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable/pwd.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable/verified.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/font/poppins.xml" value="0.1078125" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/fragment_emp.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/fragment_job.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/fragment_p_w_d.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1" />
       </map>
     </option>
   </component>
