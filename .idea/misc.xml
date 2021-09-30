@@ -4,9 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/btn_login_effect.xml" value="0.159375" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/confirm.xml" value="0.1234375" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/cursor.xml" value="0.1234375" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/email.xml" value="0.159375" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/hide_password.xml" value="0.1234375" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/password.xml" value="0.159375" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/password_icon.xml" value="0.1234375" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/selector.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/show_password.xml" value="0.1234375" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/user.xml" value="0.1" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable/emp.xml" value="0.1" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable/home.xml" value="0.1" />
@@ -18,6 +23,7 @@
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/font/poppins.xml" value="0.1078125" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/activity_login.xml" value="0.11927083333333334" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/activity_register.xml" value="0.11979166666666667" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/activity_splash_screen.xml" value="0.11927083333333334" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/fragment_emp.xml" value="0.1" />

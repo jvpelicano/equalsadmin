@@ -17,11 +17,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText etEmail;
     private EditText etPassword;
     private TextView tvSignup;
+    RelativeLayout loginLayout;
 
     //progress dialog
     private ProgressDialog progressDialog;
@@ -55,6 +58,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnSignIn = findViewById(R.id.btnSignin);
         btnforgotpass = findViewById(R.id.btnForgotpw);
         tvSignup  = findViewById(R.id.tvSignUp);
+        loginLayout = findViewById(R.id.login_layout);
 
         progressDialog = new ProgressDialog(this);
 
@@ -86,13 +90,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if(info.isConnected())
                 {
                     Log.d(TAG," Internet Connection Available...");
-                    return true;
                 }
                 else
                 {
                     Log.d(TAG," Internet Connection");
-                    return true;
                 }
+                return true;
 
             }
         }
@@ -126,7 +129,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if(view == tvSignup){
             finish();
-//            startActivity(new Intent(this, RegisterActivity_emp.class));
+            startActivity(new Intent(this, RegisterActivity.class));
         }
 
         if(view == btnforgotpass){
@@ -154,7 +157,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             etPassword.requestFocus();
         }
         else if (password.isEmpty() && email.isEmpty()) {
-            Toast.makeText(LoginActivity.this, "Fields are empty", Toast.LENGTH_SHORT).show();
+            Snackbar.make(loginLayout, "Fields are empty", Snackbar.LENGTH_LONG).show();
         }
         else if (!(password.isEmpty() && email.isEmpty())) {
             progressDialog.setMessage("Logging In..");
@@ -173,12 +176,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         public void onFailure(@NonNull Exception e) {
                             //Failed to login
                             progressDialog.dismiss();
-                            Toast.makeText(LoginActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Snackbar.make(loginLayout, "" + e.getMessage(), Snackbar.LENGTH_LONG).show();
                         }
                     });
         }
         else {
-            Toast.makeText(LoginActivity.this, "Error occurred", Toast.LENGTH_SHORT).show();
+            Snackbar.make(loginLayout, "Error Occurred", Snackbar.LENGTH_LONG).show();
         }
 
     }
@@ -198,16 +201,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
                             else{
                                 progressDialog.dismiss();
-                                Toast.makeText(LoginActivity.this, "Unauthorized Account", Toast.LENGTH_SHORT).show();
+                                Snackbar.make(loginLayout, "Unauthorized Account", Snackbar.LENGTH_LONG).show();
                             }
                         }
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         progressDialog.dismiss();
+                        Snackbar.make(loginLayout, "Error occurred" , Snackbar.LENGTH_LONG).show();
                         // Toast.makeText(LoginActivity.this, ""+i.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
+    //transition when back button is pressed
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
 }

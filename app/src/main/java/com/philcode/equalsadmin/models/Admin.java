@@ -3,16 +3,14 @@ package com.philcode.equalsadmin.models;
 public class Admin {
 
     private String uid;
-    private String fname;
-    private String lname;
+    private String name;
     private String email;
     private String image;
     private String accountType;
 
-    public Admin(String uid, String fname, String lname, String email, String image, String accountType) {
+    public Admin(String uid, String name, String email, String image, String accountType) {
         this.uid = uid;
-        this.fname = fname;
-        this.lname = lname;
+        this.name = name;
         this.email = email;
         this.image = image;
         this.accountType = accountType;
@@ -30,20 +28,12 @@ public class Admin {
         this.uid = uid;
     }
 
-    public String getFname() {
-        return fname;
+    public String getName() {
+        return name;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname;
-    }
-
-    public String getLname() {
-        return lname;
-    }
-
-    public void setLname(String lname) {
-        this.lname = lname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
