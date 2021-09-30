@@ -1,11 +1,17 @@
 package com.philcode.equalsadmin.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -72,59 +78,67 @@ public class RegisterActivity extends AppCompatActivity {
             if (!validateName() | !validateEmail() | !validatePassword() | !validateConfirmPassword()){
 
             }
-            else
+            else {
                 registerAdmin();
+            }
         });
 
     }
 
     private void registerAdmin(){
 
-        progressDialog.show();
-        final String nameSignup = textNameSignup.getEditableText().toString().trim();
-        final String emailSignup = textEmailSignup.getEditableText().toString().trim();
-        final String passwordSignup = textPasswordSignup.getEditableText().toString().trim();
-        final String accountType = "Admin";
+        if(RegisterActivity.CheckNetwork.isInternetAvailable(RegisterActivity.this)) {
 
-        mAuth.createUserWithEmailAndPassword(emailSignup,passwordSignup)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()){
-                        //Sign in success, dismiss dialog and start register activity
-                        progressDialog.dismiss();
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        String emailSignup1 = user.getEmail();
-                        String uid = user.getUid();
+            progressDialog.show();
+            final String nameSignup = textNameSignup.getEditableText().toString().trim();
+            final String emailSignup = textEmailSignup.getEditableText().toString().trim();
+            final String passwordSignup = textPasswordSignup.getEditableText().toString().trim();
+            final String accountType = "Admin";
 
-
-                        HashMap<Object, String> hashMap = new HashMap<>();
-                        //put info in hashmap
-                        hashMap.put("uid", uid);
-                        hashMap.put("email", emailSignup1);
-                        hashMap.put("name", nameSignup);
-                        hashMap.put("image", "");
-                        hashMap.put("accountType", accountType);
-
-                        FirebaseDatabase database = FirebaseDatabase.getInstance();
-                        DatabaseReference reference = database.getReference("Admin");
-                        //put data within hashmap in database
-                        reference.child(uid).setValue(hashMap);
+            mAuth.createUserWithEmailAndPassword(emailSignup, passwordSignup)
+                    .addOnCompleteListener(this, task -> {
+                        if (task.isSuccessful()) {
+                            //Sign in success, dismiss dialog and start register activity
+                            progressDialog.dismiss();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            String emailSignup1 = user.getEmail();
+                            String uid = user.getUid();
 
 
-                        Snackbar.make(mainLayout, "Account successfully registered", Snackbar.LENGTH_LONG).show();
-                        finish();
-                    }
-                    else{
-                        //if sign in fails, display a message
-                        progressDialog.dismiss();
-                       Snackbar.make(mainLayout, "Failed to register. Please try again", Snackbar.LENGTH_LONG).show();
-                    }
-                }).addOnFailureListener(e -> {
-                    //error dismiss progress dialog and get and show the error
-                    progressDialog.dismiss();
-                    Snackbar.make(mainLayout, "" + e.getMessage(), Snackbar.LENGTH_LONG).show();
-                });
+                            HashMap<Object, String> hashMap = new HashMap<>();
+                            //put info in hashmap
+                            hashMap.put("uid", uid);
+                            hashMap.put("email", emailSignup1);
+                            hashMap.put("name", nameSignup);
+                            hashMap.put("image", "");
+                            hashMap.put("accountType", accountType);
+
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference reference = database.getReference("Admin");
+                            //put data within hashmap in database
+                            reference.child(uid).setValue(hashMap);
 
 
+                            Snackbar.make(mainLayout, "Account successfully registered", Snackbar.LENGTH_LONG).show();
+                            finish();
+                        } else {
+                            //if sign in fails, display a message
+                            progressDialog.dismiss();
+                            Snackbar.make(mainLayout, "Failed to register. Please try again", Snackbar.LENGTH_LONG).show();
+                        }
+                    }).addOnFailureListener(e -> {
+                //error dismiss progress dialog and get and show the error
+                progressDialog.dismiss();
+                Snackbar.make(mainLayout, "" + e.getMessage(), Snackbar.LENGTH_LONG).show();
+            });
+
+        }
+        AlertDialog.Builder alert =  new AlertDialog.Builder(RegisterActivity.this);
+        alert.setMessage("Make sure that your Wi-Fi or mobile data is turned on, then try again.").setCancelable(false)
+                .setPositiveButton("Dismiss", (dialog, which) -> dialog.cancel());
+        AlertDialog alertDialog = alert.create();
+        alertDialog.setTitle("No Internet Connection");
+        alertDialog.show();
     }
 
     @Override
@@ -192,6 +206,34 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             textConfirmPasswordSignupLayout.setError(null);
             return true;
+        }
+    }
+
+    public static class CheckNetwork {
+
+        private static final String TAG = LoginActivity.CheckNetwork.class.getSimpleName();
+        public static boolean isInternetAvailable(Context context)
+        {
+            NetworkInfo info = ((ConnectivityManager)
+                    context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+            if (info == null)
+            {
+                Log.d(TAG,"No Internet Connection");
+                return false;
+            }
+            else
+            {
+                if(info.isConnected())
+                {
+                    Log.d(TAG," Internet Connection Available...");
+                }
+                else
+                {
+                    Log.d(TAG," Internet Connection");
+                }
+                return true;
+
+            }
         }
     }
 

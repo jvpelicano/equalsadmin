@@ -30,9 +30,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        //make status bar text color to black
-//        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-//        getSupportActionBar().setTitle("Equals Admin");
 
         ahBottomNavigationViewPager = findViewById(R.id.bottom_navigation_viewpager);
         ahBottomNavigation = findViewById(R.id.bottom_navigation);
@@ -62,12 +59,10 @@ public class MainActivity extends AppCompatActivity {
         ahBottomNavigation.setAccentColor(Color.parseColor("#035297"));
         ahBottomNavigation.setInactiveColor(Color.parseColor("#747474"));
 
-        ahBottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
-            @Override
-            public boolean onTabSelected(int position, boolean wasSelected) {
-                ahBottomNavigationViewPager.setCurrentItem(position);
-                return true;
-            }
+        ahBottomNavigation.setNotification("3", 3); //Sample count notification
+        ahBottomNavigation.setOnTabSelectedListener((position, wasSelected) -> {
+            ahBottomNavigationViewPager.setCurrentItem(position);
+            return true;
         });
 
         ahBottomNavigationViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
