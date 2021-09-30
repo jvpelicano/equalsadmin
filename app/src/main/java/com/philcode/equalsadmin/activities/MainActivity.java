@@ -1,4 +1,4 @@
-package com.philcode.equalsadmin;
+package com.philcode.equalsadmin.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
+import com.philcode.equalsadmin.R;
 import com.philcode.equalsadmin.adapters.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //make status bar text color to black
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        getSupportActionBar().setTitle(" ");
+//        //make status bar text color to black
+//        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//        getSupportActionBar().setTitle("Equals Admin");
 
         ahBottomNavigationViewPager = findViewById(R.id.bottom_navigation_viewpager);
         ahBottomNavigation = findViewById(R.id.bottom_navigation);

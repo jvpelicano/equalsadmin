@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.HomeFragment">
+    tools:context=".activities.LoginActivity">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Home fragment" />
+        android:fontFamily="@font/poppins_medium"
+        android:text="LOGIN"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-147dp" />
 
     <Button
-        android:id="@+id/btnSample1"
+        android:id="@+id/btnSample"
         android:textColor="@color/white"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:text="Done" />
 
-</FrameLayout>
+
+</RelativeLayout>

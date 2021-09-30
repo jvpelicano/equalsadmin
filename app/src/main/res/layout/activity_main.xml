@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
 
     <FrameLayout
@@ -50,8 +50,8 @@
         android:id="@+id/view_animation"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:visibility="invisible"
-        android:background="@android:color/transparent"></ImageView>
+        android:background="@android:color/transparent"
+        android:visibility="invisible"></ImageView>
 
 
 </RelativeLayout>
