@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/btn_login_effect.xml" value="0.159375" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/email.xml" value="0.159375" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/password.xml" value="0.159375" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/selector.xml" value="0.1" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/user.xml" value="0.1" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable/emp.xml" value="0.1" />
