@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 ahBottomNavigation.setCurrentItem(position);
+                ahBottomNavigation.setNotification("", position);
+
             }
 
             @Override
