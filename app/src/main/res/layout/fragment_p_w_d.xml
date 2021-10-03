@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,27 +7,45 @@
     tools:context=".fragments.PWDFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_job"
+        android:id="@+id/toolbar_pwd"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        android:textAlignment="center"
-        app:title="Candidates"
-        app:titleTextColor="@color/cardview_light_background" />
+        app:title="Announcements / Seminars / Blogs"
+        app:titleTextColor="@color/cardview_light_background"
+        />
 
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
-        android:padding="10dp">
+        android:layout_below="@+id/toolbar_pwd"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintStart_toStartOf="@id/toolbar_pwd"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingBottom="55dp">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/poppins"
-            android:text="hello candidates fragment" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:isScrollContainer="true"
+            android:orientation="vertical">
 
-</FrameLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/post_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:background="#F4F4F4"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"></androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
+        ahBottomNavigation.setCurrentItem(0);
+
         ahBottomNavigationViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

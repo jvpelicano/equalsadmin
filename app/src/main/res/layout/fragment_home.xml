@@ -20,13 +20,14 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="680dp"
+        android:layout_height="match_parent"
         android:layout_below="@+id/toolbar_home"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
         app:layout_constraintStart_toStartOf="@id/toolbar_home"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingBottom="55dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,7 +38,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/post_list"
             android:layout_width="match_parent"
-            android:layout_height="677dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:background="#F4F4F4"
