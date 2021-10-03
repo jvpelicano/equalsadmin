@@ -13,14 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        android:textAlignment="center"
-        app:title="Announcements"
-        app:titleTextColor="@color/cardview_light_background" />
+        app:title="Announcements / Seminars / Blogs"
+        app:titleTextColor="@color/cardview_light_background"
+        />
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="670dp"
+        android:layout_height="680dp"
         android:layout_below="@+id/toolbar_home"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="0dp"
@@ -37,7 +37,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/post_list"
             android:layout_width="match_parent"
-            android:layout_height="540dp"
+            android:layout_height="677dp"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:background="#F4F4F4"
@@ -46,5 +46,16 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="357dp"
+        android:layout_height="468dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="80dp"
+        android:contentDescription="Add"
+        android:src="@drawable/add" />
 
 </RelativeLayout>

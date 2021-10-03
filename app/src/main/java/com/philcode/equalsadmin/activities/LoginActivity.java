@@ -74,7 +74,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public static class CheckNetwork {
 
         private static final String TAG = CheckNetwork.class.getSimpleName();
-
         public static boolean isInternetAvailable(Context context)
         {
             NetworkInfo info = ((ConnectivityManager)
@@ -96,7 +95,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.d(TAG," Internet Connection");
                 }
                 return true;
-
             }
         }
     }
@@ -164,20 +162,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             progressDialog.show();
 
             firebaseAuth.signInWithEmailAndPassword(email, password)
-                    .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            //logged in successfully
-                            checkUserType();
-                        }
+                    .addOnSuccessListener(authResult -> {
+                        //logged in successfully
+                        checkUserType();
                     })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            //Failed to login
-                            progressDialog.dismiss();
-                            Snackbar.make(loginLayout, "" + e.getMessage(), Snackbar.LENGTH_LONG).show();
-                        }
+                    .addOnFailureListener(e -> {
+                        //Failed to login
+                        progressDialog.dismiss();
+                        Snackbar.make(loginLayout, "" + e.getMessage(), Snackbar.LENGTH_LONG).show();
                     });
         }
         else {
@@ -187,7 +179,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void checkUserType() {
-        //if user is admin, manager or traveler
+        //if user is admin
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Admin");
         ref.orderByChild("uid").equalTo(firebaseAuth.getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {

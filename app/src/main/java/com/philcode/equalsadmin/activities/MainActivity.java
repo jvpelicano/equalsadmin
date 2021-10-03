@@ -1,5 +1,6 @@
 package com.philcode.equalsadmin.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -8,28 +9,41 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.philcode.equalsadmin.R;
 import com.philcode.equalsadmin.adapters.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    RelativeLayout mainLayout;
     private AHBottomNavigationViewPager ahBottomNavigationViewPager;
     private AHBottomNavigation ahBottomNavigation;
     private ViewPagerAdapter viewPagerAdapter;
 
+
     private View viewEndAnimation;
     private ImageView viewAnimation;
+
+    public FirebaseDatabase firebaseDatabase;
+    public DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mainLayout = findViewById(R.id.main_layout);
 
         ahBottomNavigationViewPager = findViewById(R.id.bottom_navigation_viewpager);
         ahBottomNavigation = findViewById(R.id.bottom_navigation);
@@ -59,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         ahBottomNavigation.setAccentColor(Color.parseColor("#035297"));
         ahBottomNavigation.setInactiveColor(Color.parseColor("#747474"));
 
-        ahBottomNavigation.setNotification("3", 3); //Sample count notification
         ahBottomNavigation.setOnTabSelectedListener((position, wasSelected) -> {
             ahBottomNavigationViewPager.setCurrentItem(position);
             return true;
@@ -70,19 +83,73 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
             }
-
             @Override
             public void onPageSelected(int position) {
                 ahBottomNavigation.setCurrentItem(position);
                 ahBottomNavigation.setNotification("", position);
-
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
+
+        //get notification badge for Pending Job Offers
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference = firebaseDatabase.getReference("Job_Offers");
+        Query query3 = reference.orderByChild("permission").equalTo("pending");
+        query3.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getChildrenCount() > 0){
+                    dataSnapshot.getChildrenCount();
+                    ahBottomNavigation.setNotification(""+ dataSnapshot.getChildrenCount(), 1);
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Snackbar.make(mainLayout, "Network ERROR. Please check your internet connection", Snackbar.LENGTH_LONG).show();
+            }
+        });
+
+
+        //get notification badge for pending PWD
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference = firebaseDatabase.getReference("PWD");
+        Query query2 = reference.orderByChild("typeStatus").equalTo("PWDPending");
+        query2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getChildrenCount() > 0){
+                    dataSnapshot.getChildrenCount();
+                    ahBottomNavigation.setNotification(""+ dataSnapshot.getChildrenCount(), 2);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Snackbar.make(mainLayout, "Network ERROR. Please check your internet connection", Snackbar.LENGTH_LONG).show();
+            }
+        });
+
+        //get notification badge for pending EMP
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference = firebaseDatabase.getReference("Employers");
+        Query query = reference.orderByChild("typeStatus").equalTo("EMPPending");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getChildrenCount() > 0){
+                    dataSnapshot.getChildrenCount();
+                    ahBottomNavigation.setNotification(""+ dataSnapshot.getChildrenCount(), 3);
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Snackbar.make(mainLayout, "Network ERROR. Please check your internet connection", Snackbar.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     @Override
@@ -97,4 +164,5 @@ public class MainActivity extends AppCompatActivity {
     public ImageView getViewAnimation() {
         return viewAnimation;
     }
+
 }
