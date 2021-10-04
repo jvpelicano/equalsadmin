@@ -31,13 +31,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     Activity activity;
     Context context;
 
-
     public HomeAdapter(Context context, ArrayList<Announcement> homeModels, Activity activity) {
         this.homeModels = homeModels;
         this.activity = activity;
         this.context = context;
     }
-
 
     @NonNull
     @Override
@@ -53,6 +51,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.postTitle.setText(currentItem.getPostContentTitle());
         holder.postDescription.setText(currentItem.getPostDescription());
         holder.postDate.setText(currentItem.getFormattedDate());
+        try {
+            Picasso.get().load(homeModels.get(position).getPostImage())
+                    .placeholder(R.drawable.equalsplaceholder).centerCrop().fit().into(holder.postImage);
+        }
+        catch (Exception e){
+        }
 
         holder.postCardView.setOnClickListener(view -> {
             Intent intent = new Intent(activity, PostDetailsActivity.class);
@@ -62,14 +66,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             intent.putExtra("postImage", homeModels.get(position).getPostImage());
             activity.startActivity(intent);
         });
-
-
-        try {
-            Picasso.get().load(homeModels.get(position).getPostImage())
-                    .placeholder(R.drawable.profile).centerCrop().fit().into(holder.postImage);
-        }
-        catch (Exception e){
-        }
 
     }
 

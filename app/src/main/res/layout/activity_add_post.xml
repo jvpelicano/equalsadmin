@@ -91,7 +91,9 @@
                 android:fontFamily="@font/poppins_medium"
                 android:text="Publish"
                 app:backgroundTint="@color/btnColor"
-                app:rippleColor="@android:color/darker_gray"></com.google.android.material.button.MaterialButton>
+                app:rippleColor="@android:color/darker_gray">
+            </com.google.android.material.button.MaterialButton>
+
         </LinearLayout>
 
     </ScrollView>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/employer_item_layout"
+    android:clickable="true"
+    android:focusable="true"
+   >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:id="@+id/emp_img_profile"
+            android:src="@drawable/emp_placeholder"
+            android:padding="2dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp">
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Company:"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/proxima_nova_bold"/>
+
+                <TextView
+                    android:id="@+id/emp_company_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Avanza Inc"
+                    android:textSize="16sp"
+                    android:textColor="@color/textColor"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/proxima_nova_bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name:"
+                    android:fontFamily="@font/proxima_nova_regular"/>
+
+                <TextView
+                    android:id="@+id/emp_fname_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Juan"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:textColor="@color/textColor"/>
+
+                <TextView
+                    android:id="@+id/emp_lname_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dela Cruz"
+                    android:layout_marginLeft="3dp"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:textColor="@color/textColor"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email:"
+                    android:fontFamily="@font/proxima_nova_regular"/>
+
+                <TextView
+                    android:id="@+id/emp_email_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="juandelacruz@gmail.com"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:textColor="@color/textColor"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact No.:"
+                    android:fontFamily="@font/proxima_nova_regular"/>
+
+                <TextView
+                    android:id="@+id/emp_phone_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+639211000002"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:textColor="@color/textColor"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="Status:"/>
+
+                <TextView
+                    android:id="@+id/emp_status_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:textStyle="bold"
+                    android:text="Pending"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/textColor"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

@@ -13,9 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        app:title="Announcements / Seminars / Blogs"
-        app:titleTextColor="@color/cardview_light_background"
-        />
+        app:title="Employers"
+        app:titleTextColor="@color/cardview_light_background" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -36,7 +35,7 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/job_list"
+                android:id="@+id/emp_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="0dp"

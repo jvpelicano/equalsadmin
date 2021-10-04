@@ -8,4 +8,24 @@
     <string name="tab_5">PROFILE</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!--    <string name="hello_blank_fragment">Hello blank fragment</string>-->
+
+    <string-array name="EMPStatus">
+        <item>Pending</item>
+        <item>EMPApproved</item>
+        <item>Cancelled</item>
+    </string-array>
+
+    <string-array name="PWDStatus">
+        <item>Pending</item>
+        <item>PWDApproved</item>
+        <item>Cancelled</item>
+    </string-array>
+
+    <string-array name="JobStatus">
+        <item>Pending</item>
+        <item>Approved</item>
+        <item>Cancelled</item>
+    </string-array>
+
 </resources>
+
