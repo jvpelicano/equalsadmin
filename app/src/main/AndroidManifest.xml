@@ -11,9 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activities.PWDDetailsActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.EmployerDetailsActivity"
             android:exported="true"
-            android:theme="@style/Theme.EqualsAdmin"/>
+            android:theme="@style/Theme.EqualsAdmin" />
         <activity
             android:name=".activities.PostDetailsActivity"
             android:exported="true"

@@ -3,6 +3,7 @@ package com.philcode.equalsadmin.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,12 +51,30 @@ public class EmployerAdapter extends RecyclerView.Adapter<EmployerAdapter.Employ
     public void onBindViewHolder(@NonNull final EmployerViewHolder holder, final int position) {
         final Employer currentItem = employerModels.get(position);
 
+        String verified = currentItem.getTypeStatus();
+
+        if (verified.equals("EMPApproved")){
+            holder.empVerified.setVisibility(View.VISIBLE);
+            holder.empStatus.setText("Approved");
+            holder.empStatus.setTextColor(Color.parseColor("#008000"));
+        }
+        else if (verified.equals("PWDPending")){
+            holder.empVerified.setVisibility(View.GONE);
+            holder.empStatus.setText("Pending");
+            holder.empStatus.setTextColor(Color.parseColor("#FF1414"));
+        }
+        else{
+            holder.empVerified.setVisibility(View.GONE);
+            holder.empStatus.setText("Cancelled");
+            holder.empStatus.setTextColor(Color.parseColor("#808080"));
+        }
+
         holder.empCompany.setText(currentItem.getFullname());
         holder.empFname.setText(currentItem.getFirstname());
         holder.empLname.setText(currentItem.getLastname());
         holder.empEmail.setText(currentItem.getEmail());
         holder.empPhone.setText(currentItem.getContact());
-        holder.empStatus.setText(currentItem.getTypeStatus());
+
         try {
             Picasso.get().load(employerModels.get(position).getAvatar())
                     .placeholder(R.drawable.emp_placeholder).centerCrop().fit().into(holder.empImage);
@@ -84,6 +103,7 @@ public class EmployerAdapter extends RecyclerView.Adapter<EmployerAdapter.Employ
     public class EmployerViewHolder extends RecyclerView.ViewHolder {
 
         public CircleImageView empImage;
+        public ImageView empVerified;
         public TextView empFname, empLname,empCompany, empEmail, empPhone, empStatus;
         public MaterialCardView empCardView;
 
@@ -97,6 +117,7 @@ public class EmployerAdapter extends RecyclerView.Adapter<EmployerAdapter.Employ
             empEmail = itemView.findViewById(R.id.emp_email_item);
             empPhone = itemView.findViewById(R.id.emp_phone_item);
             empStatus = itemView.findViewById(R.id.emp_status_item);
+            empVerified = itemView.findViewById(R.id.img_verified_indicator);
             empCardView = itemView.findViewById(R.id.employer_item_layout);
         }
     }
