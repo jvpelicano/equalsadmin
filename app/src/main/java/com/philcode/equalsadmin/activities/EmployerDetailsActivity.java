@@ -2,32 +2,28 @@ package com.philcode.equalsadmin.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Toolbar;
 
 import com.philcode.equalsadmin.R;
+import com.philcode.equalsadmin.fragments.EmpFragment;
 
-public class AddPostActivity extends AppCompatActivity {
-
-    private View viewEndAnimation;
-    private ImageView viewAnimation;
+public class EmployerDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_post);
+        setContentView(R.layout.activity_employer_details);
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
-        getSupportActionBar().setTitle("Add Post");
+        getSupportActionBar().setTitle("Employer Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().show();
-
-        viewEndAnimation = findViewById(R.id.view_end_animation);
-        viewAnimation = findViewById(R.id.view_animation);
     }
 
     @Override
@@ -39,5 +35,11 @@ public class AddPostActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 }

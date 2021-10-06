@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.philcode.equalsadmin.R;
 import com.philcode.equalsadmin.activities.AddPostActivity;
+import com.philcode.equalsadmin.activities.MainActivity;
 import com.philcode.equalsadmin.adapters.HomeAdapter;
 import com.philcode.equalsadmin.models.Announcement;
 
@@ -31,6 +32,7 @@ public class HomeFragment extends Fragment{
 
     RecyclerView rvPostItems;
     FloatingActionButton fab;
+    private MainActivity mainActivity;
     ArrayList<Announcement> posts = new ArrayList<>();
     HomeAdapter homeAdapter;
     DatabaseReference postReference;
@@ -44,6 +46,7 @@ public class HomeFragment extends Fragment{
                              Bundle savedInstanceState) {
 
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
+        mainActivity = (MainActivity) getActivity();
 
         mAuth = FirebaseAuth.getInstance();
         mUSer = mAuth.getCurrentUser();

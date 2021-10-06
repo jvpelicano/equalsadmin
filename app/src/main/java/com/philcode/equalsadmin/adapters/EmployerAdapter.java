@@ -2,11 +2,13 @@ package com.philcode.equalsadmin.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -14,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
 import com.philcode.equalsadmin.R;
+import com.philcode.equalsadmin.activities.EmployerDetailsActivity;
+import com.philcode.equalsadmin.activities.PostDetailsActivity;
 import com.philcode.equalsadmin.models.Announcement;
 import com.philcode.equalsadmin.models.Employer;
 import com.squareup.picasso.Picasso;
@@ -28,10 +32,10 @@ public class EmployerAdapter extends RecyclerView.Adapter<EmployerAdapter.Employ
     Activity activity;
     Context context;
 
-    public EmployerAdapter(Context context, ArrayList<Employer> employerModels, Activity activity) {
+    public EmployerAdapter( Context context, ArrayList<Employer> employerModels, Activity activity) {
+        this.context = context;
         this.employerModels = employerModels;
         this.activity = activity;
-        this.context = context;
     }
 
 
@@ -57,7 +61,18 @@ public class EmployerAdapter extends RecyclerView.Adapter<EmployerAdapter.Employ
                     .placeholder(R.drawable.emp_placeholder).centerCrop().fit().into(holder.empImage);
         }
         catch (Exception e){
+
+//            Toast.makeText(getActiv, "Error"+ e.getMessage(), Toast.LENGTH_LONG).show();
         }
+
+        holder.empCardView.setOnClickListener(view -> {
+            Intent intent = new Intent(activity, EmployerDetailsActivity.class);
+//            intent.putExtra("postContentTitle", homeModels.get(position).getPostContentTitle());
+//            intent.putExtra("postDescription", homeModels.get(position).getPostDescription());
+//            intent.putExtra("formattedDate", homeModels.get(position).getFormattedDate());
+//            intent.putExtra("postImage", homeModels.get(position).getPostImage());
+            activity.startActivity(intent);
+        });
 
     }
 

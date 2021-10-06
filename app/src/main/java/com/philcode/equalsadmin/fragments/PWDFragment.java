@@ -2,65 +2,78 @@ package com.philcode.equalsadmin.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.philcode.equalsadmin.R;
+import com.philcode.equalsadmin.adapters.CandidateAdapter;
+import com.philcode.equalsadmin.models.Candidate;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PWDFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+
 public class PWDFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    RecyclerView rvPwdItems;
+    ArrayList<Candidate> candidates = new ArrayList<>();
+    CandidateAdapter pwdAdapter;
+    DatabaseReference pwdReference;
+    FirebaseAuth mAuth;
+    FirebaseUser mUSer;
+    String uid;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public PWDFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PWDFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PWDFragment newInstance(String param1, String param2) {
-        PWDFragment fragment = new PWDFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_p_w_d, container, false);
+        ViewGroup pwdRoot = (ViewGroup) inflater.inflate(R.layout.fragment_p_w_d, container, false);
+
+        mAuth = FirebaseAuth.getInstance();
+        mUSer = mAuth.getCurrentUser();
+        uid = mUSer.getUid();
+
+        candidates = new ArrayList<>();
+        rvPwdItems = pwdRoot.findViewById(R.id.pwd_list);
+        pwdAdapter = new CandidateAdapter( getContext(), candidates, getActivity());
+        rvPwdItems.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        rvPwdItems.setAdapter(pwdAdapter);
+
+        pwdReference =  FirebaseDatabase.getInstance().getReference().child("PWD");
+        pwdReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                candidates.clear();
+                for (DataSnapshot snapShot : dataSnapshot.getChildren()) {
+                    Candidate pwdModel = snapShot.getValue(Candidate.class);
+
+                    candidates.add(pwdModel);
+                }
+                //update data on Firebase when changes has been made
+
+                pwdAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return pwdRoot;
     }
+
+
 }

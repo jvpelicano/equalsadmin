@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.philcode.equalsadmin.R;
 
@@ -61,6 +62,11 @@ public class JobFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_job, container, false);
+        ViewGroup root = (ViewGroup)  inflater.inflate(R.layout.fragment_job, container, false);
+
+        Toast.makeText(getActivity(), "JOb", Toast.LENGTH_LONG).show();
+
+        return root;
     }
+
 }

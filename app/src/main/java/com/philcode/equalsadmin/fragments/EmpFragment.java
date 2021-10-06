@@ -49,7 +49,7 @@ public class EmpFragment extends Fragment {
 
         employers = new ArrayList<>();
         rvEmpItems = root.findViewById(R.id.emp_list);
-        empAdapter = new EmployerAdapter(getContext(), employers, getActivity());
+        empAdapter = new EmployerAdapter( getContext(), employers, getActivity());
         rvEmpItems.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rvEmpItems.setAdapter(empAdapter);
 
@@ -64,6 +64,8 @@ public class EmpFragment extends Fragment {
                     try {
                         empModel.setAvatar(snapShot.child("empProfilePic").getValue().toString());
                         employers.add(empModel);
+
+
                     }catch (Exception e){
                         Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();
                     }
@@ -78,6 +80,7 @@ public class EmpFragment extends Fragment {
             }
         });
 
+        Toast.makeText(getContext(), "Employer", Toast.LENGTH_LONG).show();
 
         return root;
     }

@@ -57,6 +57,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="80dp"
         android:contentDescription="Add"
-        android:src="@drawable/add" />
+        android:src="@drawable/add"
+        android:elevation="5dp"/>
 
 </RelativeLayout>

@@ -15,6 +15,8 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout mainLayout;
     private AHBottomNavigationViewPager ahBottomNavigationViewPager;
     private AHBottomNavigation ahBottomNavigation;
-    private ViewPagerAdapter viewPagerAdapter;
 
 
     private View viewEndAnimation;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     public FirebaseDatabase firebaseDatabase;
     public DatabaseReference reference;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         viewEndAnimation = findViewById(R.id.view_end_animation);
         viewAnimation = findViewById(R.id.view_animation);
 
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         ahBottomNavigationViewPager.setAdapter(viewPagerAdapter);
 
         // Create items
@@ -76,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         ahBottomNavigation.setOnTabSelectedListener((position, wasSelected) -> {
             ahBottomNavigationViewPager.setCurrentItem(position);
             return true;
+
         });
 
         ahBottomNavigation.setCurrentItem(0);
@@ -154,17 +158,59 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void createNavItems() {
+
+        // Create items
+        AHBottomNavigationItem item0 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.home, R.color.btnColor);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_2, R.drawable.jobs, R.color.btnColor);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_3, R.drawable.pwd, R.color.btnColor);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_4, R.drawable.emp, R.color.btnColor);
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.tab_5, R.drawable.user, R.color.btnColor);
+
+        // Add items
+        ahBottomNavigation.addItem(item0);
+        ahBottomNavigation.addItem(item1);
+        ahBottomNavigation.addItem(item2);
+        ahBottomNavigation.addItem(item3);
+        ahBottomNavigation.addItem(item4);
+
+        // Manage titles
+        ahBottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
+        ahBottomNavigation.setAccentColor(Color.parseColor("#035297"));
+        ahBottomNavigation.setInactiveColor(Color.parseColor("#747474"));
+
+        ahBottomNavigation.setOnTabSelectedListener((position, wasSelected) -> {
+            ahBottomNavigationViewPager.setCurrentItem(position);
+            return true;
+        });
+
+        ahBottomNavigation.setCurrentItem(0);
+
+    }
+
+//    FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
+//        @Override
+//        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+//            if (firebaseUser == null) {
+//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                startActivity(intent);
+//            }
+//        }
+//    };
+
     @Override
     public void onBackPressed() {
-        moveTaskToBack(true);
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
-
-    public View getViewEndAnimation() {
-        return viewEndAnimation;
-    }
-
-    public ImageView getViewAnimation() {
-        return viewAnimation;
-    }
+//
+//    public View getViewEndAnimation() {
+//        return viewEndAnimation;
+//    }
+//
+//    public ImageView getViewAnimation() {
+//        return viewAnimation;
+//    }
 
 }
