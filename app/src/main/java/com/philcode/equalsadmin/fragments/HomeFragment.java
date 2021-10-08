@@ -23,10 +23,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.philcode.equalsadmin.R;
 import com.philcode.equalsadmin.activities.AddPostActivity;
 import com.philcode.equalsadmin.activities.MainActivity;
+import com.philcode.equalsadmin.activities.PostDetailsActivity;
 import com.philcode.equalsadmin.adapters.HomeAdapter;
 import com.philcode.equalsadmin.models.Announcement;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HomeFragment extends Fragment{
 
@@ -45,7 +47,7 @@ public class HomeFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
+        ViewGroup homeRoot = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
         mainActivity = (MainActivity) getActivity();
 
         mAuth = FirebaseAuth.getInstance();
@@ -53,9 +55,14 @@ public class HomeFragment extends Fragment{
         uid = mUSer.getUid();
 
         posts = new ArrayList<>();
-        rvPostItems = root.findViewById(R.id.post_list);
-        fab = root.findViewById(R.id.fab);
-        fab.setOnClickListener(view -> startActivity(new Intent(getActivity(), AddPostActivity.class)));
+        rvPostItems = homeRoot.findViewById(R.id.post_list);
+        fab = homeRoot.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), AddPostActivity.class));
+            }
+        });
 
         homeAdapter = new HomeAdapter(getContext(), posts, getActivity());
         rvPostItems.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -81,7 +88,7 @@ public class HomeFragment extends Fragment{
 
             }
         });
-        return root;
+        return homeRoot;
     }
 
 }

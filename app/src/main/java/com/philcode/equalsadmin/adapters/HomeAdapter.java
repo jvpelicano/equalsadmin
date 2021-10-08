@@ -58,17 +58,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                     .placeholder(R.drawable.equalsplaceholder).centerCrop().fit().into(holder.postImage);
         }
         catch (Exception e){
-            Log.d("Error", "Error occured");
+            Picasso.get().load(R.drawable.equalsplaceholder).centerCrop().fit().into(holder.postImage);
         }
 
 
         holder.postCardView.setOnClickListener(view -> {
-            Intent intent = new Intent(activity, PostDetailsActivity.class);
-            intent.putExtra("postContentTitle", homeModels.get(position).getPostContentTitle());
-            intent.putExtra("postDescription", homeModels.get(position).getPostDescription());
-            intent.putExtra("formattedDate", homeModels.get(position).getFormattedDate());
-            intent.putExtra("postImage", homeModels.get(position).getPostImage());
-            activity.startActivity(intent);
+            Intent intent = new Intent(context, PostDetailsActivity.class);
+            intent.putExtra("postUid", homeModels.get(position).getPostUid());
+            context.startActivity(intent);
         });
 
     }

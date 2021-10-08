@@ -80,8 +80,6 @@ public class EmpFragment extends Fragment {
             }
         });
 
-        Toast.makeText(getContext(), "Employer", Toast.LENGTH_LONG).show();
-
         return root;
     }
 

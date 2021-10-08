@@ -2,6 +2,7 @@ package com.philcode.equalsadmin.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
 import com.philcode.equalsadmin.R;
+import com.philcode.equalsadmin.activities.JobDetailsActivity;
+import com.philcode.equalsadmin.activities.PWDDetailsActivity;
 import com.philcode.equalsadmin.models.Candidate;
 import com.squareup.picasso.Picasso;
 
@@ -77,6 +80,12 @@ public class CandidateAdapter extends RecyclerView.Adapter<CandidateAdapter.Cand
         }
         catch (Exception e){
         }
+
+        holder.pwdCardView.setOnClickListener(view -> {
+            Intent intent = new Intent(context, PWDDetailsActivity.class);
+            intent.putExtra("email", candidateModels.get(position).getEmail());
+            context.startActivity(intent);
+        });
 
     }
 

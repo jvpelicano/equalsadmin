@@ -158,35 +158,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void createNavItems() {
-
-        // Create items
-        AHBottomNavigationItem item0 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.home, R.color.btnColor);
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_2, R.drawable.jobs, R.color.btnColor);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_3, R.drawable.pwd, R.color.btnColor);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_4, R.drawable.emp, R.color.btnColor);
-        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.tab_5, R.drawable.user, R.color.btnColor);
-
-        // Add items
-        ahBottomNavigation.addItem(item0);
-        ahBottomNavigation.addItem(item1);
-        ahBottomNavigation.addItem(item2);
-        ahBottomNavigation.addItem(item3);
-        ahBottomNavigation.addItem(item4);
-
-        // Manage titles
-        ahBottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
-        ahBottomNavigation.setAccentColor(Color.parseColor("#035297"));
-        ahBottomNavigation.setInactiveColor(Color.parseColor("#747474"));
-
-        ahBottomNavigation.setOnTabSelectedListener((position, wasSelected) -> {
-            ahBottomNavigationViewPager.setCurrentItem(position);
-            return true;
-        });
-
-        ahBottomNavigation.setCurrentItem(0);
-
-    }
 
 //    FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
 //        @Override

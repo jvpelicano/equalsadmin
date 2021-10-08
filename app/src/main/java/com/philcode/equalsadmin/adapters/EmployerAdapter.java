@@ -21,6 +21,7 @@ import com.philcode.equalsadmin.activities.EmployerDetailsActivity;
 import com.philcode.equalsadmin.activities.PostDetailsActivity;
 import com.philcode.equalsadmin.models.Announcement;
 import com.philcode.equalsadmin.models.Employer;
+import com.philcode.equalsadmin.models.Job;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -85,12 +86,9 @@ public class EmployerAdapter extends RecyclerView.Adapter<EmployerAdapter.Employ
         }
 
         holder.empCardView.setOnClickListener(view -> {
-            Intent intent = new Intent(activity, EmployerDetailsActivity.class);
-//            intent.putExtra("postContentTitle", homeModels.get(position).getPostContentTitle());
-//            intent.putExtra("postDescription", homeModels.get(position).getPostDescription());
-//            intent.putExtra("formattedDate", homeModels.get(position).getFormattedDate());
-//            intent.putExtra("postImage", homeModels.get(position).getPostImage());
-            activity.startActivity(intent);
+            Intent intent = new Intent(context, EmployerDetailsActivity.class);
+            intent.putExtra("email", employerModels.get(position).getEmail());
+            context.startActivity(intent);
         });
 
     }
