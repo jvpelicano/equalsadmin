@@ -55,7 +55,7 @@
                 android:fontFamily="@font/proxima_nova_regular"
                 android:text="Feed Title"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold">
 
             </TextView>
@@ -67,7 +67,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="15dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/proxima_nova_regular"
                 android:maxLines="2"
                 android:textColor="@android:color/black">
             </TextView>
@@ -81,7 +81,8 @@
                 android:layout_marginEnd="15dp"
                 android:text="Date"
                 android:fontFamily="@font/poppins_light"
-                android:textSize="10sp">
+                android:textSize="10sp"
+                android:textStyle="italic">
 
             </TextView>
             <View

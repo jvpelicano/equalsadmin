@@ -25,7 +25,9 @@ import com.philcode.equalsadmin.activities.PostDetailsActivity;
 import com.philcode.equalsadmin.models.Announcement;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder>{
 
@@ -50,9 +52,17 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     public void onBindViewHolder(@NonNull final HomeViewHolder holder,final int position) {
         final Announcement currentItem = homeModels.get(position);
 
+        String timeStamp = homeModels.get(position).getFormattedDate();
+
         holder.postTitle.setText(currentItem.getPostContentTitle());
         holder.postDescription.setText(currentItem.getPostDescription());
-        holder.postDate.setText(currentItem.getFormattedDate());
+
+        //Retrieve and Convert timestamp to String
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.parseLong(timeStamp));
+        String currentDate  = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        holder.postDate.setText("Posted on " + currentDate);
+
         try {
             Picasso.get().load(homeModels.get(position).getPostImage())
                     .placeholder(R.drawable.equalsplaceholder).centerCrop().fit().into(holder.postImage);
@@ -67,6 +77,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             intent.putExtra("postUid", homeModels.get(position).getPostUid());
             context.startActivity(intent);
         });
+
 
     }
 

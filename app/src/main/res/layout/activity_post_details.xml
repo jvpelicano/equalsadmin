@@ -47,8 +47,6 @@
                     android:id="@+id/post_title_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:focusable="false"
                     android:fontFamily="@font/proxima_nova_regular"
                     android:text="hello"
                     android:textColor="#232c33"
