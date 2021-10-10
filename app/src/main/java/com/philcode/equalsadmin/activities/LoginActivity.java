@@ -22,11 +22,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -189,8 +193,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         for (DataSnapshot ds : dataSnapshot.getChildren()){
                             String accountType = "" + ds.child("accountType").getValue();
                             if (accountType.equals("Admin")){
-                                progressDialog.dismiss();
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                if(firebaseAuth.getCurrentUser().isEmailVerified()){
+                                    progressDialog.dismiss();
+                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                }
+                                else{
+                                    progressDialog.dismiss();
+                                    AlertDialog.Builder alert =  new AlertDialog.Builder(LoginActivity.this);
+                                    alert.setMessage("Please check your email address.").setCancelable(false)
+                                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.cancel();
+
+                                                }
+                                            });
+                                    AlertDialog alertDialog = alert.create();
+                                    alertDialog.setTitle("Verify your Email");
+                                    alertDialog.show();
+
+                                }
                             }
                             else{
                                 progressDialog.dismiss();
@@ -205,6 +227,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         // Toast.makeText(LoginActivity.this, ""+i.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+
+
     }
 
     //transition when back button is pressed

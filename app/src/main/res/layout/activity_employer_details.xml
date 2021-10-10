@@ -7,35 +7,306 @@
     android:id="@+id/emp_details_layout"
     tools:context=".activities.EmployerDetailsActivity">
 
-    <RelativeLayout
-        android:id="@+id/rl_profile_img"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@color/btnColor">
+        android:layout_height="match_parent">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/emp_details_img"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_centerInParent="true"
-            android:padding="2dp"
-            android:src="@drawable/emp_placeholder">
-
-        </de.hdodenhof.circleimageview.CircleImageView>
-
-    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="250dp"
-        android:orientation="horizontal">
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/rl_profile_img"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@color/browser_actions_bg_grey">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/emp_details_img"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:layout_gravity="center"
+                        android:padding="2dp"
+                        android:src="@drawable/emp_placeholder">
+
+                    </de.hdodenhof.circleimageview.CircleImageView>
+
+                    <ImageView
+                        android:id="@+id/emp_verified_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/emp_details_img"
+                        android:layout_alignBottom="@+id/emp_details_img"
+                        android:src="@drawable/verified_user" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_fullname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:id="@+id/emp_profile_fname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/proxima_nova_bold"
+                        android:text="Juan"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/emp_profile_lname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/proxima_nova_bold"
+                        android:text="Dela Cruz"
+                        android:layout_marginStart="3dp"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/emp_verified_acc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="Verified Account"
+                    android:textColor="@color/green"></TextView>
+
+                <Button
+                    android:id="@+id/update_status_btn"
+                    android:text="Update Status"
+                    android:background="@android:color/transparent"
+                    android:layout_gravity="center"
+                    android:drawableEnd="@drawable/edit"
+                    android:drawablePadding="5dp"
+                    android:textAllCaps="false"
+                    android:textColor="#177ad0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/proxima_nova_regular"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/proxima_nova_regular"
+                android:text="Personal Information"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/view_post_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:hint="Email address"
+                app:boxStrokeColor="@color/btnColor"
+                app:hintTextColor="@color/btnColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emp_profile_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="admin@gmail.com"
+                    android:textColor="#232c33"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:textSize="16sp">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emp_profile_phone_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:hint="Contact Number"
+                app:boxStrokeColor="@color/btnColor"
+                app:hintTextColor="@color/btnColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emp_profile_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="09221234567"
+                    android:textColor="#232c33"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:textSize="16sp">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/proxima_nova_regular"
+                android:text="Company Information"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:hint="Company Name"
+                app:boxStrokeColor="@color/btnColor"
+                app:hintTextColor="@color/btnColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emp_profile_company"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="ABC Corporation"
+                    android:textColor="#232c33"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:textSize="16sp">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:hint="Company Address"
+                app:boxStrokeColor="@color/btnColor"
+                app:hintTextColor="@color/btnColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emp_profile_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="Block 1 Lot 2 Manila"
+                    android:textColor="#232c33"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:textSize="16sp">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:hint="Company Overview"
+                app:boxStrokeColor="@color/btnColor"
+                app:hintTextColor="@color/btnColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emp_profile_overview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                    android:textColor="#232c33"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:textSize="16sp">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/proxima_nova_regular"
+                android:text="Provided Document/s"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/proxima_nova_regular"
+                android:text="*Company ID"
+                android:textSize="14dp"
+                android:textStyle="italic"
+                android:gravity="start"
+                android:padding="3dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"/>
+
+            <ImageView
+                android:id="@+id/emp_profile_id"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/background"/>
+        </LinearLayout>
 
     </LinearLayout>
 
-
-
-
-
-
+    </ScrollView>
 </RelativeLayout>

@@ -80,6 +80,7 @@ public class HomeFragment extends Fragment{
                     posts.add(postModel);
 
                 }
+                Collections.reverse(posts);
                 //update data on Firebase when changes has been made
                 homeAdapter.notifyDataSetChanged();
             }

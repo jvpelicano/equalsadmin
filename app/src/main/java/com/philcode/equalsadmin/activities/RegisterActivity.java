@@ -7,12 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -87,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void registerAdmin(){
 
-        if(RegisterActivity.CheckNetwork.isInternetAvailable(RegisterActivity.this)) {
+        if(CheckNetwork.isInternetAvailable(RegisterActivity.this)) {
 
             progressDialog.show();
             final String nameSignup = textNameSignup.getEditableText().toString().trim();
@@ -98,29 +100,37 @@ public class RegisterActivity extends AppCompatActivity {
             mAuth.createUserWithEmailAndPassword(emailSignup, passwordSignup)
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
+
+                            mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>(){
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    progressDialog.dismiss();
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    String emailSignup1 = user.getEmail();
+                                    String uid = user.getUid();
+
+
+                                    HashMap<Object, String> hashMap = new HashMap<>();
+                                    //put info in hashmap
+                                    hashMap.put("uid", uid);
+                                    hashMap.put("email", emailSignup1);
+                                    hashMap.put("name", nameSignup);
+                                    hashMap.put("image", "");
+                                    hashMap.put("accountType", accountType);
+
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    DatabaseReference reference = database.getReference("Admin");
+                                    //put data within hashmap in database
+                                    reference.child(uid).setValue(hashMap);
+
+
+                                    Snackbar.make(mainLayout, "Account successfully registered", Snackbar.LENGTH_LONG).show();
+                                    finish();
+
+                                }
+                            });
                             //Sign in success, dismiss dialog and start register activity
-                            progressDialog.dismiss();
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            String emailSignup1 = user.getEmail();
-                            String uid = user.getUid();
-
-
-                            HashMap<Object, String> hashMap = new HashMap<>();
-                            //put info in hashmap
-                            hashMap.put("uid", uid);
-                            hashMap.put("email", emailSignup1);
-                            hashMap.put("name", nameSignup);
-                            hashMap.put("image", "");
-                            hashMap.put("accountType", accountType);
-
-                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-                            DatabaseReference reference = database.getReference("Admin");
-                            //put data within hashmap in database
-                            reference.child(uid).setValue(hashMap);
-
-
-                            Snackbar.make(mainLayout, "Account successfully registered", Snackbar.LENGTH_LONG).show();
-                            finish();
                         } else {
                             //if sign in fails, display a message
                             progressDialog.dismiss();
@@ -133,12 +143,14 @@ public class RegisterActivity extends AppCompatActivity {
             });
 
         }
-        AlertDialog.Builder alert =  new AlertDialog.Builder(RegisterActivity.this);
-        alert.setMessage("Make sure that your Wi-Fi or mobile data is turned on, then try again.").setCancelable(false)
-                .setPositiveButton("Dismiss", (dialog, which) -> dialog.cancel());
-        AlertDialog alertDialog = alert.create();
-        alertDialog.setTitle("No Internet Connection");
-        alertDialog.show();
+        else{
+            AlertDialog.Builder alert =  new AlertDialog.Builder(RegisterActivity.this);
+            alert.setMessage("Make sure that your Wi-Fi or mobile data is turned on, then try again.").setCancelable(false)
+                    .setPositiveButton("Dismiss", (dialog, which) -> dialog.cancel());
+            AlertDialog alertDialog = alert.create();
+            alertDialog.setTitle("No Internet Connection");
+            alertDialog.show();
+        }
     }
 
     @Override
@@ -242,5 +254,8 @@ public class RegisterActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        finish();
+        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
     }
+
 }

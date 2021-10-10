@@ -15,6 +15,7 @@
         android:background="@color/colorPrimary"
         app:title="Announcements / Seminars / Blogs"
         app:titleTextColor="@color/cardview_light_background"
+        android:textAlignment="center"
         />
 
     <ScrollView

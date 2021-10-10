@@ -59,7 +59,7 @@ public class EmployerAdapter extends RecyclerView.Adapter<EmployerAdapter.Employ
             holder.empStatus.setText("Approved");
             holder.empStatus.setTextColor(Color.parseColor("#008000"));
         }
-        else if (verified.equals("PWDPending")){
+        else if (verified.equals("EMPPending")){
             holder.empVerified.setVisibility(View.GONE);
             holder.empStatus.setText("Pending");
             holder.empStatus.setTextColor(Color.parseColor("#FF1414"));
