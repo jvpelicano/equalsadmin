@@ -6,6 +6,7 @@
     <string name="tab_3">CANDIDATES</string>
     <string name="tab_4">EMPLOYERS</string>
     <string name="tab_5">PROFILE</string>
+    <string name="resume">*<u>Resume Link </u></string>
     <!-- TODO: Remove or change this placeholder text -->
     <!--    <string name="hello_blank_fragment">Hello blank fragment</string>-->
 
@@ -16,9 +17,9 @@
     </string-array>
 
     <string-array name="PWDStatus">
-        <item>Pending</item>
+        <item>PWDPending</item>
         <item>PWDApproved</item>
-        <item>Cancelled</item>
+        <item>PWDCancelled</item>
     </string-array>
 
     <string-array name="JobStatus">
