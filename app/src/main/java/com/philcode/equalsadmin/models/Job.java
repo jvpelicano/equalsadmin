@@ -44,10 +44,11 @@ public class Job {
     public String skill;
     public int numberOfPrimarySkills;
     public String educationalAttainmentRequirement;
+    public String postJobId;
 
     public Job(){}
 
-    public Job(String imageURL, String postTitle, String permission, String companyName, String postDate, String postDescription, String postLocation, String typeOfDisability1, String typeOfDisability2, String typeOfDisability3, String typeOfDisabilityMore, String jobSkill1, String jobSkill2, String jobSkill3, String jobSkill4, String jobSkill5, String jobSkill6, String jobSkill7, String jobSkill8, String jobSkill9, String jobSkill10, String uid, String expDate, String city, String educationalAttainment, String workExperience, String primarySkill1, String primarySkill2, String primarySkill3, String primarySkill4, String primarySkill5, String primarySkill6, String primarySkill7, String primarySkill8, String primarySkill9, String primarySkill10, String primarySkillOther, String skill, int numberOfPrimarySkills, String educationalAttainmentRequirement) {
+    public Job(String imageURL, String postTitle, String permission, String companyName, String postDate, String postDescription, String postLocation, String typeOfDisability1, String typeOfDisability2, String typeOfDisability3, String typeOfDisabilityMore, String jobSkill1, String jobSkill2, String jobSkill3, String jobSkill4, String jobSkill5, String jobSkill6, String jobSkill7, String jobSkill8, String jobSkill9, String jobSkill10, String uid, String expDate, String city, String educationalAttainment, String workExperience, String primarySkill1, String primarySkill2, String primarySkill3, String primarySkill4, String primarySkill5, String primarySkill6, String primarySkill7, String primarySkill8, String primarySkill9, String primarySkill10, String primarySkillOther, String skill, int numberOfPrimarySkills, String educationalAttainmentRequirement, String postJobId) {
         this.imageURL = imageURL;
         this.postTitle = postTitle;
         this.permission = permission;
@@ -88,6 +89,7 @@ public class Job {
         this.skill = skill;
         this.numberOfPrimarySkills = numberOfPrimarySkills;
         this.educationalAttainmentRequirement = educationalAttainmentRequirement;
+        this.postJobId = postJobId;
     }
 
     public String getImageURL() {
@@ -408,5 +410,13 @@ public class Job {
 
     public void setEducationalAttainmentRequirement(String educationalAttainmentRequirement) {
         this.educationalAttainmentRequirement = educationalAttainmentRequirement;
+    }
+
+    public String getPostJobId() {
+        return postJobId;
+    }
+
+    public void setPostJobId(String postJobId) {
+        this.postJobId = postJobId;
     }
 }

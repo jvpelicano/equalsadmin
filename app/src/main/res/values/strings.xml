@@ -23,7 +23,7 @@
     </string-array>
 
     <string-array name="JobStatus">
-        <item>Pending</item>
+        <item>pending</item>
         <item>Approved</item>
         <item>Cancelled</item>
     </string-array>

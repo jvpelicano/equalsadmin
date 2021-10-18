@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
@@ -44,7 +45,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull JobAdapter.JobViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final JobViewHolder holder, final int position) {
         final Job currentItem = jobModels.get(position);
 
         String offerVerified = currentItem.getPermission();
@@ -68,7 +69,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder>{
         holder.jobCompany.setText(currentItem.getCompanyName());
         holder.jobTitle.setText(currentItem.getPostTitle());
         holder.jobPosted.setText(currentItem.getPostDate());
-        holder.jobPermission.setText(currentItem.getPermission());
+//        holder.jobPermission.setText(currentItem.getPermission());
         try {
             Picasso.get().load(jobModels.get(position).getImageURL())
                     .placeholder(R.drawable.equalsplaceholder).centerCrop().fit().into(holder.jobImg);
@@ -80,12 +81,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder>{
 
         holder.jobCardView.setOnClickListener(view -> {
             Intent intent = new Intent(context, JobDetailsActivity.class);
-//            intent.putExtra("postTitle", jobModels.get(position).getPostTitle());
-//            intent.putExtra("companyName", jobModels.get(position).getCompanyName());
-//            intent.putExtra("postDate", jobModels.get(position).getPostDate());
-//            intent.putExtra("expDate", jobModels.get(position).getExpDate());
-//            intent.putExtra("imageURL", jobModels.get(position).getImageURL());
-            intent.putExtra("uid", jobModels.get(position).getUid());
+            intent.putExtra("postJobId", jobModels.get(position).getPostJobId());
             context.startActivity(intent);
         });
 
@@ -93,7 +89,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder>{
 
     @Override
     public int getItemCount() {
-        return 0;
+        return jobModels.size();
     }
 
     public class JobViewHolder extends RecyclerView.ViewHolder {

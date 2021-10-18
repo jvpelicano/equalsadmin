@@ -65,9 +65,6 @@ public class JobFragment extends Fragment {
 
                     try {
                         jobModel.setImageURL(snapShot.child("imageURL").getValue().toString());
-//                        jobModel.setCompanyName(snapShot.child("companyName").getValue().toString());
-//                        jobModel.setPostTitle(snapShot.child("postTitle").getValue().toString());
-//                        jobModel.setPostDate(snapShot.child("postDate").getValue().toString());
                         jobs.add(jobModel);
                         Toast.makeText(getActivity(), "Connected in Firebase", Toast.LENGTH_LONG).show();
 
