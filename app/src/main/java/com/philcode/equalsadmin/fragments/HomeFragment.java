@@ -1,14 +1,19 @@
 package com.philcode.equalsadmin.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -57,6 +62,7 @@ public class HomeFragment extends Fragment{
         posts = new ArrayList<>();
         rvPostItems = homeRoot.findViewById(R.id.post_list);
         fab = homeRoot.findViewById(R.id.fab);
+        fab.setColorFilter(Color.WHITE);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,6 +96,8 @@ public class HomeFragment extends Fragment{
             }
         });
         return homeRoot;
+
     }
+
 
 }

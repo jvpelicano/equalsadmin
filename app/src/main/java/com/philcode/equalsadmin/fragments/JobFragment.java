@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -44,6 +46,7 @@ public class JobFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup jobRoot = (ViewGroup) inflater.inflate(R.layout.fragment_job, container, false);
+        setHasOptionsMenu(true);
 
         mAuth = FirebaseAuth.getInstance();
         mUSer = mAuth.getCurrentUser();
@@ -84,6 +87,13 @@ public class JobFragment extends Fragment {
         });
 
         return jobRoot;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.add_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
 

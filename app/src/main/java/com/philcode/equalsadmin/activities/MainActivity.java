@@ -172,19 +172,19 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-//    }
-//
-//    public View getViewEndAnimation() {
-//        return viewEndAnimation;
-//    }
-//
-//    public ImageView getViewAnimation() {
-//        return viewAnimation;
-//    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+
+    public View getViewEndAnimation() {
+        return viewEndAnimation;
+    }
+
+    public ImageView getViewAnimation() {
+        return viewAnimation;
+    }
 
     //back
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -193,5 +193,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
 
 }

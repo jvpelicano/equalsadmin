@@ -15,7 +15,6 @@
         android:background="@color/colorPrimary"
         app:title="Announcements / Seminars / Blogs"
         app:titleTextColor="@color/cardview_light_background"
-        android:textAlignment="center"
         />
 
     <ScrollView
@@ -59,7 +58,9 @@
         android:layout_marginBottom="80dp"
         android:contentDescription="Add"
         android:src="@drawable/add"
-        android:elevation="8dp"
-        android:background="@color/btnColor"/>
+        android:elevation="10dp"
+        android:clickable="true"
+        android:backgroundTint="@color/btnColor"
+        />
 
 </RelativeLayout>

@@ -10,9 +10,11 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -25,6 +27,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -77,7 +80,6 @@ public class PostDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_details);
 
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getSupportActionBar().setTitle("Post Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -90,6 +92,12 @@ public class PostDetailsActivity extends AppCompatActivity {
         viewPostDesc = findViewById(R.id.post_desc_details);
         viewPostImg = findViewById(R.id.post_details_img);
         updatePost = findViewById(R.id.post_btn_edit);
+        postDetail = findViewById(R.id.post_details_layout);
+
+        updatePost.setVisibility(View.INVISIBLE);
+        viewPostTitle.setEnabled(false);
+        viewPostDesc.setEnabled(false);
+        viewPostImg.setEnabled(false);
 
         //firebase instance
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -256,9 +264,23 @@ public class PostDetailsActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.post_edit:
+                updatePost.setVisibility(View.VISIBLE);
+                viewPostTitle.setEnabled(true);
+                viewPostDesc.setEnabled(true);
+                viewPostImg.setEnabled(true);
+                getSupportActionBar().setTitle("Edit Details");
+                Snackbar.make(postDetail, "You can now update the post, Tap to edit", Snackbar.LENGTH_LONG).show();
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.edit, menu);
+        menu.findItem(R.id.post_edit);
+        return true;
     }
 
     @Override
