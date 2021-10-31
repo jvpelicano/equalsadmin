@@ -3,11 +3,13 @@ package com.philcode.equalsadmin.activities;
 import static com.google.firebase.storage.FirebaseStorage.getInstance;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -326,7 +328,26 @@ public class PostDetailsActivity extends AppCompatActivity {
                 viewPostImg.setEnabled(true);
                 getSupportActionBar().setTitle("Edit Details");
                 Snackbar.make(postDetail, "You can now update the post, Tap to edit", Snackbar.LENGTH_LONG).show();
+                return true;
+            case R.id.post_delete:
+                AlertDialog.Builder alert =  new AlertDialog.Builder(PostDetailsActivity.this);
+                alert.setMessage("Are you sure you want to delete this Post?").setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
+                                firebaseDatabase.getReference().child("home_content").child(postId).removeValue();
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog alertDialog = alert.create();
+                alertDialog.setTitle("Delete Post");
+                alertDialog.show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -335,9 +356,13 @@ public class PostDetailsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.edit, menu);
+        getMenuInflater().inflate(R.menu.delete, menu);
         menu.findItem(R.id.post_edit);
+        menu.findItem(R.id.post_delete);
         return true;
     }
+
+
 
     @Override
     public void onBackPressed() {

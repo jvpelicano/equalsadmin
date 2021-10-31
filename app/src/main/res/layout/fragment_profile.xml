@@ -59,6 +59,14 @@
 
                     </de.hdodenhof.circleimageview.CircleImageView>
 
+                    <ImageView
+                        android:id="@+id/admin_camera_icon"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/admin_img"
+                        android:layout_alignBottom="@+id/admin_img"
+                        android:src="@drawable/camera" />
+
                 </RelativeLayout>
 
                 <LinearLayout

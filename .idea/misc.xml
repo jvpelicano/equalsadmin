@@ -15,6 +15,7 @@
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/user.xml" value="0.1" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable/add.xml" value="0.1125" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable/bottom_sheet_background.xml" value="0.13645833333333332" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable/camera.xml" value="0.12864583333333332" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable/close.xml" value="0.13645833333333332" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable/edit.xml" value="0.17291666666666666" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable/emp.xml" value="0.1" />
@@ -46,7 +47,7 @@
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/fragment_job.xml" value="0.1" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/fragment_p_w_d.xml" value="0.22" />
-        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/fragment_profile.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/fragment_profile.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/job_item.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/post_item.xml" value="0.11041666666666666" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/post_layout.xml" value="0.12" />
@@ -54,6 +55,7 @@
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/layout/toolbar.xml" value="0.140625" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/menu/add_menu.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/menu/delete.xml" value="0.1515625" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/menu/edit.xml" value="0.15520833333333334" />
       </map>
     </option>
