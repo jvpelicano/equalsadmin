@@ -254,4 +254,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        etEmail.setText("");
+        etPassword.setText("");
+    }
 }
