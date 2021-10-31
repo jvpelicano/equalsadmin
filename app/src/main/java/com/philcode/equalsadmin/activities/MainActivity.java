@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     public DatabaseReference reference;
     private FirebaseAuth mAuth;
 
+    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mainLayout = findViewById(R.id.main_layout);
+
+        mAuth = FirebaseAuth.getInstance();
+        uid = mAuth.getCurrentUser().getUid();
+
 
         ahBottomNavigationViewPager = findViewById(R.id.bottom_navigation_viewpager);
         ahBottomNavigation = findViewById(R.id.bottom_navigation);

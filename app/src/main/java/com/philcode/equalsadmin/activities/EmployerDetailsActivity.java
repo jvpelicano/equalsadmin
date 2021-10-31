@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,6 +58,7 @@ public class EmployerDetailsActivity extends AppCompatActivity {
 
     //firebase auth
     private FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference employerDbRef;
 
@@ -103,6 +105,7 @@ public class EmployerDetailsActivity extends AppCompatActivity {
 
         //firebase auth instance
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         employerDbRef = firebaseDatabase.getReference("Employers");
 
