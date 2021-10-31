@@ -2,6 +2,7 @@ package com.philcode.equalsadmin.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -171,6 +172,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Fragment profileFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_admin_layout);
+        profileFragment.onActivityResult(requestCode, resultCode, data);
+    }
+
 
     @Override
     public void onBackPressed() {

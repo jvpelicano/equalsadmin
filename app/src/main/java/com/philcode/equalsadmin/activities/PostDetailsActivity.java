@@ -174,26 +174,24 @@ public class PostDetailsActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Uri> task) {
 
                         progressDialog.dismiss();
-//
-//                        firebaseDatabase = FirebaseDatabase.getInstance();
-//                        postDbRef = firebaseDatabase.getReference("home_content");
 
 
                         final String imgPost = task.getResult().toString();
                         final String title = viewPostTitle.getText().toString().trim();
                         final String desc = viewPostDesc.getText().toString().trim();
 
-                        HashMap<String, Object> hashMap2 = new HashMap<>();
 
+                        HashMap<String, Object> hashMap2 = new HashMap<>();
                         hashMap2.put("postContentTitle", title);
                         hashMap2.put("postDescription", desc);
                         if(imgPost != null){
-                            hashMap2.put("postImage", imgPost);
 
+                            hashMap2.put("postImage", imgPost);
                             postDbRef.child(postId).updateChildren(hashMap2);
 
                         }
                         else{
+                            hashMap2.put("postImage", imgPost);
                             postDbRef.child(postId).updateChildren(hashMap2);
                             Toast.makeText(PostDetailsActivity.this, "Post has been published successfully", Toast.LENGTH_LONG).show();
                             finish();
@@ -232,6 +230,63 @@ public class PostDetailsActivity extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Please Select Image"), PICK_IMAGE_REQUEST);
+
+        final StorageReference ref = storageReference.child(storagePath + System.currentTimeMillis() + "." + GetFileExtension(filePath));
+        ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+
+                        progressDialog.dismiss();
+
+
+                        final String imgPost = task.getResult().toString();
+//                        final String title = viewPostTitle.getText().toString().trim();
+//                        final String desc = viewPostDesc.getText().toString().trim();
+
+
+                        HashMap<String, Object> hashMap2 = new HashMap<>();
+//                        hashMap2.put("postContentTitle", title);
+//                        hashMap2.put("postDescription", desc);
+//                        if(imgPost != null){
+
+//                            hashMap2.put("postImage", imgPost);
+//                            postDbRef.child(postId).updateChildren(hashMap2);
+
+//                        }
+//                        else{
+                            hashMap2.put("postImage", imgPost);
+                            postDbRef.child(postId).updateChildren(hashMap2);
+                            Toast.makeText(PostDetailsActivity.this, "Post has been published successfully", Toast.LENGTH_LONG).show();
+//                            finish();
+
+//                        }
+//
+//                        Toast.makeText(PostDetailsActivity.this, "Post has been published successfully", Toast.LENGTH_LONG).show();
+//                        finish();
+
+                    }
+
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
+                Toast.makeText(PostDetailsActivity.this, "Failed:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                progressDialog.setMessage("Loading " + (int) progress + "%");
+                progressDialog.setCancelable(false);
+            }
+        });
+
+
     }
 
     public String GetFileExtension(Uri uri) {
@@ -271,6 +326,7 @@ public class PostDetailsActivity extends AppCompatActivity {
                 viewPostImg.setEnabled(true);
                 getSupportActionBar().setTitle("Edit Details");
                 Snackbar.make(postDetail, "You can now update the post, Tap to edit", Snackbar.LENGTH_LONG).show();
+
             default:
                 return super.onOptionsItemSelected(item);
         }

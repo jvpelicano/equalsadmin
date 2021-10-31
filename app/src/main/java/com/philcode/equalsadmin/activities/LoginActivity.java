@@ -37,6 +37,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.philcode.equalsadmin.R;
+import com.philcode.equalsadmin.fragments.ForgotPasswordBottomSheet;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -73,6 +74,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         tvSignup.setOnClickListener(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        btnforgotpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ForgotPasswordBottomSheet forgotPasswordBottomSheet = new ForgotPasswordBottomSheet();
+                forgotPasswordBottomSheet.show(getSupportFragmentManager(), "TAG");
+            }
+        });
     }
 
 
