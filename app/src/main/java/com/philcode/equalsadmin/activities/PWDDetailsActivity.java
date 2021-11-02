@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -274,9 +275,37 @@ public class PWDDetailsActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.post_delete:
+                androidx.appcompat.app.AlertDialog.Builder alert =  new androidx.appcompat.app.AlertDialog.Builder(PWDDetailsActivity.this);
+                alert.setMessage("Are you sure to delete this PWD?").setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                firebaseDatabase.getReference().child("PWD").child(uid).removeValue();
+                                Snackbar.make(pwdDetail, "PWD has been deleted", Snackbar.LENGTH_LONG).show();
+                                finish();
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                androidx.appcompat.app.AlertDialog alertDialog = alert.create();
+                alertDialog.setTitle("Delete PWD");
+                alertDialog.show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.delete, menu);
+        menu.findItem(R.id.post_delete);
+        return true;
     }
 
     @Override

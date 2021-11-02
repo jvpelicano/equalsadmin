@@ -248,7 +248,7 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
 
                                 firebaseDatabase.getReference().child("Employers").child(uid).removeValue();
-                                Snackbar.make(empDetail, "Post has been deleted", Snackbar.LENGTH_LONG).show();
+                                Snackbar.make(empDetail, "Employer has been deleted", Snackbar.LENGTH_LONG).show();
                                 finish();
                             }
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
