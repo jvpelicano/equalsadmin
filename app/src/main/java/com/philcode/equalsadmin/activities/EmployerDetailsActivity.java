@@ -235,6 +235,46 @@ public class EmployerDetailsActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.post_delete:
+                androidx.appcompat.app.AlertDialog.Builder alert =  new androidx.appcompat.app.AlertDialog.Builder(EmployerDetailsActivity.this);
+                alert.setMessage("Are you sure to delete this Employer?").setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                firebaseDatabase.getReference().child("Employers").child(uid).removeValue();
+                                Snackbar.make(empDetail, "Post has been deleted", Snackbar.LENGTH_LONG).show();
+                                finish();
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                androidx.appcompat.app.AlertDialog alertDialog = alert.create();
+                alertDialog.setTitle("Delete Employer");
+                alertDialog.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.delete, menu);
+        menu.findItem(R.id.post_delete);
+        return true;
+    }
+
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);

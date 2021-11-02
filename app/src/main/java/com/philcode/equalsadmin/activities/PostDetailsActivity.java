@@ -331,12 +331,14 @@ public class PostDetailsActivity extends AppCompatActivity {
                 return true;
             case R.id.post_delete:
                 AlertDialog.Builder alert =  new AlertDialog.Builder(PostDetailsActivity.this);
-                alert.setMessage("Are you sure you want to delete this Post?").setCancelable(false)
+                alert.setMessage("Are you sure to delete this Post?").setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
                                 firebaseDatabase.getReference().child("home_content").child(postId).removeValue();
+                                Snackbar.make(postDetail, "Post has been deleted", Snackbar.LENGTH_LONG).show();
+                                finish();
                             }
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override

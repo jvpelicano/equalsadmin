@@ -48,7 +48,7 @@
 
                         <ImageView
                             android:id="@+id/pwd_verified_icon"
-                            android:layout_width="wrap_content"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
                             android:layout_alignRight="@+id/pwd_profile_img"
                             android:layout_alignBottom="@+id/pwd_profile_img"
