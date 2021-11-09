@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,6 +40,7 @@ public class HomeFragment extends Fragment{
 
     RecyclerView rvPostItems;
     FloatingActionButton fab;
+    Toolbar toolbar;
     private MainActivity mainActivity;
     ArrayList<Announcement> posts = new ArrayList<>();
     HomeAdapter homeAdapter;
@@ -55,20 +57,17 @@ public class HomeFragment extends Fragment{
         ViewGroup homeRoot = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
         mainActivity = (MainActivity) getActivity();
 
+
+
         mAuth = FirebaseAuth.getInstance();
         mUSer = mAuth.getCurrentUser();
         uid = mUSer.getUid();
 
         posts = new ArrayList<>();
         rvPostItems = homeRoot.findViewById(R.id.post_list);
-        fab = homeRoot.findViewById(R.id.fab);
-        fab.setColorFilter(Color.WHITE);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), AddPostActivity.class));
-            }
-        });
+        toolbar = homeRoot.findViewById(R.id.toolbar_home);
+        toolbar.inflateMenu(R.menu.add_menu);
+
 
         homeAdapter = new HomeAdapter(getContext(), posts, getActivity());
         rvPostItems.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -97,6 +96,38 @@ public class HomeFragment extends Fragment{
         });
         return homeRoot;
 
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.add_menu, menu);
+    }
+
+
+    public void clearToolbarMenu() {
+
+        toolbar.getMenu().clear();
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        toolbar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.post_add_menu:
+                    startActivity(new Intent(getContext(), AddPostActivity.class));
+                    return true;
+                default:
+                    return false;
+            }
+        });
     }
 
 

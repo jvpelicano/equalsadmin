@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.ForgetPasswordActivity"
+            android:name=".activities.AddEmployerActivity"
             android:exported="false" />
         <activity
             android:name=".activities.JobDetailsActivity"

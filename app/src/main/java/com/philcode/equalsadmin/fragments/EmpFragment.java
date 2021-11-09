@@ -43,6 +43,7 @@ public class EmpFragment extends Fragment {
 
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_emp, container, false);
 
+
         mAuth = FirebaseAuth.getInstance();
         mUSer = mAuth.getCurrentUser();
         uid = mUSer.getUid();
@@ -81,6 +82,12 @@ public class EmpFragment extends Fragment {
         });
 
         return root;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
     }
 
 

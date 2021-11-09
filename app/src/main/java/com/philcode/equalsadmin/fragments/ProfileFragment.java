@@ -94,6 +94,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_profile, container, false);
+        setHasOptionsMenu(true);
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -498,5 +499,10 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
 
 }

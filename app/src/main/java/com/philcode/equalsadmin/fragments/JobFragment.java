@@ -16,10 +16,12 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.philcode.equalsadmin.R;
 import com.philcode.equalsadmin.adapters.EmployerAdapter;
@@ -28,6 +30,7 @@ import com.philcode.equalsadmin.models.Employer;
 import com.philcode.equalsadmin.models.Job;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class JobFragment extends Fragment {
@@ -59,7 +62,7 @@ public class JobFragment extends Fragment {
         rvJobItems.setAdapter(jobAdapter);
 
         jobReference = FirebaseDatabase.getInstance().getReference().child("Job_Offers");
-        jobReference.addValueEventListener(new ValueEventListener() {
+        jobReference.orderByChild("permission").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 jobs.clear();
@@ -69,7 +72,8 @@ public class JobFragment extends Fragment {
                     try {
                         jobModel.setImageURL(snapShot.child("imageURL").getValue().toString());
                         jobs.add(jobModel);
-                        Toast.makeText(getActivity(), "Connected in Firebase", Toast.LENGTH_LONG).show();
+
+//
 
                     } catch (Exception e) {
                         Toast.makeText(getActivity(), "Error in Fetching Data", Toast.LENGTH_LONG).show();
@@ -77,6 +81,7 @@ public class JobFragment extends Fragment {
 
                 }
                 //update data on Firebase when changes has been made
+                Collections.reverse(jobs);
                 jobAdapter.notifyDataSetChanged();
             }
 

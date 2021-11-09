@@ -1,15 +1,21 @@
 package com.philcode.equalsadmin.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -49,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar actionBarToolBar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(actionBarToolBar);
+
 
         mainLayout = findViewById(R.id.main_layout);
 
@@ -163,6 +173,11 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(mainLayout, "Network ERROR. Please check your internet connection", Snackbar.LENGTH_LONG).show();
             }
         });
+        String skill="skill";
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference = firebaseDatabase.getReference("Category/skill/skill1");
+        reference.child("primarySkill1").setValue("Time Management");
+//        reference.child(skill).child("skill1").child("primarySkill1").setValue("Time Management");
 
     }
 
@@ -178,12 +193,12 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Fragment profileFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_admin_layout);
-        profileFragment.onActivityResult(requestCode, resultCode, data);
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        Fragment profileFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_admin_layout);
+//        profileFragment.onActivityResult(requestCode, resultCode, data);
+//    }
 
 
     @Override
@@ -200,10 +215,12 @@ public class MainActivity extends AppCompatActivity {
         return viewAnimation;
     }
 
-    //back
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
-            finish();
+            Intent startMain = new Intent(Intent.ACTION_MAIN);
+            startMain.addCategory(Intent.CATEGORY_HOME);
+            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(startMain);
         }
         return super.onKeyDown(keyCode, event);
     }
