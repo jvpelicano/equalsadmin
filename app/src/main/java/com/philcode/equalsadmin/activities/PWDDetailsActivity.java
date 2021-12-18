@@ -104,7 +104,7 @@ public class PWDDetailsActivity extends AppCompatActivity {
         resumeLink.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-               showLink();
+                showLink();
             }
         });
 

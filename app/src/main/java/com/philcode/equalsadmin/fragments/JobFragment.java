@@ -1,9 +1,17 @@
 package com.philcode.equalsadmin.fragments;
 
+import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,7 +69,60 @@ public class JobFragment extends Fragment {
         rvJobItems.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rvJobItems.setAdapter(jobAdapter);
 
+        new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(rvJobItems);
+
         jobReference = FirebaseDatabase.getInstance().getReference().child("Job_Offers");
+        getData();
+
+        return jobRoot;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.add_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+  ItemTouchHelper.SimpleCallback itemTouchHelper = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+      @Override
+      public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+          return false;
+      }
+
+      @Override
+      public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+          AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+          builder.setTitle("Do you want to proceed?");
+          builder.setMessage("By tapping the proceed button, you agree to delete the selected job post.");
+          builder.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+                  String postJobID = jobs.get(viewHolder.getAdapterPosition()).getPostJobId();
+                  jobReference.child(postJobID).removeValue();
+                  jobs.remove(viewHolder.getAdapterPosition());
+                  jobAdapter.notifyDataSetChanged();
+              }
+          }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    getData();
+              }
+          });
+
+          AlertDialog dialog = builder.create();
+          dialog.show();
+          dialog.setCancelable(true);
+
+      }
+  };
+    public void Reload(){
+        FragmentManager fm = this.getParentFragmentManager();
+        fm.beginTransaction().detach(JobFragment.this).attach(JobFragment.this).commit();
+    }
+
+    public void getData(){
         jobReference.orderByChild("permission").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -90,16 +151,5 @@ public class JobFragment extends Fragment {
 
             }
         });
-
-        return jobRoot;
     }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.add_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-
 }
