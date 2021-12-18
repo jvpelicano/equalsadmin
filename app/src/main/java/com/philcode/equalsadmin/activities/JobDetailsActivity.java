@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.philcode.equalsadmin.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class JobDetailsActivity extends AppCompatActivity {
@@ -39,11 +40,8 @@ public class JobDetailsActivity extends AppCompatActivity {
     ImageView jobDetailsImg;
     RelativeLayout jobDetail;
     private TextInputEditText jobDetailsCompany, jobDetailsAddress, jobDetailsDescription;
-    private TextView jobDetailsTitle, jobDetailsPermission, jobDetailsCategory, jobDetailsPrimary1, jobDetailsPrimary2,jobDetailsPrimary3,
-            jobDetailsPrimary4,jobDetailsPrimary5,jobDetailsPrimary6,jobDetailsPrimary7, jobDetailsPrimary8, jobDetailsPrimary9,
-            jobDetailsPrimary10, jobDetailsPrimaryOther, jobDetailsSkill1, jobDetailsSkill2, jobDetailsSkill3, jobDetailsSkill4,
-            jobDetailsSkill5, jobDetailsSkill6, jobDetailsSkill7, jobDetailsSkill8, jobDetailsSkill9, jobDetailsSkill10, jobDetailsEduc,
-            jobDetailsWorkxp, jobDetailsDisability1, jobDetailsDisability2, jobDetailsDisability3, jobDetailsDisability4, jobDetailsExpDate;
+    private TextView jobDetailsTitle, jobDetailsPermission, jobDetailsEduc,
+            jobDetailsWorkxp, jobDetailsDisability1, jobDetailsExpDate, jobDetailsCategory, jobDetailsSkill1;
     private Button updateJobStatus;
     private String postJobId;
 
@@ -76,33 +74,10 @@ public class JobDetailsActivity extends AppCompatActivity {
         jobDetailsDescription = findViewById(R.id.job_details_description);
         jobDetailsPermission = findViewById(R.id.job_details_permission);
         jobDetailsCategory = findViewById(R.id.job_details_category);
-        jobDetailsPrimary1 = findViewById(R.id.job_details_primary_skill1);
-        jobDetailsPrimary2 = findViewById(R.id.job_details_primary_skill2);
-        jobDetailsPrimary3 = findViewById(R.id.job_details_primary_skill3);
-        jobDetailsPrimary4 = findViewById(R.id.job_details_primary_skill4);
-        jobDetailsPrimary5 = findViewById(R.id.job_details_primary_skill5);
-        jobDetailsPrimary6 = findViewById(R.id.job_details_primary_skill6);
-        jobDetailsPrimary7 = findViewById(R.id.job_details_primary_skill7);
-        jobDetailsPrimary8 = findViewById(R.id.job_details_primary_skill8);
-        jobDetailsPrimary9 = findViewById(R.id.job_details_primary_skill9);
-        jobDetailsPrimary10 = findViewById(R.id.job_details_primary_skill10);
-        jobDetailsPrimaryOther = findViewById(R.id.job_details_primary_skill_other);
         jobDetailsSkill1 = findViewById(R.id.job_details_skill1);
-        jobDetailsSkill2 = findViewById(R.id.job_details_skill2);
-        jobDetailsSkill3 = findViewById(R.id.job_details_skill3);
-        jobDetailsSkill4 = findViewById(R.id.job_details_skill4);
-        jobDetailsSkill5 = findViewById(R.id.job_details_skill5);
-        jobDetailsSkill6 = findViewById(R.id.job_details_skill6);
-        jobDetailsSkill7 = findViewById(R.id.job_details_skill7);
-        jobDetailsSkill8 = findViewById(R.id.job_details_skill8);
-        jobDetailsSkill9 = findViewById(R.id.job_details_skill9);
-        jobDetailsSkill10 = findViewById(R.id.job_details_skill10);
         jobDetailsEduc = findViewById(R.id.job_details_educ);
         jobDetailsWorkxp = findViewById(R.id.job_details_work_xp);
         jobDetailsDisability1 = findViewById(R.id.job_details_disability1);
-        jobDetailsDisability2 = findViewById(R.id.job_details_disability2);
-        jobDetailsDisability3 = findViewById(R.id.job_details_disability3);
-        jobDetailsDisability4 = findViewById(R.id.job_details_disability4);
         jobDetailsExpDate = findViewById(R.id.job_details_exp_date);
         updateJobStatus = findViewById(R.id.job_status_btn);
         jobDetail = findViewById(R.id.job_details_layout);
@@ -133,7 +108,6 @@ public class JobDetailsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //check until required info is received
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
-
                     //get data
                     String image = "" + ds.child("imageURL").getValue();
                     String title = "" + ds.child("postTitle").getValue();
@@ -145,9 +119,23 @@ public class JobDetailsActivity extends AppCompatActivity {
                     String experience = "" + ds.child("workExperience").getValue();
                     String expDate = "" + ds.child("expDate").getValue();
                     String companyId = "" + ds.child("empValidID").getValue();
-
-
                     String status = "" + ds.child("typeStatus").getValue();
+                    String skill = "" + ds.child("skill").getValue();
+                    ArrayList<String> jobSkillList = new ArrayList<>();
+                    ArrayList<String> typeOfDisabilityList = new ArrayList<>();
+
+                    for(int counter = 1; counter <= 10; counter++){
+                        if(ds.hasChild("jobSkill" + counter) && !ds.child("jobSkill" + counter).getValue().toString().equals("")){
+                            jobSkillList.add(ds.child("jobSkill" + counter).getValue(String.class));
+                        }
+                    }
+
+                    for(int counter_a = 1; counter_a <= 3; counter_a++){
+                        if(ds.hasChild("typeOfDisability" + counter_a) && !ds.child("typeOfDisability" + counter_a).getValue().toString().equals("")){
+                            typeOfDisabilityList.add(ds.child("typeOfDisability" + counter_a).getValue(String.class));
+                        }
+
+                    }
 //
 //                    if(status.equals("EMPApproved")){
 //                        empBadgeIcon.setVisibility(View.VISIBLE);
@@ -175,7 +163,19 @@ public class JobDetailsActivity extends AppCompatActivity {
                     jobDetailsEduc.setText(educ);
                     jobDetailsExpDate.setText(expDate);
                     jobDetailsWorkxp.setText(experience);
+                    jobDetailsCategory.setText(skill);
 
+                    StringBuilder jobSkillList_builder = new StringBuilder();
+                    for(String jobSkillList1 : jobSkillList){
+                        jobSkillList_builder.append(jobSkillList1 + "\n");
+                    }
+                    jobDetailsSkill1.setText(jobSkillList_builder.toString());
+
+                    StringBuilder typeOfDisability_builder = new StringBuilder();
+                    for(String typeOfDisabilityList1 : typeOfDisabilityList) {
+                        typeOfDisability_builder.append(typeOfDisabilityList1 + "\n");
+                    }
+                    jobDetailsDisability1.setText(typeOfDisability_builder.toString());
 
                     try {
                         Picasso.get().load(image).placeholder(R.drawable.equalsplaceholder)

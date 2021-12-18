@@ -152,7 +152,6 @@
                         android:textColor="#232c33"
                         android:textCursorDrawable="@drawable/cursor"
                         android:textSize="16sp">
-
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -230,40 +229,6 @@
                     android:gravity="start"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"/>
-
-                <TextView
-                    android:id="@+id/pwd_details_disability2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Disability 2 "
-                    android:textSize="14dp"
-                    android:gravity="start"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"/>
-
-                <TextView
-                    android:id="@+id/pwd_details_disability3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Disability3 "
-                    android:textSize="14dp"
-                    android:gravity="start"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"/>
-
-                <TextView
-                    android:id="@+id/pwd_details_disability4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Disability4 "
-                    android:textSize="14dp"
-                    android:gravity="start"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"/>
-
 
                 <TextView
                     android:layout_width="wrap_content"

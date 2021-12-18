@@ -35,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.philcode.equalsadmin.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -87,9 +88,6 @@ public class PWDDetailsActivity extends AppCompatActivity {
         pwdDetail = findViewById(R.id.pwd_details_layout);
         resumeLink = findViewById(R.id.pwd_resume_link);
         pwdDisability1 = findViewById(R.id.pwd_details_disability1);
-        pwdDisability2 = findViewById(R.id.pwd_details_disability2);
-        pwdDisability3 = findViewById(R.id.pwd_details_disability3);
-        pwdDisability4 = findViewById(R.id.pwd_details_disability4);
 
         //init progress dialog
         pd = new ProgressDialog(this);
@@ -135,6 +133,14 @@ public class PWDDetailsActivity extends AppCompatActivity {
                     String homeAdd2 = "" + ds.child("city").getValue();
                     String status = "" + ds.child("typeStatus").getValue();
                     resume = "" + ds.child("resumeFile").getValue();
+                    ArrayList<String> typeOfDisabilityList = new ArrayList<>();
+
+                    for(int counter_a = 1; counter_a <= 3; counter_a++){
+                        if(ds.hasChild("typeOfDisability" + counter_a) && !ds.child("typeOfDisability" + counter_a).getValue().toString().equals("")){
+                            typeOfDisabilityList.add(ds.child("typeOfDisability" + counter_a).getValue(String.class));
+                        }
+
+                    }
 //                    String disability1 = "" + ds.child("typeOfDisability1").getValue();
 //                    String disability2 = "" + ds.child("typeOfDisability2").getValue();
 //                    String disability3 = "" + ds.child("typeOfDisability3").getValue();
@@ -165,6 +171,11 @@ public class PWDDetailsActivity extends AppCompatActivity {
                     viewPWDPhone.setText(phone);
                     viewPWDAdd.setText(homeAdd1 + " " + homeAdd2);
                     resumeLink.setText(R.string.resume);
+                    StringBuilder typeOfDisability_builder = new StringBuilder();
+                    for(String typeOfDisabilityList1 : typeOfDisabilityList) {
+                        typeOfDisability_builder.append(typeOfDisabilityList1 + "\n");
+                    }
+                    pwdDisability1.setText(typeOfDisability_builder.toString());
 
 //                    if(disability1.equals("")) {
 //                        pwdDisability1.setVisibility(View.GONE);
