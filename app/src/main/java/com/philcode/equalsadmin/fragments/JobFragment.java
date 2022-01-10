@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -21,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +34,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.philcode.equalsadmin.R;
+import com.philcode.equalsadmin.activities.AddJobPostActivity;
+import com.philcode.equalsadmin.activities.AddPostActivity;
 import com.philcode.equalsadmin.adapters.EmployerAdapter;
 import com.philcode.equalsadmin.adapters.JobAdapter;
 import com.philcode.equalsadmin.models.Employer;
@@ -50,6 +54,7 @@ public class JobFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser mUSer;
     String uid;
+    Toolbar toolbar;
 
 
     @Override
@@ -58,6 +63,10 @@ public class JobFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup jobRoot = (ViewGroup) inflater.inflate(R.layout.fragment_job, container, false);
         setHasOptionsMenu(true);
+
+        //set toolbar
+        toolbar = jobRoot.findViewById(R.id.toolbar_job);
+        toolbar.inflateMenu(R.menu.add_menu);
 
         mAuth = FirebaseAuth.getInstance();
         mUSer = mAuth.getCurrentUser();
@@ -77,50 +86,40 @@ public class JobFragment extends Fragment {
         return jobRoot;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.add_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
+    //Delete on swipe function
+    ItemTouchHelper.SimpleCallback itemTouchHelper = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
 
-  ItemTouchHelper.SimpleCallback itemTouchHelper = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-      @Override
-      public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-          return false;
-      }
-
-      @Override
-      public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-          AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-          builder.setTitle("Do you want to proceed?");
-          builder.setMessage("By tapping the proceed button, you agree to delete the selected job post.");
-          builder.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int which) {
-                  String postJobID = jobs.get(viewHolder.getAdapterPosition()).getPostJobId();
-                  jobReference.child(postJobID).removeValue();
-                  jobs.remove(viewHolder.getAdapterPosition());
-                  jobAdapter.notifyDataSetChanged();
-              }
-          }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int which) {
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Do you want to proceed?");
+            builder.setMessage("By tapping the proceed button, you agree to delete the selected job post.");
+            builder.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String postJobID = jobs.get(viewHolder.getAdapterPosition()).getPostJobId();
+                    jobReference.child(postJobID).removeValue();
+                    jobs.remove(viewHolder.getAdapterPosition());
+                    jobAdapter.notifyDataSetChanged();
+                }
+            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                     getData();
-              }
-          });
+                }
+            });
 
-          AlertDialog dialog = builder.create();
-          dialog.show();
-          dialog.setCancelable(true);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            dialog.setCancelable(true);
 
-      }
-  };
-    public void Reload(){
-        FragmentManager fm = this.getParentFragmentManager();
-        fm.beginTransaction().detach(JobFragment.this).attach(JobFragment.this).commit();
-    }
+        }
+    };
 
     public void getData(){
         jobReference.orderByChild("permission").addValueEventListener(new ValueEventListener() {
@@ -129,12 +128,9 @@ public class JobFragment extends Fragment {
                 jobs.clear();
                 for (DataSnapshot snapShot : dataSnapshot.getChildren()) {
                     Job jobModel = snapShot.getValue(Job.class);
-
                     try {
                         jobModel.setImageURL(snapShot.child("imageURL").getValue().toString());
                         jobs.add(jobModel);
-
-//
 
                     } catch (Exception e) {
                         Toast.makeText(getActivity(), "Error in Fetching Data", Toast.LENGTH_LONG).show();
@@ -152,4 +148,27 @@ public class JobFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.add_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        toolbar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.post_add_menu:
+                    startActivity(new Intent(getContext(), AddJobPostActivity.class));
+                    return true;
+                default:
+                    return false;
+            }
+        });
+    }
+
+
 }

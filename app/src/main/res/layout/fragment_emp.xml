@@ -14,7 +14,9 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         app:title="Employers"
-        app:titleTextColor="@color/cardview_light_background" />
+        app:titleTextColor="@color/cardview_light_background"
+        android:fitsSystemWindows="true"
+        />
 
     <ScrollView
         android:id="@+id/scrollView2"

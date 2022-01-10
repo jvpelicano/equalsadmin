@@ -1,16 +1,22 @@
 package com.philcode.equalsadmin.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,6 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.philcode.equalsadmin.R;
+import com.philcode.equalsadmin.activities.AddEmployerActivity;
+import com.philcode.equalsadmin.activities.AddJobPostActivity;
+import com.philcode.equalsadmin.activities.AddPWDActivity;
 import com.philcode.equalsadmin.adapters.EmployerAdapter;
 import com.philcode.equalsadmin.models.Employer;
 import java.util.ArrayList;
@@ -34,6 +43,7 @@ public class EmpFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser mUSer;
     String uid;
+    Toolbar toolbar;
 
 
 
@@ -53,6 +63,10 @@ public class EmpFragment extends Fragment {
         empAdapter = new EmployerAdapter( getContext(), employers, getActivity());
         rvEmpItems.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rvEmpItems.setAdapter(empAdapter);
+
+        //set toolbar and toolbar menu
+        toolbar = root.findViewById(R.id.toolbar_emp);
+        toolbar.inflateMenu(R.menu.add_menu);
 
         empReference =  FirebaseDatabase.getInstance().getReference().child("Employers");
         empReference.addValueEventListener(new ValueEventListener() {
@@ -90,5 +104,25 @@ public class EmpFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.add_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        toolbar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.post_add_menu:
+                    startActivity(new Intent(getContext(), AddEmployerActivity.class));
+                    return true;
+                default:
+                    return false;
+            }
+        });
+    }
 
 }
