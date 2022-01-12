@@ -105,7 +105,7 @@ public class AddPostActivity extends AppCompatActivity {
         storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         //clicking the imageview for profile picture
-        addPostButton.setOnClickListener(new View.OnClickListener() {
+        addPostImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showAddImgDialog();
