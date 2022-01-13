@@ -15,8 +15,11 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,8 +27,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -42,19 +48,21 @@ public class AddJobPostActivity extends AppCompatActivity {
     private ImageView imageView;
     private MaterialButton btn_post;
     private ProgressDialog progressDialog;
-
+    private Spinner spinner_postDuration, spinner_skillCategory;
+    private ArrayAdapter<String> spinner_skillCategory_adapter;
 
     //Arrays
     private Integer[] secondary_skills_checkboxIDs;
     private CheckBox[] checkBoxes;
     private HashMap<String, String> checked_secondary_skills;
+    private ArrayList<String> skillCategory_contentList;
+
     //request codes
     private int Image_Request_Code = 7;
     //database
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference jobPostNode;
+    private DatabaseReference jobPostNode, categoryNode;
     private StorageReference ref, jobOffersNode;
-    private FirebaseStorage firebaseStorage;
     private String storage_path = "Job_Offers/";
 
     private Uri FilePathUri;
@@ -65,6 +73,11 @@ public class AddJobPostActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.add_job_post_img);
         btn_post = findViewById(R.id.btn_job_post);
+        spinner_skillCategory = findViewById(R.id.spinner_skillCategory);
+        skillCategory_contentList = new ArrayList<>();
+        spinner_skillCategory_adapter = new ArrayAdapter<String>(AddJobPostActivity.this, android.R.layout.simple_spinner_dropdown_item, skillCategory_contentList);
+
+
         progressDialog = new ProgressDialog(AddJobPostActivity.this);
 
 
@@ -72,7 +85,12 @@ public class AddJobPostActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         jobPostNode = firebaseDatabase.getReference().child("Job_Offers");
+        categoryNode = firebaseDatabase.getReference().child("Category");
         jobOffersNode = FirebaseStorage.getInstance().getReference();
+
+        spinner_skillCategory.setAdapter(spinner_skillCategory_adapter);
+        setSpinner();
+
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +112,24 @@ public class AddJobPostActivity extends AppCompatActivity {
         });
     }
 
+    private void setSpinner(){
+        categoryNode.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    skillCategory_contentList.add(ds.child("skill").getValue().toString());
+                }
+                spinner_skillCategory_adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    //this method is optimized version for checking if checkBox is checked.
     private void selectedSecondarySkills(){
         secondary_skills_checkboxIDs = new Integer[]{R.id.typeOfSkills1, R.id.typeOfSkills2,
                 R.id.typeOfSkills3, R.id.typeOfSkills4, R.id.typeOfSkills5, R.id.typeOfSkills6, R.id.typeOfSkills7
@@ -105,15 +141,12 @@ public class AddJobPostActivity extends AppCompatActivity {
         for(int i = 0; i < secondary_skills_checkboxIDs.length; i++){
             checkBoxes[i] = (CheckBox) findViewById(secondary_skills_checkboxIDs[i]);
             if(checkBoxes[i].isChecked()){
-                //not working, checkboxes returning null values instead of string.
-                //checked_secondary_skills is a Hashmap<String, String>
                 checked_secondary_skills.put("typeOfSkills" + i, checkBoxes[i].getText().toString().trim());
-
-                //checked_secondary_skills.put("Pakistan", "Grape!");
             }
         }
     }
 
+    //this method is for uploading data once the user tapped the post button.
     private void uploadData() {
         progressDialog.setTitle("Posting...");
         progressDialog.show();
@@ -168,7 +201,7 @@ public class AddJobPostActivity extends AppCompatActivity {
         }
     }
 
-    // Creating Method to get the selected image file Extension from File Path URI.
+    // this method is to get the selected image file Extension from File Path URI.
     public String GetFileExtension(Uri uri) {
         ContentResolver contentResolver = getContentResolver();
 
