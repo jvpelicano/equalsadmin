@@ -246,75 +246,93 @@ public class AddJobPostActivity extends AppCompatActivity {
     //this method is for uploading data once the user tapped the post button.
     private void uploadData() {
 
-        progressDialog.setTitle("Posting...");
-        progressDialog.show();
-        ref = jobOffersNode.child(storage_path + System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
-        ref.putFile(FilePathUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        if(spinner_skillCategory.getSelectedItem().toString().equals("Click to select value")){
+            Toast.makeText(AddJobPostActivity.this, "Please select a skill category.", Toast.LENGTH_SHORT).show();
+        }else{
+            if(FilePathUri == null){
+                Toast.makeText(AddJobPostActivity.this, "Please fill in all the fields.", Toast.LENGTH_LONG).show();
+            }else{
+                progressDialog.setTitle("Posting...");
+                progressDialog.show();
+                ref = jobOffersNode.child(storage_path + System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
+                ref.putFile(FilePathUri)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Uri> task) {
+                                        progressDialog.dismiss();
+                                        final String imageURL = task.getResult().toString();
+                                        final String pushKey = jobPostNode.push().getKey();
+                                        final String skill = spinner_skillCategory.getSelectedItem().toString();
+                                        final String selected_postExpDate = spinner_postDuration.getSelectedItem().toString();
+                                        selected_workExpRg_ID = rg_workExp.getCheckedRadioButtonId();
+                                        selected_educAttainment_ID = rg_educAttainment.getCheckedRadioButtonId();
+                                        rb_workExp = findViewById(selected_workExpRg_ID);
+                                        rb_educAttainment = findViewById(selected_educAttainment_ID);
+
+                                        hashmap_all_data.put("postTitle", tv_jobTitle.getText().toString().trim());
+                                        hashmap_all_data.put("postDescription", tv_jobDescription.getText().toString().trim());
+                                        hashmap_all_data.put("educationalAttainment", rb_educAttainment.getText().toString());
+                                        hashmap_all_data.put("yearsOfExperience", tv_yearsOfExp.getText().toString().trim());
+                                        hashmap_all_data.put("uid", currentAdmin_uID);
+                                        hashmap_all_data.put("postDate", postDate);
+                                        hashmap_all_data.put("imageURL", imageURL);
+                                        hashmap_all_data.put("postJobId", pushKey);
+                                        hashmap_all_data.put("skill", skill);
+                                        hashmap_all_data.put("permission", "Approved");
+                                        hashmap_all_data.put("city", "Manila");
+                                        hashmap_all_data.put("postLocation", "Blk 1 Lot 2 Brngy. San Jose, Manila City Philippines");
+                                        hashmap_all_data.put("companyName", "PhilCode");
+
+                                        //check if educational attainment requirement is on
+                                        if(checkBox_toggle_educRequired.isChecked()){
+                                            hashmap_all_data.put("educationalAttainmentRequirement", "true");
+                                        }else if(!checkBox_toggle_educRequired.isChecked()){
+                                            hashmap_all_data.put("educationalAttainmentRequirement", "false");
+                                        }
+
+                                        if((hashmap_all_data.containsKey("jobSkill1") || hashmap_all_data.containsKey("jobSkill2") || hashmap_all_data.containsKey("jobSkill3")
+                                                ||hashmap_all_data.containsKey("jobSkill4") || hashmap_all_data.containsKey("jobSkill5") || hashmap_all_data.containsKey("jobSkill6")
+                                                ||hashmap_all_data.containsKey("jobSkill7") || hashmap_all_data.containsKey("jobSkill8") || hashmap_all_data.containsKey("jobSkill9") || hashmap_all_data.containsKey("jobSkill10"))
+
+                                                && (hashmap_all_data.containsKey("typeOfDisability1") || hashmap_all_data.containsKey("typeOfDisability2") || hashmap_all_data.containsKey("typeOfDisability3")
+                                                || hashmap_all_data.containsKey("typeOfDisabilityMore"))
+
+                                                && hashmap_all_data.containsKey("postTitle") && hashmap_all_data.containsKey("postDescription")
+                                                && hashmap_all_data.containsKey("imageURL")){
+
+                                            jobPostNode.child(pushKey).setValue(hashmap_all_data);
+                                            calculateExpDate(selected_postExpDate);
+                                            jobPostNode.child(pushKey).child("expDate").setValue(calculated_postExpDate);
+
+                                        }else
+                                            Toast.makeText(AddJobPostActivity.this, "Please fill in all the fields.", Toast.LENGTH_LONG).show();
+
+                                        startActivity(new Intent(AddJobPostActivity.this, MainActivity.class));
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(AddJobPostActivity.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                     @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> task) {
-                                progressDialog.dismiss();
-                                final String imageURL = task.getResult().toString();
-                                final String pushKey = jobPostNode.push().getKey();
-                                final String skill = spinner_skillCategory.getSelectedItem().toString();
-                                final String selected_postExpDate = spinner_postDuration.getSelectedItem().toString();
-                                selected_workExpRg_ID = rg_workExp.getCheckedRadioButtonId();
-                                selected_educAttainment_ID = rg_educAttainment.getCheckedRadioButtonId();
-                                rb_workExp = findViewById(selected_workExpRg_ID);
-                                rb_educAttainment = findViewById(selected_educAttainment_ID);
-
-                                hashmap_all_data.put("postTitle", tv_jobTitle.getText().toString().trim());
-                                hashmap_all_data.put("postDescription", tv_jobDescription.getText().toString().trim());
-                                hashmap_all_data.put("educationalAttainment", rb_educAttainment.getText().toString());
-                                hashmap_all_data.put("yearsOfExperience", tv_yearsOfExp.getText().toString().trim());
-                                hashmap_all_data.put("uid", currentAdmin_uID);
-                                hashmap_all_data.put("postDate", postDate);
-                                hashmap_all_data.put("imageURL", imageURL);
-                                hashmap_all_data.put("postJobID", pushKey);
-                                hashmap_all_data.put("skill", skill);
-                                hashmap_all_data.put("permission", "Approved");
-                                hashmap_all_data.put("city", "Manila");
-                                hashmap_all_data.put("postLocation", "Blk 1 Lot 2 Brngy. San Jose, Manila City Philippines");
-                                hashmap_all_data.put("companyName", "PhilCode");
-
-                                //check if educational attainment requirement is on
-                                if(checkBox_toggle_educRequired.isChecked()){
-                                    hashmap_all_data.put("educationalAttainmentRequirement", "true");
-                                }else if(!checkBox_toggle_educRequired.isChecked()){
-                                    hashmap_all_data.put("educationalAttainmentRequirement", "false");
-                                }
-
-                                jobPostNode.child(pushKey).setValue(hashmap_all_data);
-
-
-                                calculateExpDate(selected_postExpDate);
-                                jobPostNode.child(pushKey).child("expDate").setValue(calculated_postExpDate);
-
-
-
-                                startActivity(new Intent(AddJobPostActivity.this, MainActivity.class));
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                progressDialog.dismiss();
-                                Toast.makeText(AddJobPostActivity.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                        double progress = (100.0 * snapshot.getBytesTransferred() / snapshot
+                                .getTotalByteCount());
+                        progressDialog.setMessage("Uploaded " + (int) progress + "%");
+                        progressDialog.setCancelable(false);
                     }
-                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                double progress = (100.0 * snapshot.getBytesTransferred() / snapshot
-                        .getTotalByteCount());
-                progressDialog.setMessage("Uploaded " + (int) progress + "%");
-                progressDialog.setCancelable(false);
+                });
             }
-        });
 
+
+        }
 
     }
 

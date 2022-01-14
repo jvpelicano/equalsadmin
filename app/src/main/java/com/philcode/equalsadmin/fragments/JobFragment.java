@@ -24,6 +24,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -33,6 +35,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.philcode.equalsadmin.R;
 import com.philcode.equalsadmin.activities.AddJobPostActivity;
 import com.philcode.equalsadmin.activities.AddPostActivity;
@@ -41,6 +45,7 @@ import com.philcode.equalsadmin.adapters.JobAdapter;
 import com.philcode.equalsadmin.models.Employer;
 import com.philcode.equalsadmin.models.Job;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -51,8 +56,10 @@ public class JobFragment extends Fragment {
     ArrayList<Job> jobs = new ArrayList<>();
     JobAdapter jobAdapter;
     DatabaseReference jobReference;
+    StorageReference jobStorageReference;
     FirebaseAuth mAuth;
     FirebaseUser mUSer;
+    FirebaseStorage firebaseStorage;
     String uid;
     Toolbar toolbar;
 
@@ -80,7 +87,9 @@ public class JobFragment extends Fragment {
 
         new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(rvJobItems);
 
+        firebaseStorage = FirebaseStorage.getInstance();
         jobReference = FirebaseDatabase.getInstance().getReference().child("Job_Offers");
+
         getData();
 
         return jobRoot;
@@ -102,7 +111,20 @@ public class JobFragment extends Fragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String postJobID = jobs.get(viewHolder.getAdapterPosition()).getPostJobId();
+                    String imageURL = jobs.get(viewHolder.getAdapterPosition()).getImageURL();
                     jobReference.child(postJobID).removeValue();
+                    jobStorageReference = firebaseStorage.getReferenceFromUrl(imageURL);
+                    jobStorageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(getContext(), "Data deleted successfully.", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     jobs.remove(viewHolder.getAdapterPosition());
                     jobAdapter.notifyDataSetChanged();
                 }
