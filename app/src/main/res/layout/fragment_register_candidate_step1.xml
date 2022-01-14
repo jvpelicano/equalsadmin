@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.RegisterCandidateStep1_Fragment"
+    android:gravity="center_vertical|center_horizontal"
+    >
+
+    <TextView
+        android:id="@+id/welcome_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome to fragment1!"
+        android:textSize="22sp"
+        android:gravity="center"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnNext_fragment1"
+        android:layout_width="100dp"
+        android:layout_height="65dp"
+        android:textSize="9sp"
+        android:text="Next Fragment"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        />
+
+</RelativeLayout>

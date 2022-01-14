@@ -8,6 +8,7 @@
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_add_post.xml" value="0.2572463768115942" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_add_pwdactivity.xml" value="0.3385416666666667" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_job_details.xml" value="0.23125" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_main.xml" value="0.26902173913043476" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_post_details.xml" value="0.23125" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_pwddetails.xml" value="0.23125" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/content_add_employee.xml" value="0.3385416666666667" />
@@ -15,6 +16,12 @@
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_home.xml" value="0.24682971014492755" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_job.xml" value="0.24682971014492755" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_p_w_d.xml" value="0.23125" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_register_candidate1.xml" value="0.3385416666666667" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_register_candidate2.xml" value="0.3223958333333333" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_register_candidate3.xml" value="0.3223958333333333" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_register_candidate_step1.xml" value="0.3385416666666667" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_register_candidate_step2.xml" value="0.3385416666666667" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_register_candidate_step3.xml" value="0.3385416666666667" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/post_item.xml" value="0.23125" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/toolbar.xml" value="0.3385416666666667" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/menu/add_menu.xml" value="0.3385416666666667" />

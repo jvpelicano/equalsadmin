@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.philcode.equalsadmin.R;
+import com.philcode.equalsadmin.fragments.RegisterCandidateStep1_Fragment;
 
 public class AddPWDActivity extends AppCompatActivity {
 
@@ -18,6 +19,9 @@ public class AddPWDActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().show();
+
+        RegisterCandidateStep1_Fragment register_fragment1 = new RegisterCandidateStep1_Fragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.addPWD_frameLayout, register_fragment1).commit();
     }
 
     @Override
