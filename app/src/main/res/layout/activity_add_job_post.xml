@@ -63,7 +63,7 @@
                 app:hintTextColor="@color/btnColor">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_title_post"
+                    android:id="@+id/add_jobtitle_post"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/proxima_nova_regular"
@@ -95,7 +95,7 @@
                 app:hintTextColor="@color/btnColor">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_desc_post"
+                    android:id="@+id/add_jobdesc_post"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/proxima_nova_regular"
@@ -118,14 +118,14 @@
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinner_skillCategory"
-                android:layout_width="250dp"
-                android:layout_height="44dp"
                 style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
                 android:layout_gravity="start"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                />
+                android:layout_marginBottom="10dp"
+                tools:ignore="SpeakableTextPresentCheck" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -349,7 +349,7 @@
                 />
 
             <RadioGroup
-                android:id="@+id/workexperience"
+                android:id="@+id/rg_work"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -373,6 +373,87 @@
                     android:layout_marginEnd="10dp"
                     android:text="With Experience" />
             </RadioGroup>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/add_yearsOfExp_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="150dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:hint="Number of years required."
+                app:boxStrokeColor="@color/btnColor"
+                app:hintTextColor="@color/btnColor"
+                android:layout_gravity="start"
+                android:visibility="gone"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/yearsOfExp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:inputType="number"
+                    android:textColor="#232c33"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:textSize="16sp">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:text="Type of Disability"
+                android:layout_margin="10dp"
+                />
+
+            <CheckBox
+                android:id="@+id/typeOfDisability1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+
+                android:layout_marginEnd="8dp"
+                android:text="Orthopedic Disability"
+                android:fontFamily="@font/proxima_nova_regular"
+                android:layout_gravity="start"
+                 />
+
+            <CheckBox
+                android:id="@+id/typeOfDisability2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:text="Partial Vision Disability"
+                android:fontFamily="@font/proxima_nova_regular"
+                android:layout_gravity="start" />
+
+            <CheckBox
+                android:id="@+id/typeOfDisability3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:text="Hearing Disability"
+                android:fontFamily="@font/proxima_nova_regular"
+                android:layout_gravity="start" />
+
+            <CheckBox
+                android:id="@+id/typeOfDisabilityOther"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:text="Other Disabilities"
+                android:fontFamily="@font/proxima_nova_regular"
+                android:layout_gravity="start" />
+
+
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
