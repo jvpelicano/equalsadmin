@@ -57,9 +57,9 @@ public class JobFragment extends Fragment {
     JobAdapter jobAdapter;
     DatabaseReference jobReference;
     StorageReference jobStorageReference;
+    FirebaseStorage firebaseStorage;
     FirebaseAuth mAuth;
     FirebaseUser mUSer;
-    FirebaseStorage firebaseStorage;
     String uid;
     Toolbar toolbar;
 

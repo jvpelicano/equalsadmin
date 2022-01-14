@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
@@ -101,6 +102,11 @@ public class AddJobPostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_job_post);
+
+        getSupportActionBar().setTitle("Add Job Post");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().show();
 
         //Layout
             //views
@@ -210,7 +216,7 @@ public class AddJobPostActivity extends AppCompatActivity {
         });
     }
 
-    //this method is optimized version for checking if checkBox is checked.
+    //These methods are for checking if checkBox is checked.
     private void selectedSecondarySkills(){
         secondary_skills_checkboxIDs = new Integer[]{R.id.typeOfSkills1, R.id.typeOfSkills2,
                 R.id.typeOfSkills3, R.id.typeOfSkills4, R.id.typeOfSkills5, R.id.typeOfSkills6, R.id.typeOfSkills7
@@ -243,7 +249,7 @@ public class AddJobPostActivity extends AppCompatActivity {
         }
     }
 
-    //this method is for uploading data once the user tapped the post button.
+    //This method is for uploading data once the user tapped the post button.
     private void uploadData() {
 
         if(spinner_skillCategory.getSelectedItem().toString().equals("Click to select value")){
@@ -336,6 +342,7 @@ public class AddJobPostActivity extends AppCompatActivity {
 
     }
 
+    //Calculates selected post duration and save the calculated date to database.
     private void calculateExpDate(String selected_postExpDate) {
         if(selected_postExpDate.equals("1 week")) { // working
             cal.add(Calendar.WEEK_OF_YEAR, 1);
@@ -440,6 +447,17 @@ public class AddJobPostActivity extends AppCompatActivity {
 
         // Returning the file Extension.
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

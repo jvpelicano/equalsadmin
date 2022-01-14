@@ -16,13 +16,19 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".activities.AddPWDActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.EqualsAdmin"
+            />
         <activity
             android:name=".activities.AddJobPostActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.EqualsAdmin"
+            />
         <activity
             android:name=".activities.AddEmployerActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.EqualsAdmin"
+            />
         <activity
             android:name=".activities.JobDetailsActivity"
             android:exported="true"

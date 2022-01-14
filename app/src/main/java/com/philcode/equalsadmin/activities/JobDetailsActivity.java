@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,6 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.philcode.equalsadmin.R;
 import com.squareup.picasso.Picasso;
 
@@ -43,7 +47,7 @@ public class JobDetailsActivity extends AppCompatActivity {
     private TextView jobDetailsTitle, jobDetailsPermission, jobDetailsEduc,
             jobDetailsWorkxp, jobDetailsDisability1, jobDetailsExpDate, jobDetailsCategory, jobDetailsSkill1;
     private Button updateJobStatus;
-    private String postJobId;
+    private String postJobId, image;
 
     private ProgressDialog pd;
 
@@ -51,13 +55,14 @@ public class JobDetailsActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference jobsDbRef;
+    private FirebaseStorage firebaseStorage;
+    private StorageReference jobStorageReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_details);
-
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         getSupportActionBar().setTitle("Job Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -100,6 +105,7 @@ public class JobDetailsActivity extends AppCompatActivity {
         //firebase auth instance
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance();
         jobsDbRef = firebaseDatabase.getReference("Job_Offers");
 
         Query jobQuery = jobsDbRef.orderByChild("postJobId").equalTo(postJobId);
@@ -109,7 +115,7 @@ public class JobDetailsActivity extends AppCompatActivity {
                 //check until required info is received
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     //get data
-                    String image = "" + ds.child("imageURL").getValue();
+                    image = "" + ds.child("imageURL").getValue();
                     String title = "" + ds.child("postTitle").getValue();
                     String company = "" + ds.child("companyName").getValue();
                     String description = "" + ds.child("postDescription").getValue();
@@ -257,11 +263,49 @@ public class JobDetailsActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.post_delete:
+                AlertDialog.Builder builder = new AlertDialog.Builder(JobDetailsActivity.this);
+                builder.setTitle("Do you want to proceed?");
+                builder.setMessage("By tapping the proceed button, you agree to delete the selected job post.");
+                builder.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        jobsDbRef.child(postJobId).removeValue();
+                        jobStorageReference = firebaseStorage.getReferenceFromUrl(image);
+                        jobStorageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(JobDetailsActivity.this, "Data deleted successfully.", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(JobDetailsActivity.this, MainActivity.class));
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(JobDetailsActivity.this, (CharSequence) e, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                dialog.setCancelable(true);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.delete, menu);
+        menu.findItem(R.id.post_delete);
+        return true;
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();

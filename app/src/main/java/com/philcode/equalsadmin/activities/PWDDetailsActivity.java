@@ -47,7 +47,7 @@ public class PWDDetailsActivity extends AppCompatActivity {
     RelativeLayout pwdDetail;
     private TextView viewPWDFname, viewPWDLname, pwdBadge, resumeLink;
     private TextInputEditText viewPWDEmail, viewPWDPhone, viewPWDAdd;
-    private TextView pwdDisability1, pwdDisability2, pwdDisability3, pwdDisability4;
+    private TextView pwdDisability1;
     private ImageView viewPWDId, pwdBadgeIcon;
     private Button updatePWDStatus;
     private ProgressDialog pd;
@@ -292,7 +292,6 @@ public class PWDDetailsActivity extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
                                 firebaseDatabase.getReference().child("PWD").child(uid).removeValue();
                                 Snackbar.make(pwdDetail, "PWD has been deleted", Snackbar.LENGTH_LONG).show();
                                 finish();
@@ -318,6 +317,7 @@ public class PWDDetailsActivity extends AppCompatActivity {
         menu.findItem(R.id.post_delete);
         return true;
     }
+
 
     @Override
     public void onBackPressed() {
