@@ -80,7 +80,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="15dp"
-                android:hint="Juan Agustine"
+                android:hint="Juan"
                 app:boxStrokeColor="@color/btnColor"
                 app:hintTextColor="@color/btnColor">
 
@@ -114,7 +114,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="15dp"
-                android:hint="Guido"
+                android:hint="Dela Cruz"
                 app:boxStrokeColor="@color/btnColor"
                 app:hintTextColor="@color/btnColor">
 
