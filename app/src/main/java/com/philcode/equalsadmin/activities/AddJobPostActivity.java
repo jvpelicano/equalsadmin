@@ -59,12 +59,13 @@ public class AddJobPostActivity extends AppCompatActivity {
     private TextView tv_jobTitle, tv_jobDescription, tv_yearsOfExp;
     private ImageView imageView;
     private RadioGroup rg_educAttainment, rg_workExp;
-    private RadioButton rb_educAttainment, rb_workExp;
+    private RadioButton rb_educAttainment;
     private MaterialButton btn_post;
     private ProgressDialog progressDialog;
-    private Spinner spinner_postDuration, spinner_skillCategory;
-    private ArrayAdapter<String> spinner_skillCategory_adapter, spinner_postDuration_adapter;
     private CheckBox checkBox_typeOfDisability_Other, checkBox_toggle_educRequired;
+    private Spinner spinner_postDuration, spinner_skillCategory;
+
+    private ArrayAdapter<String> spinner_skillCategory_adapter, spinner_postDuration_adapter;
     Calendar cal;
     SimpleDateFormat format;
 
@@ -275,7 +276,6 @@ public class AddJobPostActivity extends AppCompatActivity {
                                         final String selected_postExpDate = spinner_postDuration.getSelectedItem().toString();
                                         selected_workExpRg_ID = rg_workExp.getCheckedRadioButtonId();
                                         selected_educAttainment_ID = rg_educAttainment.getCheckedRadioButtonId();
-                                        rb_workExp = findViewById(selected_workExpRg_ID);
                                         rb_educAttainment = findViewById(selected_educAttainment_ID);
 
                                         hashmap_all_data.put("postTitle", tv_jobTitle.getText().toString().trim());
@@ -342,7 +342,7 @@ public class AddJobPostActivity extends AppCompatActivity {
 
     }
 
-    //Calculates selected post duration and save the calculated date to database.
+    //Calculates selected post duration and save the calculated date to hashmap.
     private void calculateExpDate(String selected_postExpDate) {
         if(selected_postExpDate.equals("1 week")) { // working
             cal.add(Calendar.WEEK_OF_YEAR, 1);

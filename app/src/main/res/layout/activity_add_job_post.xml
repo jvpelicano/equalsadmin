@@ -286,8 +286,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/educAttainmentRequirement">
 
-
-
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/radio_1"
                     android:layout_width="match_parent"

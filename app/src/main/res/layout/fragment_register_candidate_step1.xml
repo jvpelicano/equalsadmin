@@ -89,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/proxima_nova_regular"
-                    android:inputType="textWebPassword"
+                    android:inputType="textWebEditText"
                     android:textColor="#232c33"
                     android:textCursorDrawable="@drawable/cursor"
                     android:textSize="16sp">
@@ -123,7 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/proxima_nova_regular"
-                    android:inputType="textWebPassword"
+                    android:inputType="textWebEditText"
                     android:textColor="#232c33"
                     android:textCursorDrawable="@drawable/cursor"
                     android:textSize="16sp">
@@ -215,7 +215,9 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                android:entries="@array/City"
+                />
 
             <TextView
                 android:layout_width="match_parent"

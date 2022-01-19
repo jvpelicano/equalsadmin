@@ -337,6 +337,34 @@
                     android:text="With Experience" />
             </RadioGroup>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/add_yearsOfExp_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="150dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:hint="Number of years required."
+                app:boxStrokeColor="@color/btnColor"
+                app:hintTextColor="@color/btnColor"
+                android:layout_gravity="start"
+                android:visibility="gone"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/yearsOfExp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:inputType="number"
+                    android:textColor="#232c33"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:textSize="16sp">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
 
 
             <TextView
