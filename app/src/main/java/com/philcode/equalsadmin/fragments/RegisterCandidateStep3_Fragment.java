@@ -17,18 +17,13 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.UserRecord;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.philcode.equalsadmin.R;
 
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.util.HashMap;
 
 public class RegisterCandidateStep3_Fragment extends Fragment {
@@ -104,25 +99,25 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
         btn_Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadData();
+                //uploadData();
             }
         });
 
         return view;
     }
 
-    private void uploadData() {
+   /* private void uploadData() {
         UserRecord.CreateRequest request = new UserRecord.CreateRequest()
                 .setEmail(tv_email.getText().toString().trim())
                 .setPassword(tv_password.getText().toString());
 
-      /*  try {
+      *//*  try {
             UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
             final String newUser_UID = userRecord.getUid();
         } catch (FirebaseAuthException e) {
             e.printStackTrace();
-        }*/
-    }
+        }*//*
+    }*/
 
 
 }
