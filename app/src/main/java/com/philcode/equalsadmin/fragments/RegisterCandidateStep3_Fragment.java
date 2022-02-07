@@ -2,12 +2,13 @@ package com.philcode.equalsadmin.fragments;
 
 import android.content.Context;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,19 +18,21 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.UserRecord;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.philcode.equalsadmin.R;
+import com.philcode.equalsadmin.activities.MainActivity;
+import com.philcode.equalsadmin.apis.UserAPI;
+import com.philcode.equalsadmin.models.User;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterCandidateStep3_Fragment extends Fragment {
     //views
@@ -74,7 +77,6 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
 
         pwdNode = firebaseDatabase.getReference().child("PWD");
 
-
         hashMap_disability = new HashMap<>();
         hashMap_secondary_skills =  new HashMap<>();
 
@@ -100,10 +102,10 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
 
         //layouts
         btn_Submit = view.findViewById(R.id.btnNext_submit);
-
         btn_Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String fullName = firstName + "" + lastName;
                 uploadData();
             }
         });
@@ -112,16 +114,41 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
     }
 
     private void uploadData() {
-        UserRecord.CreateRequest request = new UserRecord.CreateRequest()
-                .setEmail(tv_email.getText().toString().trim())
-                .setPassword(tv_password.getText().toString());
 
-      /*  try {
-            UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
-            final String newUser_UID = userRecord.getUid();
-        } catch (FirebaseAuthException e) {
-            e.printStackTrace();
-        }*/
+       Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        UserAPI userAPI = retrofit.create(UserAPI.class);
+        User newUser = new User();
+        newUser.setEmail(tv_email.getText().toString().trim());
+        newUser.setDisplayName(firstName + lastName);
+
+        Call<User> call = userAPI.createUser(newUser);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.code() != 200) {
+
+                    User responseFromApi = response.body();
+                    String email = responseFromApi.getEmail();
+                    String displayName = responseFromApi.getDisplayName();
+                    Log.d("Email", "here's the email" + email);
+                    Log.d("DisplayName", "here's the displayName" + displayName);
+
+                    Intent i = new Intent(getContext(), MainActivity.class);
+                    startActivity(i);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                t.getMessage();
+                }
+        });
     }
 
 

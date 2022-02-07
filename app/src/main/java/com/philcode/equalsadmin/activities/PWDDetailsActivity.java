@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,12 +32,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.philcode.equalsadmin.R;
+import com.philcode.equalsadmin.apis.UserAPI;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PWDDetailsActivity extends AppCompatActivity {
 
@@ -120,7 +125,7 @@ public class PWDDetailsActivity extends AppCompatActivity {
                 //check until required info is received
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
 
-                    uid = ds.getKey();
+                   uid = ds.getKey();
 
                     //get data
                     String emailAdd = "" + ds.child("email").getValue();
@@ -293,7 +298,10 @@ public class PWDDetailsActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 firebaseDatabase.getReference().child("PWD").child(uid).removeValue();
-                                Snackbar.make(pwdDetail, "PWD has been deleted", Snackbar.LENGTH_LONG).show();
+
+                                deleteUser(uid);
+
+                                Snackbar.make(pwdDetail, "PWD has been deleted" + uid, Snackbar.LENGTH_LONG).show();
                                 finish();
                             }
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -323,5 +331,27 @@ public class PWDDetailsActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+
+    private void deleteUser(String id){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        UserAPI userAPI = retrofit.create(UserAPI.class);
+
+        Call<Void> call = userAPI.deleteUser(id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Snackbar.make(pwdDetail, "User has been deleted", Snackbar.LENGTH_LONG).show();
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.getMessage();
+            }
+        });
     }
 }

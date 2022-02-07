@@ -32,8 +32,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.philcode.equalsadmin.R;
-import com.philcode.equalsadmin.activities.AddJobPostActivity;
-import com.philcode.equalsadmin.models.Candidate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -243,6 +241,5 @@ public class RegisterCandidateStep2_Fragment extends Fragment {
             hashMap_disability.put("typeOfDisabilityMore", "Other Disabilities");
         }
     }
-
 
 }
