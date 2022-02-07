@@ -37,12 +37,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.philcode.equalsadmin.R;
+import com.philcode.equalsadmin.apis.UserAPI;
 import com.philcode.equalsadmin.fragments.EmpFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EmployerDetailsActivity extends AppCompatActivity {
 
@@ -248,6 +254,8 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
 
                                 firebaseDatabase.getReference().child("Employers").child(uid).removeValue();
+                                deleteUser(uid);
+
                                 Snackbar.make(empDetail, "Employer has been deleted", Snackbar.LENGTH_LONG).show();
                                 finish();
                             }
@@ -278,5 +286,27 @@ public class EmployerDetailsActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+
+    private void deleteUser(String id){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        UserAPI userAPI = retrofit.create(UserAPI.class);
+
+        Call<Void> call = userAPI.deleteUser(id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Snackbar.make(empDetail, "User has been deleted", Snackbar.LENGTH_LONG).show();
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.getMessage();
+            }
+        });
     }
 }
