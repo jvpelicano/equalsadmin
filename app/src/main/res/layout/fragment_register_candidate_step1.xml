@@ -222,7 +222,7 @@
                 />
 
             <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spinner_EMPcity"
+                android:id="@+id/spinner_PWDcity"
                 style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:layout_width="250dp"
                 android:layout_height="48dp"

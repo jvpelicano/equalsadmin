@@ -73,7 +73,7 @@ public class JobFragment extends Fragment {
 
         //set toolbar
         toolbar = jobRoot.findViewById(R.id.toolbar_job);
-        toolbar.inflateMenu(R.menu.add_menu);
+        toolbar.inflateMenu(R.menu.more_menu);
 
         mAuth = FirebaseAuth.getInstance();
         mUSer = mAuth.getCurrentUser();
@@ -174,7 +174,7 @@ public class JobFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        inflater.inflate(R.menu.add_menu, menu);
+        inflater.inflate(R.menu.more_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -183,8 +183,11 @@ public class JobFragment extends Fragment {
 
         toolbar.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
-                case R.id.post_add_menu:
+                case R.id.add_job_post:
                     startActivity(new Intent(getContext(), AddJobPostActivity.class));
+                    return true;
+                case R.id.add_skill_category:
+                    Toast.makeText(getActivity(), "Add Skill Category", Toast.LENGTH_SHORT).show();
                     return true;
                 default:
                     return false;

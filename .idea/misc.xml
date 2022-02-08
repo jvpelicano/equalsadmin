@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/drawable/ic_baseline_local_phone_24.xml" value="0.35885416666666664" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.35885416666666664" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/drawable/jobs.xml" value="0.35885416666666664" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_add_employer.xml" value="0.2545289855072464" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_add_job_post.xml" value="0.2545289855072464" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_add_pwdactivity.xml" value="0.2545289855072464" />
@@ -13,6 +14,13 @@
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_register_candidate_step3.xml" value="0.2545289855072464" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_register_employer_step1.xml" value="0.32518115942028986" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_register_employer_step2.xml" value="0.32518115942028986" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/toolbar.xml" value="0.32518115942028986" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/menu/add_menu.xml" value="0.3385416666666667" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.3385416666666667" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/menu/delete.xml" value="0.3385416666666667" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/menu/dropdown_menu.xml" value="0.3385416666666667" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/menu/edit.xml" value="0.3385416666666667" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/menu/more_menu.xml" value="0.3385416666666667" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/btn_login_effect.xml" value="0.159375" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/confirm.xml" value="0.1234375" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/cursor.xml" value="0.1234375" />
