@@ -24,6 +24,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
                 android:gravity="center"
+                android:fontFamily="@font/poppins_bold"
                 android:text="Personal Information"
                 android:textSize="26sp" />
 
@@ -31,7 +32,7 @@
                 android:id="@+id/line2"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:background="@color/colorPrimary" />
@@ -39,11 +40,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:paddingStart="15dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="Attach a photo of your PWD ID"
-                android:textSize="18sp" />
+                android:text="Attach a photo of your valid PWD ID"
+                android:fontFamily="@font/open_sans_regular"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/imageView_selectPWD_id"
@@ -53,24 +55,30 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
                 android:background="@color/background"
-                android:src="@drawable/camera" />
+                android:src="@drawable/id_picture"
+                android:scaleType="centerCrop"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:paddingStart="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:text="* Please tap the image above to begin selecting your photo."
-                android:textSize="12sp" />
+                android:textSize="14sp"
+                android:textStyle="italic"
+                />
             <!--First Name-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:paddingStart="15dp"
+                android:fontFamily="@font/open_sans_regular"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="First Name"
-                android:textSize="18sp" />
+                />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/pwd_enterFirstName_layout"
@@ -101,10 +109,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="Last Name"
-                android:textSize="18sp" />
+                android:paddingStart="15dp"
+                android:fontFamily="@font/open_sans_regular"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Last Name" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/pwd_enterLastName_layout"
@@ -135,10 +144,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="Contact Number"
-                android:textSize="18sp" />
+                android:paddingStart="15dp"
+                android:fontFamily="@font/open_sans_regular"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Contact Number" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/pwd_enterContactNumber_layout"
@@ -148,7 +158,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="15dp"
-                android:hint="091537..."
+                android:hint="+639..."
                 app:boxStrokeColor="@color/btnColor"
                 app:hintTextColor="@color/btnColor">
 
@@ -169,10 +179,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="5dp"
+                android:paddingStart="15dp"
+                android:fontFamily="@font/open_sans_regular"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="Address"
-                android:textSize="18sp" />
+                />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/pwd_enterAddress_layout"
@@ -202,12 +214,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:paddingStart="15dp"
+                android:fontFamily="@font/open_sans_regular"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="City"
-                android:textSize="18sp" />
+                />
 
             <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spinner_PWDcity"
+                android:id="@+id/spinner_EMPcity"
                 style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:layout_width="250dp"
                 android:layout_height="48dp"

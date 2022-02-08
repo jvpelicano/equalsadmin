@@ -25,6 +25,7 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="center"
                 android:text="Job Qualification"
+                android:fontFamily="@font/poppins_bold"
                 android:textSize="26sp" />
 
             <View
@@ -40,16 +41,19 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:paddingStart="15dp"
+                android:fontFamily="@font/open_sans_regular"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="Type of Disability"
-                android:textSize="18sp" />
+                />
 
             <CheckBox
                 android:id="@+id/typeOfDisability1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/proxima_nova_regular"
@@ -88,9 +92,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:paddingStart="15dp"
+
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans_regular"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="Skill Category"
-                android:textSize="18sp" />
+                />
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinner_skillCategory"
@@ -106,9 +115,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:paddingStart="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans_regular"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="Secondary Skill/s"
-                android:textSize="18sp" />
+                />
 
             <!--Secondary Skill/s layout-->
 
@@ -234,9 +247,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
+                android:paddingStart="15dp"
+                android:layout_marginTop="10dp"
+
+                android:fontFamily="@font/open_sans_regular"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="Educational Attainment"
-                android:layout_margin="10dp"
                 />
 
             <!--Educational Attainment layout-->
@@ -306,9 +323,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
+                android:paddingStart="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans_regular"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="Work Experience"
-                android:layout_margin="10dp"
                 />
 
             <RadioGroup
