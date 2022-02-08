@@ -73,7 +73,7 @@ public class JobFragment extends Fragment {
 
         //set toolbar
         toolbar = jobRoot.findViewById(R.id.toolbar_job);
-        toolbar.inflateMenu(R.menu.add_menu);
+        toolbar.inflateMenu(R.menu.more_settings);
 
         mAuth = FirebaseAuth.getInstance();
         mUSer = mAuth.getCurrentUser();
@@ -174,7 +174,7 @@ public class JobFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        inflater.inflate(R.menu.add_menu, menu);
+        inflater.inflate(R.menu.more_settings, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
