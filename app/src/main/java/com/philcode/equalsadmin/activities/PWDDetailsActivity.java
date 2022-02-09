@@ -2,17 +2,22 @@ package com.philcode.equalsadmin.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,6 +27,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,6 +64,11 @@ public class PWDDetailsActivity extends AppCompatActivity {
     private ProgressDialog pd;
     private String uid;
     private String resume;
+
+    private FloatingActionButton fab_main, fab1_call, fab2_mail;
+    private Animation fab_open, fab_close, fab_clock, fab_antiClock;
+    TextView textview_call, textview_mail;
+    Boolean isOpen = false;
 
 
     //firebase auth
@@ -97,6 +108,82 @@ public class PWDDetailsActivity extends AppCompatActivity {
         //init progress dialog
         pd = new ProgressDialog(this);
         pd.setMessage("Updating Status..");
+
+        //animation
+        fab_main = findViewById(R.id.fab);
+        fab1_call = findViewById(R.id.fab1);
+        fab2_mail = findViewById(R.id.fab2);
+        textview_call = findViewById(R.id.textview_call);
+        textview_mail = findViewById(R.id.textview_sendEmail);
+        fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+        fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+        fab_clock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotate_clock);
+        fab_antiClock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotate_anticlock);
+
+        fab_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (isOpen) {
+
+                    textview_mail.setVisibility(View.INVISIBLE);
+                    textview_call.setVisibility(View.INVISIBLE);
+                    fab2_mail.startAnimation(fab_close);
+                    fab1_call.startAnimation(fab_close);
+                    fab_main.startAnimation(fab_antiClock);
+                    fab2_mail.setClickable(false);
+                    fab1_call.setClickable(false);
+                    isOpen = false;
+                } else {
+                    textview_mail.setVisibility(View.VISIBLE);
+                    textview_call.setVisibility(View.VISIBLE);
+                    fab2_mail.startAnimation(fab_open);
+                    fab1_call.startAnimation(fab_open);
+                    fab_main.startAnimation(fab_clock);
+                    fab2_mail.setClickable(true);
+                    fab1_call.setClickable(true);
+                    isOpen = true;
+                }
+
+            }
+        });
+
+        fab2_mail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setData(Uri.parse("email"));
+                TextView email = findViewById(R.id.pwd_profile_email);
+                String [] emailP = {email.getText().toString()};
+                i.putExtra(Intent.EXTRA_EMAIL, emailP);
+                i.putExtra(Intent.EXTRA_SUBJECT, "Invitation for Job Interview");
+                i.putExtra(Intent.EXTRA_TEXT, "Put your details here.");
+                i.setType("message/rfc822");
+                Intent chooser = Intent.createChooser(i,"Choose Application");
+                startActivity(chooser);
+
+            }
+        });
+
+        fab1_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_CALL);
+                TextView contact = findViewById(R.id.pwd_profile_phone);
+                String contactNum = contact.getText().toString();
+                i.setData(Uri.parse("tel:"+contactNum));
+                if(ActivityCompat.checkSelfPermission(PWDDetailsActivity.this, Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED){
+                    requestPermission();
+                }else{
+                    startActivity(i);
+                }
+            }
+            private void requestPermission(){
+                ActivityCompat.requestPermissions(PWDDetailsActivity.this, new String[] {Manifest.permission.CALL_PHONE},1);
+            }
+
+        });
 
         //Click Update Button
         updatePWDStatus.setOnClickListener(new View.OnClickListener() {

@@ -316,4 +316,89 @@
     </LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/textview_sendEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="186dp"
+        android:fontFamily="@font/proxima_nova_regular"
+        android:padding="8dp"
+        android:text="Send Email"
+        android:textColor="#177ad0"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="176dp"
+        android:layout_marginEnd="24dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:focusable="true"
+        app:borderWidth="2dp"
+        android:visibility="invisible"
+        app:backgroundTint="#ffffff"
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/email"
+        app:tint="@color/colorPrimary"
+        />
+
+    <TextView
+        android:id="@+id/textview_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="116dp"
+        android:fontFamily="@font/proxima_nova_regular"
+        android:padding="8dp"
+        android:text="Call"
+        android:textColor="#177ad0"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="106dp"
+        android:layout_marginEnd="24dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:focusable="true"
+        app:borderWidth="2dp"
+        android:visibility="invisible"
+        app:backgroundTint="#ffffff"
+        app:tint="@color/colorPrimary"
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/call" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:focusable="true"
+        android:src="@drawable/add"
+        app:backgroundTint="@color/colorPrimary"
+        app:tint="@color/white" />
+
 </RelativeLayout>
