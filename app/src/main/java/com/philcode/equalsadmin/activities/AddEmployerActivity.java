@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.philcode.equalsadmin.R;
+import com.philcode.equalsadmin.fragments.RegisterEmployerStep1_Fragment;
 
 public class AddEmployerActivity extends AppCompatActivity {
 
@@ -17,14 +18,13 @@ public class AddEmployerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_employer);
 
-        getSupportActionBar().setTitle("Candidate Details");
+        getSupportActionBar().setTitle("Employer Register");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().show();
 
-
-
-
+        RegisterEmployerStep1_Fragment fragment1 = new RegisterEmployerStep1_Fragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.addEMP_frameLayout, fragment1).commit();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -4,16 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.RegisterCandidateStep3_Fragment"
-    android:padding="0dp"
-    >
+    tools:context=".fragments.RegisterEmployerStep2_Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
-        android:layout_weight="1"
         >
         <TextView
             android:layout_width="match_parent"
@@ -38,58 +34,32 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:paddingStart="15dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            android:text="Select a profile picture"
+            android:text="Attach a photo of your company's logo"
             android:fontFamily="@font/open_sans_regular"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/imageView_selectPWD_id"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/background"
+            android:src="@drawable/camera" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
-            android:text="This will help you get recognized."
-            android:textSize="12sp" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageView_selectPWD_pfp"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_gravity="center"
-                android:padding="2dp"
-                android:src="@drawable/emp_placeholder">
-
-            </de.hdodenhof.circleimageview.CircleImageView>
-
-            <ImageView
-                android:id="@+id/pwd_verified_icon"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/imageView_selectPWD_pfp"
-                android:layout_alignBottom="@+id/imageView_selectPWD_pfp"
-                android:src="@drawable/verified_user" />
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
+            android:paddingStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:text="* Please tap the image above to begin selecting your photo."
             android:textSize="14sp"
             android:textStyle="italic"
             />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,140 +80,131 @@
             android:layout_marginEnd="10dp"
             android:background="@color/colorPrimary" />
 
-        <!--Email-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:paddingStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
             android:text="Email Address"
             android:fontFamily="@font/open_sans_regular"
             android:textStyle="bold"
             android:textSize="18sp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/pwd_enterEmail_layout"
+            android:id="@+id/textInputLayout3"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
-            android:hint="example@gmail.com"
-            app:boxStrokeColor="@color/btnColor"
-            app:hintTextColor="@color/btnColor">
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText_PWDemail"
+                android:id="@+id/edit_EMPEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:drawableStart="@drawable/email"
+                android:drawablePadding="10dp"
                 android:fontFamily="@font/proxima_nova_regular"
-                android:textColor="#232c33"
-                android:textCursorDrawable="@drawable/cursor"
-                android:textSize="16sp">
-
-            </com.google.android.material.textfield.TextInputEditText>
+                android:textColorHighlight="#B31F86DE"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--Password-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
+            android:paddingStart="10dp"
+            android:layout_marginTop="10dp"
             android:text="Password"
             android:fontFamily="@font/open_sans_regular"
             android:textStyle="bold"
             android:textSize="18sp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/pwd_enterPassword_layout"
+            android:id="@+id/textInputLayout4"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
-            android:hint="Password"
-            app:boxStrokeColor="@color/btnColor"
-            app:hintTextColor="@color/btnColor">
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText_PWDpassword"
+                android:id="@+id/edit_EMPPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:drawableStart="@drawable/password"
+                android:drawablePadding="10dp"
                 android:fontFamily="@font/proxima_nova_regular"
-                android:inputType="textWebPassword"
-                android:textColor="#232c33"
-                android:textCursorDrawable="@drawable/cursor"
-                android:textSize="16sp">
+                android:textColorHighlight="#B31F86DE"
+                android:hint="Password"
+                android:inputType="textPassword" />
 
-            </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--Confirm Password-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
+            android:paddingStart="10dp"
+            android:layout_marginTop="10dp"
             android:text="Confirm Password"
             android:fontFamily="@font/open_sans_regular"
             android:textStyle="bold"
             android:textSize="18sp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/pwd_enterConfirmPassword_layout"
+            android:id="@+id/textInputLayout5"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
-            android:hint="Confirm Password"
-            app:boxStrokeColor="@color/btnColor"
-            app:hintTextColor="@color/btnColor">
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+            app:passwordToggleEnabled="true"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText_PWDconfirmPassword"
+                android:id="@+id/edit_EMPConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:drawableStart="@drawable/password"
+                android:drawablePadding="10dp"
+                android:textColorHighlight="#B31F86DE"
                 android:fontFamily="@font/proxima_nova_regular"
-                android:inputType="textWebPassword"
-                android:textColor="#232c33"
-                android:textCursorDrawable="@drawable/cursor"
-                android:textSize="16sp">
-
-            </com.google.android.material.textfield.TextInputEditText>
+                android:hint="Confirm Password"
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="65dp"
-            android:orientation="vertical"
-            android:gravity="bottom"
-            android:layout_gravity="bottom"
-            >
-            <TextView
-                android:id="@+id/step_indicator"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:gravity="end"
-                android:text="Step 3 out of 3"
-                android:textSize="12sp"
-                />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnNext_submit"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:text="Submit"
-                android:textSize="12sp" />
-        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="end"
+            android:text="Step 2 out of 2"
+            android:textSize="12sp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave_EMP"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:text="Proceed"
+            android:textSize="12sp" />
+
     </LinearLayout>
 
 </ScrollView>

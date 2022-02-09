@@ -8,11 +8,10 @@
     android:gravity="center"
     >
 
-    <TextView
+    <FrameLayout
+        android:id="@+id/addEMP_frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="CREATE EMPLOYER ACCOUNT ACTIVITY."
-        android:gravity="center"
+        android:layout_height="match_parent"
         />
 
 </RelativeLayout>

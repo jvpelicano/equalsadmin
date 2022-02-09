@@ -18,7 +18,7 @@ public class AddPWDActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pwdactivity);
 
-        getSupportActionBar().setTitle("Candidate Details");
+        getSupportActionBar().setTitle("Candidate Register");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().show();
