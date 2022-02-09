@@ -316,7 +316,8 @@ public class AddJobPostActivity extends AppCompatActivity {
                                         }else
                                             Toast.makeText(AddJobPostActivity.this, "Please fill in all the fields.", Toast.LENGTH_LONG).show();
 
-                                        startActivity(new Intent(AddJobPostActivity.this, MainActivity.class));
+//                                        startActivity(new Intent(AddJobPostActivity.this, MainActivity.class));
+                                        finish();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override

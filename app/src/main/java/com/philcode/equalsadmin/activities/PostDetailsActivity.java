@@ -66,15 +66,11 @@ public class PostDetailsActivity extends AppCompatActivity {
     //path where images of traveler profile will be stored
     private String storagePath = "Posts/";
 
-    //permissions constants
-    int PICK_IMAGE_REQUEST = 7;
-
-    //arrays of permissions to be requested
-    private String[] cameraPermissions;
-    private String[] storagePermissions;
+    //request codes
+    private int Image_Request_Code = 7;
 
     //uri of picked image
-    private Uri filePath;
+    private Uri filePathUri;
 
 
     @Override
@@ -106,9 +102,6 @@ public class PostDetailsActivity extends AppCompatActivity {
         postDbRef = firebaseDatabase.getReference("home_content");
         storageReference = getInstance().getReference(); // firebase storage
 
-        //init arrays of permissions
-        cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         //init progress dialog
         progressDialog = new ProgressDialog(this);
@@ -118,7 +111,12 @@ public class PostDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                chooseImgGallery();
+
+                Intent intent = new Intent();
+                // Setting intent type as image to select image from phone storage.
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Please Select Image"), Image_Request_Code);
             }
         });
 
@@ -166,128 +164,85 @@ public class PostDetailsActivity extends AppCompatActivity {
 
 
     private void saveEditedPost() {
+        if (filePathUri != null) {
 
-        final StorageReference ref = storageReference.child(storagePath + System.currentTimeMillis() + "." + GetFileExtension(filePath));
-        ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
+            progressDialog.show();
 
-                        progressDialog.dismiss();
+            final StorageReference ref = storageReference.child(storagePath + System.currentTimeMillis() + "." + GetFileExtension(filePathUri));
+            ref.putFile(filePathUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
 
-
-                        final String imgPost = task.getResult().toString();
-                        final String title = viewPostTitle.getText().toString().trim();
-                        final String desc = viewPostDesc.getText().toString().trim();
+                            progressDialog.dismiss();
 
 
-                        HashMap<String, Object> hashMap2 = new HashMap<>();
-                        hashMap2.put("postContentTitle", title);
-                        hashMap2.put("postDescription", desc);
-                        if(imgPost != null){
+                            final String imgPost = task.getResult().toString();
+                            final String title = viewPostTitle.getText().toString().trim();
+                            final String desc = viewPostDesc.getText().toString().trim();
 
-                            hashMap2.put("postImage", imgPost);
-                            postDbRef.child(postId).updateChildren(hashMap2);
 
-                        }
-                        else{
-                            hashMap2.put("postImage", imgPost);
-                            postDbRef.child(postId).updateChildren(hashMap2);
+                            HashMap<String, Object> hashMap2 = new HashMap<>();
+                            hashMap2.put("postContentTitle", title);
+                            hashMap2.put("postDescription", desc);
+                            if (imgPost != null) {
+
+                                hashMap2.put("postImage", imgPost);
+                                postDbRef.child(postId).updateChildren(hashMap2);
+
+                            } else {
+//                                hashMap2.put("postImage", imgPost);
+                                postDbRef.child(postId).updateChildren(hashMap2);
+                                Toast.makeText(PostDetailsActivity.this, "Post has been published successfully", Toast.LENGTH_LONG).show();
+                                finish();
+
+                            }
+
                             Toast.makeText(PostDetailsActivity.this, "Post has been published successfully", Toast.LENGTH_LONG).show();
                             finish();
 
                         }
 
-                        Toast.makeText(PostDetailsActivity.this, "Post has been published successfully", Toast.LENGTH_LONG).show();
-                        finish();
-
-                    }
-
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                Toast.makeText(PostDetailsActivity.this, "Failed:" + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                progressDialog.setMessage("Loading " + (int) progress + "%");
-                progressDialog.setCancelable(false);
-            }
-        });
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(PostDetailsActivity.this, "Failed:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                    progressDialog.setMessage("Loading " + (int) progress + "%");
+                    progressDialog.setCancelable(false);
+                }
+            });
+        }
+        else{
+            updateDataOnly();
+        }
 
     }
 
-    private void chooseImgGallery() {
-        // Creating intent.
-        Intent intent = new Intent();
+    private void updateDataOnly(){
+        final String title = viewPostTitle.getText().toString().trim();
+        final String desc = viewPostDesc.getText().toString().trim();
 
-        // Setting intent type as image to select image from phone storage.
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Please Select Image"), PICK_IMAGE_REQUEST);
+        HashMap<String, Object> hashMap2 = new HashMap<>();
+        hashMap2.put("postContentTitle", title);
+        hashMap2.put("postDescription", desc);
 
-        final StorageReference ref = storageReference.child(storagePath + System.currentTimeMillis() + "." + GetFileExtension(filePath));
-        ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-
-                        progressDialog.dismiss();
+        postDbRef.child(postId).updateChildren(hashMap2);
+        Toast.makeText(PostDetailsActivity.this, "Post has been published successfully", Toast.LENGTH_LONG).show();
+        finish();
 
 
-                        final String imgPost = task.getResult().toString();
-//                        final String title = viewPostTitle.getText().toString().trim();
-//                        final String desc = viewPostDesc.getText().toString().trim();
-
-
-                        HashMap<String, Object> hashMap2 = new HashMap<>();
-//                        hashMap2.put("postContentTitle", title);
-//                        hashMap2.put("postDescription", desc);
-//                        if(imgPost != null){
-
-//                            hashMap2.put("postImage", imgPost);
-//                            postDbRef.child(postId).updateChildren(hashMap2);
-
-//                        }
-//                        else{
-                            hashMap2.put("postImage", imgPost);
-                            postDbRef.child(postId).updateChildren(hashMap2);
-                            Toast.makeText(PostDetailsActivity.this, "Post has been published successfully", Toast.LENGTH_LONG).show();
-//                            finish();
-
-//                        }
-//
-//                        Toast.makeText(PostDetailsActivity.this, "Post has been published successfully", Toast.LENGTH_LONG).show();
-//                        finish();
-
-                    }
-
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                Toast.makeText(PostDetailsActivity.this, "Failed:" + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                progressDialog.setMessage("Loading " + (int) progress + "%");
-                progressDialog.setCancelable(false);
-            }
-        });
-
+        Toast.makeText(PostDetailsActivity.this, "Post has been published successfully", Toast.LENGTH_LONG).show();
+        finish();
 
     }
 
@@ -300,20 +255,6 @@ public class PostDetailsActivity extends AppCompatActivity {
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    protected  void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data !=null && data.getData() != null){
-            filePath = data.getData();
-            try{
-                Bitmap bitmap1 = MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
-                viewPostImg.setImageBitmap(bitmap1);
-            }
-            catch (IOException e){
-                e.printStackTrace();
-            }
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -352,6 +293,21 @@ public class PostDetailsActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Image_Request_Code && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            filePathUri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePathUri);
+                viewPostImg.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
