@@ -121,6 +121,7 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
                 .build();
 
         UserAPI userAPI = retrofit.create(UserAPI.class);
+
         User newUser = new User();
         newUser.setEmail(tv_email.getText().toString().trim());
         newUser.setDisplayName(firstName + lastName);
@@ -138,8 +139,7 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
                     Log.d("Email", "here's the email" + email);
                     Log.d("DisplayName", "here's the displayName" + displayName);
 
-                    Intent i = new Intent(getContext(), MainActivity.class);
-                    startActivity(i);
+                    return;
 
                 }
             }

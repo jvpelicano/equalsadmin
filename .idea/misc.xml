@@ -97,10 +97,16 @@
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/drawable/pwd.xml" value="0.10833333333333334" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/drawable/verified.xml" value="0.10833333333333334" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/drawable/verified_user.xml" value="0.10833333333333334" />
+        <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_add_employer.xml" value="0.11302083333333333" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_employer_details.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_employer_personal_info_update.xml" value="0.22" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_post_details.xml" value="0.15416666666666667" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_pwddetails.xml" value="0.1" />
+        <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_update_employer_company_info.xml" value="0.22" />
+        <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_update_employer_personal_info.xml" value="0.12864583333333332" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/fragment_profile.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/fragment_register_employer_step1.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/menu/add_menu.xml" value="0.1" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/menu/more_settings.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/xml/network_security_config.xml" value="0.151268115942029" />
