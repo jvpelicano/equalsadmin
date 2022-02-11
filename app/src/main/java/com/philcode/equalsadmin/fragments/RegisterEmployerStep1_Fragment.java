@@ -74,6 +74,7 @@ public class RegisterEmployerStep1_Fragment extends Fragment {
         imageView_empID = view.findViewById(R.id.emp_ID);
 
         buttonNext = view.findViewById(R.id.btnNext_EMPFragment2);
+        fragment1_bundle_sendToFragment2 = new Bundle();
 
         context = getActivity().getApplicationContext();
 
@@ -121,6 +122,8 @@ public class RegisterEmployerStep1_Fragment extends Fragment {
                             .addToBackStack(null)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .commit();
+                }else{
+                    Toast.makeText(context, "Please fill up the form completely.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -129,7 +132,6 @@ public class RegisterEmployerStep1_Fragment extends Fragment {
 
     private Boolean checkTextFieldValidation(TextInputEditText textInputEditText) {
         if(textInputEditText.getText().toString().isEmpty()){
-            Toast.makeText(context, "Please fill up the form completely.", Toast.LENGTH_SHORT).show();
             valid = false;
         }else{
             valid = true;
