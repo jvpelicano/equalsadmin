@@ -41,6 +41,8 @@ public class RegisterEmployerStep2_Fragment extends Fragment {
         editText_confirmPassword = view.findViewById(R.id.edit_EMPConfirmPassword);
         buttonSave = view.findViewById(R.id.btnSave_EMP);
 
+        bundleFromFragment1 = new Bundle();
+
         context = getActivity().getApplicationContext();
 
         //getData from previous Fragment
@@ -73,6 +75,8 @@ public class RegisterEmployerStep2_Fragment extends Fragment {
                     }else{
                         Toast.makeText(context, "Password doesn't match.", Toast.LENGTH_SHORT).show();
                     }
+                }else{
+                    Toast.makeText(context, "Please fill up the form completely.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -85,7 +89,6 @@ public class RegisterEmployerStep2_Fragment extends Fragment {
 
     private Boolean checkTextFieldValidation(TextInputEditText textInputEditText) {
         if(textInputEditText.getText().toString().isEmpty()){
-            Toast.makeText(context, "Please fill up the form completely.", Toast.LENGTH_SHORT).show();
             valid = false;
         }else{
             valid = true;
