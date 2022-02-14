@@ -14,9 +14,9 @@ public interface EmployerAPI {
     @GET("test")
     Call<Employer> getEmployer();
 
-    @POST("create-emp")
+    @POST("create-employer")
     Call<Employer> createEmployer(@Body Employer employer);
 
-    @DELETE("delete-emp/{uid}")
-    Call<Employer> deleteEmployer(@Path("uid") String uid);
+    @DELETE("/delete-employer/{uid}")
+    Call<Void> deleteEmployer(@Path("uid") String uid);
 }

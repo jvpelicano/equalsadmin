@@ -67,6 +67,7 @@ public class UpdateEmployerPersonalInfo extends AppCompatActivity {
     //uri of picked image
     private Uri filePathUri;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
