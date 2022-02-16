@@ -248,5 +248,4 @@ public class JobFragment extends Fragment {
         alertDialog.setCancelable(true);
     }
 
-
 }
