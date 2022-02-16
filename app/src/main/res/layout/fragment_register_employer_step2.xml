@@ -42,7 +42,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/imageView_selectPWD_id"
+            android:id="@+id/add_emp_company_logo"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginLeft="15dp"

@@ -56,6 +56,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.philcode.equalsadmin.R;
+import com.philcode.equalsadmin.apis.EmployerAPI;
 import com.philcode.equalsadmin.apis.UserAPI;
 import com.philcode.equalsadmin.fragments.EmpFragment;
 import com.squareup.picasso.Picasso;
@@ -543,9 +544,9 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                 .baseUrl("http://10.0.2.2:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        UserAPI userAPI = retrofit.create(UserAPI.class);
+        EmployerAPI employerAPI = retrofit.create(EmployerAPI.class);
 
-        Call<Void> call = userAPI.deleteUser(id);
+        Call<Void> call = employerAPI.deleteEmployer(id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
