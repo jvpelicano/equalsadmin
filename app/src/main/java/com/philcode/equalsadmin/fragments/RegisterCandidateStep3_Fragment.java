@@ -50,6 +50,9 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
             address, city, yearsOfExperience, educationalAttainment, workExperience,
             skill, email, password, confirmPass;
 
+    //Boolean
+    private Boolean valid = true;
+
     //database
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
@@ -151,5 +154,13 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
         });
     }
 
+    private Boolean checkTextFieldValidation(TextInputEditText textInputEditText) {
+        if(textInputEditText.getText().toString().isEmpty()){
+            valid = false;
+        }else{
+            valid = true;
+        }
 
+        return valid;
+    }
 }

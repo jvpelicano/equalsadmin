@@ -40,6 +40,7 @@ public class RegisterCandidateStep1_Fragment extends Fragment {
             editText_PWDcontactNumber, editText_PWDaddress;
     private AppCompatSpinner spinner_PWDcity;
     private MaterialButton btnNext_fragment1;
+    private Boolean valid = true;
 
     //request codes
     private int Image_Request_Code = 7;
@@ -137,5 +138,14 @@ public class RegisterCandidateStep1_Fragment extends Fragment {
                         }
                     }
                 });
+    }
+    private Boolean checkTextFieldValidation(TextInputEditText textInputEditText) {
+        if(textInputEditText.getText().toString().isEmpty()){
+            valid = false;
+        }else{
+            valid = true;
+        }
+
+        return valid;
     }
 }

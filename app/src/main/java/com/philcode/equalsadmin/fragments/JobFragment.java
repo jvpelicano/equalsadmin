@@ -10,17 +10,20 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
@@ -35,6 +38,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import android.content.Context;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.philcode.equalsadmin.R;
@@ -54,14 +58,16 @@ public class JobFragment extends Fragment {
 
     RecyclerView rvJobItems;
     ArrayList<Job> jobs = new ArrayList<>();
+    ArrayList categorySize;
     JobAdapter jobAdapter;
-    DatabaseReference jobReference;
+    DatabaseReference jobReference, categoryReference;
     StorageReference jobStorageReference;
     FirebaseStorage firebaseStorage;
     FirebaseAuth mAuth;
     FirebaseUser mUSer;
     String uid;
     Toolbar toolbar;
+    private Context context;
 
 
     @Override
@@ -70,6 +76,8 @@ public class JobFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup jobRoot = (ViewGroup) inflater.inflate(R.layout.fragment_job, container, false);
         setHasOptionsMenu(true);
+
+        context = requireActivity();
 
         //set toolbar
         toolbar = jobRoot.findViewById(R.id.toolbar_job);
@@ -80,6 +88,7 @@ public class JobFragment extends Fragment {
         uid = mUSer.getUid();
 
         jobs = new ArrayList<>();
+        categorySize = new ArrayList<>();
         rvJobItems = jobRoot.findViewById(R.id.job_list);
         jobAdapter = new JobAdapter(getContext(), jobs, getActivity());
         rvJobItems.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -89,6 +98,7 @@ public class JobFragment extends Fragment {
 
         firebaseStorage = FirebaseStorage.getInstance();
         jobReference = FirebaseDatabase.getInstance().getReference().child("Job_Offers");
+        categoryReference = FirebaseDatabase.getInstance().getReference().child("Category");
 
         getData();
 
@@ -187,7 +197,7 @@ public class JobFragment extends Fragment {
                     startActivity(new Intent(getContext(), AddJobPostActivity.class));
                     return true;
                 case R.id.add_skill_category:
-                    Toast.makeText(getActivity(), "Add Skill Category", Toast.LENGTH_SHORT).show();
+                    pop_up();
                     return true;
                 default:
                     return false;
@@ -195,5 +205,47 @@ public class JobFragment extends Fragment {
         });
     }
 
+    private void pop_up(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        alertDialog.setTitle("Enter new skill category.");
+
+        final EditText newSkillCategory = new EditText(context);
+        newSkillCategory.setInputType(InputType.TYPE_CLASS_TEXT);
+        alertDialog.setView(newSkillCategory);
+
+        alertDialog.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                categoryReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            for(DataSnapshot snapshot1 : snapshot.getChildren()){
+                                categorySize.add(snapshot1);
+                            }
+                            categoryReference.child("skill" + categorySize.size()).child("skill").setValue(newSkillCategory.getText().toString().trim());
+                            Toast.makeText(getActivity(), "New Skill Category Added.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(getActivity(), "Error: " + error, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        alertDialog.show();
+        alertDialog.setCancelable(true);
+    }
 
 }
