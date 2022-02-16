@@ -20,6 +20,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activities.UpdatePWDQualificationInfo"
+            android:exported="true"
+            android:theme="@style/Theme.EqualsAdmin"/>
+        <activity
+            android:name=".activities.UpdatePWDPersonalInfo"
+            android:exported="true"
+            android:theme="@style/Theme.EqualsAdmin"/>
+        <activity
             android:name=".activities.UpdateEmployerCompanyInfo"
             android:exported="true"
             android:theme="@style/Theme.EqualsAdmin" />

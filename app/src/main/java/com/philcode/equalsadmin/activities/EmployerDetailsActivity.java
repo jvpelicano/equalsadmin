@@ -465,12 +465,12 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                                 employerDbRef.child(uid).updateChildren(hashMap2);
 
                             } else {
-                                Toast.makeText(EmployerDetailsActivity.this, "Company Id has been published successfully", Toast.LENGTH_LONG).show();
+                                Toast.makeText(EmployerDetailsActivity.this, "Company Id has been updated successfully", Toast.LENGTH_LONG).show();
                                 finish();
 
                             }
 
-                            Toast.makeText(EmployerDetailsActivity.this, "Company Id has been published successfully", Toast.LENGTH_LONG).show();
+                            Toast.makeText(EmployerDetailsActivity.this, "Company Id has been updated successfully", Toast.LENGTH_LONG).show();
                             finish();
 
                         }

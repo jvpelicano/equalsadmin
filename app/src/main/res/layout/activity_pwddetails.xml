@@ -108,6 +108,8 @@
                         android:textAllCaps="false"
                         android:textColor="#1565C0" />
 
+
+
                 </LinearLayout>
 
             </RelativeLayout>
@@ -119,15 +121,17 @@
                 android:layout_marginBottom="20dp">
 
                 <TextView
+                    android:id="@+id/pwd_personal_info_edit"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Personal Information"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"/>
+                    android:drawableEnd="@drawable/edit"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="Personal Information "
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/view_post_layout"
@@ -209,14 +213,27 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
+                    android:id="@+id/pwd_qualification_info_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:drawableEnd="@drawable/edit"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="Type of Disability "
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/pwd_details_disability0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Type of Disability"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
+                    android:text="Disability0 "
+                    android:textSize="14dp"
+                    android:gravity="start"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"/>
 
                 <TextView
@@ -231,15 +248,39 @@
                     android:layout_marginTop="5dp"/>
 
                 <TextView
+                    android:id="@+id/pwd_details_disability2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Provided Document/s"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
+                    android:text="Disability2 "
+                    android:textSize="14dp"
+                    android:gravity="start"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/pwd_details_disability3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="Disability3 "
+                    android:textSize="14dp"
+                    android:gravity="start"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/pwd_docs_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:drawableEnd="@drawable/edit"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="Provided Document/s "
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/pwd_resume_link"
@@ -259,7 +300,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/proxima_nova_regular"
                     android:text="*PWD ID "
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:textStyle="italic|bold"
                     android:gravity="start"
                     android:layout_marginStart="20dp"
@@ -274,6 +315,21 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:background="@color/background"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/pwd_id_img_btn_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Update PWD Id"
+                    app:backgroundTint="@color/btnColor"
+                    app:rippleColor="@android:color/darker_gray">
+                </com.google.android.material.button.MaterialButton>
+
             </LinearLayout>
 
         </LinearLayout>
