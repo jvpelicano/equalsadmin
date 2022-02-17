@@ -1,18 +1,13 @@
 package com.philcode.equalsadmin.fragments;
 
 import android.app.AlertDialog;
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,25 +26,19 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import android.content.Context;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.philcode.equalsadmin.R;
 import com.philcode.equalsadmin.activities.AddJobPostActivity;
-import com.philcode.equalsadmin.activities.AddPostActivity;
-import com.philcode.equalsadmin.adapters.EmployerAdapter;
 import com.philcode.equalsadmin.adapters.JobAdapter;
-import com.philcode.equalsadmin.models.Employer;
 import com.philcode.equalsadmin.models.Job;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -216,6 +205,7 @@ public class JobFragment extends Fragment {
         alertDialog.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                categorySize.clear();
                 categoryReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -223,7 +213,8 @@ public class JobFragment extends Fragment {
                             for(DataSnapshot snapshot1 : snapshot.getChildren()){
                                 categorySize.add(snapshot1);
                             }
-                            categoryReference.child("skill" + categorySize.size()).child("skill").setValue(newSkillCategory.getText().toString().trim());
+                            final int categoryListSize = categorySize.size();
+                            categoryReference.child("skill" + categoryListSize).child("skill").setValue(newSkillCategory.getText().toString().trim());
                             Toast.makeText(getActivity(), "New Skill Category Added.", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -233,6 +224,8 @@ public class JobFragment extends Fragment {
                         Toast.makeText(getActivity(), "Error: " + error, Toast.LENGTH_SHORT).show();
                     }
                 });
+
+                dialog.dismiss();
 
             }
         });
