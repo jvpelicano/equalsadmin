@@ -135,63 +135,12 @@ public class RegisterCandidateStep2_Fragment extends Fragment {
                 //get checked checkboxes
                 selectedSecondarySkills();
                 selectedTypeOfDisabilities();
-                //Send data to the next fragment
-                Bundle fragment2_bundle_sendToFragment3 = new Bundle();
-                selected_educAttainment_ID = rg_educAttainment.getCheckedRadioButtonId();
-                rb_educAttainment = view.findViewById(selected_educAttainment_ID);
-
-                //from fragment 1
-                bundlefromFragment1 = getArguments();
-                if(bundlefromFragment1!= null){
-                    final String firstName = bundlefromFragment1.getString("firstName");
-                    final String lastName = bundlefromFragment1.getString("lastName");
-                    final String contactNumber = bundlefromFragment1.getString("contactNumber");
-                    final String address = bundlefromFragment1.getString("address");
-                    final String city = bundlefromFragment1.getString("city");
-
-                    fragment2_bundle_sendToFragment3.putString("firstName", firstName);
-                    fragment2_bundle_sendToFragment3.putString("lastName", lastName);
-                    fragment2_bundle_sendToFragment3.putString("contactNumber", contactNumber);
-                    fragment2_bundle_sendToFragment3.putString("address", address);
-                    fragment2_bundle_sendToFragment3.putString("city", city);
-                }
-                checkTextFieldValidation(tv_yearsOfExp);
-                checkTextFieldValidation(tv_yearsOfExp);
-
-                if(valid){
-
+                if(hashMap_secondary_skills.isEmpty() && hashMap_disability.isEmpty()){
+                    Toast.makeText(context, "Hashmaps are empty.", Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(context, "Please fill out the form completely.", Toast.LENGTH_SHORT).show();
+                    sendData();
                 }
 
-                final String skill = spinner_skillCategory.getSelectedItem().toString();
-                final String yearsOfExp = tv_yearsOfExp.getText().toString().trim();
-                final String educAttainment = tv_yearsOfExp.getText().toString().trim();
-
-                if(skill.isEmpty() || educAttainment.isEmpty() || hashMap_disability.isEmpty()
-                || hashMap_secondary_skills.isEmpty() || workExperience.isEmpty()){
-                    Toast.makeText(context, "Please fill out the form completely.", Toast.LENGTH_SHORT).show();
-                }else{
-                    fragment2_bundle_sendToFragment3.putSerializable("hashMap_disabilities", hashMap_disability);
-                    fragment2_bundle_sendToFragment3.putSerializable("hashMap_secondary_skills", hashMap_secondary_skills);
-                    fragment2_bundle_sendToFragment3.putString("yearsOfExperience", yearsOfExp);
-                    fragment2_bundle_sendToFragment3.putString("educationalAttainment",educAttainment);
-                    fragment2_bundle_sendToFragment3.putString("workExperience", workExperience);
-                    fragment2_bundle_sendToFragment3.putString("skill", skill);
-
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    Fragment fragment3 = new RegisterCandidateStep3_Fragment();
-
-                    fragment3.setArguments(fragment2_bundle_sendToFragment3);
-                    fm.beginTransaction()
-                            .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left,
-                                    R.anim.enter_left_to_right, R.anim.exit_left_to_right)
-                            .replace(R.id.addPWD_frameLayout, fragment3)
-                            .addToBackStack(null)
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .commit();
-
-                }
             }
         });
 
@@ -234,6 +183,7 @@ public class RegisterCandidateStep2_Fragment extends Fragment {
                 hashMap_secondary_skills.put("jobSkill" + i2, secondary_skills_checkBoxes[i].getText().toString().trim());
             }
         }
+        //return hashMap_secondary_skills;
     }
     private void selectedTypeOfDisabilities() {
         type_of_disabilities_checkboxIDs = new Integer[]{R.id.typeOfDisability1, R.id.typeOfDisability2, R.id.typeOfDisability3};
@@ -249,6 +199,59 @@ public class RegisterCandidateStep2_Fragment extends Fragment {
         }
         if(checkBox_typeOfDisability_Other.isChecked()){
             hashMap_disability.put("typeOfDisabilityMore", "Other Disabilities");
+        }
+    }
+
+    private void sendData(){
+        //Send data to the next fragment
+        Bundle fragment2_bundle_sendToFragment3 = new Bundle();
+        selected_educAttainment_ID = rg_educAttainment.getCheckedRadioButtonId();
+        rb_educAttainment = view.findViewById(selected_educAttainment_ID);
+
+        //from fragment 1 to bundle fragment 2 sending to fragment 3
+        bundlefromFragment1 = getArguments();
+        if(bundlefromFragment1!= null){
+            final String firstName = bundlefromFragment1.getString("firstName");
+            final String lastName = bundlefromFragment1.getString("lastName");
+            final String contactNumber = bundlefromFragment1.getString("contactNumber");
+            final String address = bundlefromFragment1.getString("address");
+            final String city = bundlefromFragment1.getString("city");
+
+            fragment2_bundle_sendToFragment3.putString("firstName", firstName);
+            fragment2_bundle_sendToFragment3.putString("lastName", lastName);
+            fragment2_bundle_sendToFragment3.putString("contactNumber", contactNumber);
+            fragment2_bundle_sendToFragment3.putString("address", address);
+            fragment2_bundle_sendToFragment3.putString("city", city);
+        }
+        checkTextFieldValidation(tv_yearsOfExp);
+        checkTextFieldValidation(tv_yearsOfExp);
+
+        if(valid){
+            final String skill = spinner_skillCategory.getSelectedItem().toString();
+            final String yearsOfExp = tv_yearsOfExp.getText().toString().trim();
+            final String educAttainment = tv_yearsOfExp.getText().toString().trim();
+            fragment2_bundle_sendToFragment3.putSerializable("hashMap_disabilities", hashMap_disability);
+            fragment2_bundle_sendToFragment3.putSerializable("hashMap_secondary_skills", hashMap_secondary_skills);
+            fragment2_bundle_sendToFragment3.putString("yearsOfExperience", yearsOfExp);
+            fragment2_bundle_sendToFragment3.putString("educationalAttainment",educAttainment);
+            fragment2_bundle_sendToFragment3.putString("workExperience", workExperience);
+            fragment2_bundle_sendToFragment3.putString("skill", skill);
+
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            Fragment fragment3 = new RegisterCandidateStep3_Fragment();
+
+            fragment3.setArguments(fragment2_bundle_sendToFragment3);
+            fm.beginTransaction()
+                    .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left,
+                            R.anim.enter_left_to_right, R.anim.exit_left_to_right)
+                    .replace(R.id.addPWD_frameLayout, fragment3)
+                    .addToBackStack(null)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit();
+
+
+        }else{
+            Toast.makeText(context, "Please fill out the form completely.", Toast.LENGTH_SHORT).show();
         }
     }
 

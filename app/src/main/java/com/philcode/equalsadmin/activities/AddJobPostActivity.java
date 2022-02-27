@@ -252,7 +252,6 @@ public class AddJobPostActivity extends AppCompatActivity {
 
     //This method is for uploading data once the user tapped the post button.
     private void uploadData() {
-
         if(spinner_skillCategory.getSelectedItem().toString().equals("Click to select value")){
             Toast.makeText(AddJobPostActivity.this, "Please select a skill category.", Toast.LENGTH_SHORT).show();
         }else{
