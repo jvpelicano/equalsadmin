@@ -1,7 +1,6 @@
 package com.philcode.equalsadmin.apis;
 
 import com.philcode.equalsadmin.models.Candidate;
-import com.philcode.equalsadmin.models.Employer;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -11,9 +10,9 @@ import retrofit2.http.Path;
 
 public interface PwdAPI {
 
-    @POST("create-emp")
-    Call<Candidate> createCandidate(@Body Employer employer);
+    @POST("create-pwd")
+    Call<Candidate> createCandidate(@Body Candidate candidate);
 
-    @DELETE("delete-emp/{uid}")
+    @DELETE("delete-pwd/{uid}")
     Call<Candidate> deleteCandidate(@Path("uid") String uid);
 }

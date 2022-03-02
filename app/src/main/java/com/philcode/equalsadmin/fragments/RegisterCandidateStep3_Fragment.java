@@ -1,5 +1,7 @@
 package com.philcode.equalsadmin.fragments;
 
+import static android.net.wifi.WifiEnterpriseConfig.Eap.PWD;
+
 import android.content.Context;
 
 import android.content.Intent;
@@ -23,9 +25,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.philcode.equalsadmin.R;
 import com.philcode.equalsadmin.activities.MainActivity;
+import com.philcode.equalsadmin.apis.PwdAPI;
 import com.philcode.equalsadmin.apis.UserAPI;
+import com.philcode.equalsadmin.models.Candidate;
 import com.philcode.equalsadmin.models.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -89,7 +94,7 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
 
             firstName = bundle.getString("firstName");
             lastName = bundle.getString("lastName");
-            contactNumber = bundle.getString(contactNumber);
+            contactNumber = bundle.getString("contactNumber");
             address = bundle.getString("address");
             city = bundle.getString("city");
             yearsOfExperience = bundle.getString("yearsOfExperience");
@@ -123,34 +128,35 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        UserAPI userAPI = retrofit.create(UserAPI.class);
+        PwdAPI pwdAPI = retrofit.create(PwdAPI.class);
 
-        User newUser = new User();
-        newUser.setEmail(tv_email.getText().toString().trim());
-        newUser.setDisplayName(firstName + lastName);
+        Candidate newPwd = new Candidate();
+        newPwd.setEmail(tv_email.getText().toString().trim());
+        newPwd.setPassword(tv_password.getText().toString().trim());
+        newPwd.setFirstName(firstName);
+        newPwd.setLastName(lastName);
+        newPwd.setAddress(address);
+        newPwd.setCity(city);
+        newPwd.setContact(contactNumber);
+        newPwd.setEducationalAttainment(educationalAttainment);
+        newPwd.setWorkExperience(workExperience);
+        newPwd.setTotalYears(yearsOfExperience);
+        newPwd.setSkill(skill);
 
-        Call<User> call = userAPI.createUser(newUser);
 
-        call.enqueue(new Callback<User>() {
+
+        Call<Candidate> call = pwdAPI.createCandidate(newPwd);
+
+        call.enqueue(new Callback<Candidate>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (response.code() != 200) {
+            public void onResponse(Call<Candidate> call, Response<Candidate> response) {
 
-                    User responseFromApi = response.body();
-                    String email = responseFromApi.getEmail();
-                    String displayName = responseFromApi.getDisplayName();
-                    Log.d("Email", "here's the email" + email);
-                    Log.d("DisplayName", "here's the displayName" + displayName);
-
-                    return;
-
-                }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                t.getMessage();
-                }
+            public void onFailure(Call<Candidate> call, Throwable t) {
+
+            }
         });
     }
 

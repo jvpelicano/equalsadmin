@@ -100,15 +100,17 @@
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_add_employer.xml" value="0.11302083333333333" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_employer_details.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_employer_personal_info_update.xml" value="0.22" />
+        <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_job_details.xml" value="0.22" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_post_details.xml" value="0.15416666666666667" />
-        <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_pwddetails.xml" value="0.22" />
+        <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_pwddetails.xml" value="0.3008036739380023" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_update_employer_company_info.xml" value="0.22" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_update_employer_personal_info.xml" value="0.12864583333333332" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_update_pwdpersonal_info.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/activity_update_pwdqualification_info.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/fragment_p_w_d.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/fragment_profile.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/fragment_register_candidate_step2.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/fragment_register_employer_step1.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/layout/fragment_register_employer_step2.xml" value="0.1" />
         <entry key="..\:/Users/nHaj/Desktop/Capstone2/equalsAdmin2.0/equalsadmin/app/src/main/res/menu/add_menu.xml" value="0.1" />
@@ -117,7 +119,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

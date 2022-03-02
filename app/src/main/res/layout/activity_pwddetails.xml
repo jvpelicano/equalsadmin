@@ -219,55 +219,159 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="10dp"
-                    android:drawableEnd="@drawable/edit"
                     android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Type of Disability "
+                    android:text="Qualifications"
                     android:textSize="18dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:drawableEnd="@drawable/edit"
+                    />
 
                 <TextView
-                    android:id="@+id/pwd_details_disability0"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/pwd_label_category"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/postBackground"
                     android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Disability0 "
-                    android:textSize="14dp"
-                    android:gravity="start"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"/>
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Skill Category"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/pwd_details_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/postBackground"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Category"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/pwd_label_secondary_skill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/postBackground"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Secondary Skill(s) or Preferrably"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/pwd_details_skill1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/postBackground"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Skill 1"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"/>
+
+
+
+                <TextView
+                    android:id="@+id/pwd_label_educ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/postBackground"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Educational Attainment"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/pwd_details_educ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/postBackground"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Educational Degree"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/pwd_label_work_experience"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/postBackground"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Work Experience"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/pwd_details_work_xp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/postBackground"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Total Work Experience"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/pwd_label_type_disability"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/postBackground"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Type of Disability"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/pwd_details_disability1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Disability1 "
-                    android:textSize="14dp"
-                    android:gravity="start"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"/>
-
-                <TextView
-                    android:id="@+id/pwd_details_disability2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Disability2 "
-                    android:textSize="14dp"
-                    android:gravity="start"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"/>
-
-                <TextView
-                    android:id="@+id/pwd_details_disability3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Disability3 "
-                    android:textSize="14dp"
-                    android:gravity="start"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"/>
+                    android:background="@color/postBackground"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Disability 1"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"/>
 
                 <TextView
                     android:id="@+id/pwd_docs_edit"

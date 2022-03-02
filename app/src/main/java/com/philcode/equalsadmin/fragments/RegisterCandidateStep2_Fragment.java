@@ -156,7 +156,6 @@ public class RegisterCandidateStep2_Fragment extends Fragment {
                     fragment2_bundle_sendToFragment3.putString("city", city);
                 }
                 checkTextFieldValidation(tv_yearsOfExp);
-                checkTextFieldValidation(tv_yearsOfExp);
 
                 if(valid){
 
@@ -166,7 +165,7 @@ public class RegisterCandidateStep2_Fragment extends Fragment {
 
                 final String skill = spinner_skillCategory.getSelectedItem().toString();
                 final String yearsOfExp = tv_yearsOfExp.getText().toString().trim();
-                final String educAttainment = tv_yearsOfExp.getText().toString().trim();
+                final String educAttainment = rb_educAttainment.getText().toString().trim();
 
                 if(skill.isEmpty() || educAttainment.isEmpty() || hashMap_disability.isEmpty()
                 || hashMap_secondary_skills.isEmpty() || workExperience.isEmpty()){

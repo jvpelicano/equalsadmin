@@ -3,6 +3,7 @@ package com.philcode.equalsadmin.models;
 public class Candidate {
 
     public String email;
+    public String password;
     public String typeStatus;
     public String firstName, lastName;
     public String address;
@@ -28,7 +29,7 @@ public class Candidate {
     public String educationalAttainment;
     public String skill;
     public String workExperience;
-    // public String totalYears;
+    public String totalYears;
 
     public String primarySkill1;
     public String primarySkill2;
@@ -42,7 +43,8 @@ public class Candidate {
     public String primarySkill10;
     public String primarySkillOther;
 
-    public Candidate(String email, String typeStatus, String firstName, String lastName, String address, String pwdIdCardNum, String jobSkill1, String jobSkill2, String jobSkill3, String jobSkill4, String jobSkill5, String jobSkill6, String jobSkill7, String jobSkill8, String jobSkill9, String jobSkill10, String contact, String city, String typeOfDisability1, String typeOfDisability2, String typeOfDisability3, String typeOfDisabilityMore, String pwdProfilePic, String educationalAttainment, String skill, String workExperience, String primarySkill1, String primarySkill2, String primarySkill3, String primarySkill4, String primarySkill5, String primarySkill6, String primarySkill7, String primarySkill8, String primarySkill9, String primarySkill10, String primarySkillOther) {
+    public Candidate(String email, String password, String totalYears, String typeStatus, String firstName, String lastName, String address, String pwdIdCardNum, String jobSkill1, String jobSkill2, String jobSkill3, String jobSkill4, String jobSkill5, String jobSkill6, String jobSkill7, String jobSkill8, String jobSkill9, String jobSkill10, String contact, String city, String typeOfDisability1, String typeOfDisability2, String typeOfDisability3, String typeOfDisabilityMore, String pwdProfilePic, String educationalAttainment, String skill, String workExperience, String primarySkill1, String primarySkill2, String primarySkill3, String primarySkill4, String primarySkill5, String primarySkill6, String primarySkill7, String primarySkill8, String primarySkill9, String primarySkill10, String primarySkillOther) {
+        this.password = password;
         this.email = email;
         this.typeStatus = typeStatus;
         this.firstName = firstName;
@@ -80,12 +82,29 @@ public class Candidate {
         this.primarySkill9 = primarySkill9;
         this.primarySkill10 = primarySkill10;
         this.primarySkillOther = primarySkillOther;
+        this.totalYears = totalYears;
     }
 
     public Candidate(){}
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getTotalYears() {
+        return totalYears;
+    }
+
+    public void setTotalYears(String totalYears) {
+        this.totalYears = totalYears;
     }
 
     public void setEmail(String email) {

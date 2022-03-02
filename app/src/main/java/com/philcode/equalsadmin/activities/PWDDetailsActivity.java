@@ -71,7 +71,7 @@ public class PWDDetailsActivity extends AppCompatActivity {
     RelativeLayout pwdDetail;
     private TextView viewPWDFname, viewPWDLname, pwdBadge, resumeLink;
     private TextInputEditText viewPWDEmail, viewPWDPhone, viewPWDAdd;
-    private TextView pwdDisability1, editDoc, editQualificationInfo, editPersonalInfo;;
+    private TextView pwdDisability1, editDoc, editQualificationInfo, editPersonalInfo, jobDetailsSkill1, pwdDetailCategory, pwdEduc, pwdWorkExp;
     private ImageView viewPWDId, pwdBadgeIcon;
     private Button updatePWDStatus, updatePwdIdBtn;
     private ProgressDialog pd;
@@ -126,8 +126,12 @@ public class PWDDetailsActivity extends AppCompatActivity {
         pwdBadgeIcon = findViewById(R.id.pwd_verified_icon);
         updatePWDStatus = findViewById(R.id.pwd_update_status_btn);
         pwdDetail = findViewById(R.id.pwd_details_layout);
+        pwdDetailCategory = findViewById(R.id.pwd_details_category);
+        pwdEduc = findViewById(R.id.pwd_details_educ);
+        pwdWorkExp = findViewById(R.id.pwd_details_work_xp);
         resumeLink = findViewById(R.id.pwd_resume_link);
         pwdDisability1 = findViewById(R.id.pwd_details_disability1);
+        jobDetailsSkill1 = findViewById(R.id.pwd_details_skill1);
         editPersonalInfo = findViewById(R.id.pwd_personal_info_edit);
         editQualificationInfo = findViewById(R.id.pwd_qualification_info_edit);
         editDoc = findViewById(R.id.pwd_docs_edit);
@@ -260,19 +264,26 @@ public class PWDDetailsActivity extends AppCompatActivity {
                     String homeAdd1 = "" + ds.child("address").getValue();
                     String homeAdd2 = "" + ds.child("city").getValue();
                     String status = "" + ds.child("typeStatus").getValue();
+                    String education = "" + ds.child("educationalAttainment").getValue();
+                    String workExp = "" + ds.child("workExperience").getValue();
                     resume = "" + ds.child("resumeFile").getValue();
+                    String category = "" + ds.child("skill").getValue();
+                    ArrayList<String> jobSkillList = new ArrayList<>();
                     ArrayList<String> typeOfDisabilityList = new ArrayList<>();
 
-                    for(int counter_a = 1; counter_a <= 3; counter_a++){
+                    for(int counter = 0; counter <= 9; counter++){
+                        if(ds.hasChild("jobSkills" + counter) && !ds.child("jobSkills" + counter).getValue().toString().equals("")){
+                            jobSkillList.add(ds.child("jobSkills" + counter).getValue(String.class));
+                        }
+                    }
+
+                    for(int counter_a = 0; counter_a <= 2; counter_a++){
                         if(ds.hasChild("typeOfDisability" + counter_a) && !ds.child("typeOfDisability" + counter_a).getValue().toString().equals("")){
                             typeOfDisabilityList.add(ds.child("typeOfDisability" + counter_a).getValue(String.class));
                         }
 
                     }
-//                    String disability1 = "" + ds.child("typeOfDisability1").getValue();
-//                    String disability2 = "" + ds.child("typeOfDisability2").getValue();
-//                    String disability3 = "" + ds.child("typeOfDisability3").getValue();
-//                    String disability4 = "" + ds.child("typeOfDisability4").getValue();
+
 
                     if(status.equals("PWDApproved")){
                         pwdBadgeIcon.setVisibility(View.VISIBLE);
@@ -298,6 +309,9 @@ public class PWDDetailsActivity extends AppCompatActivity {
                     viewPWDEmail.setText(emailAdd);
                     viewPWDPhone.setText(phone);
                     viewPWDAdd.setText(homeAdd1 + " " + homeAdd2);
+                    pwdDetailCategory.setText(category);
+                    pwdEduc.setText(education);
+                    pwdWorkExp.setText(workExp);
                     resumeLink.setText(R.string.resume);
 
                     StringBuilder typeOfDisability_builder = new StringBuilder();
@@ -306,28 +320,11 @@ public class PWDDetailsActivity extends AppCompatActivity {
                     }
                     pwdDisability1.setText(typeOfDisability_builder.toString());
 
-//                    if(disability1.equals("")) {
-//                        pwdDisability1.setVisibility(View.GONE);
-//                    }else{
-//                        pwdDisability1.setText(disability1);
-//                    }
-//                    if(typeOfDisability2.equals(d2)) {
-//                        displayTypeOfDisability2.setText(typeOfDisability2);
-//                    }else{
-//                        displayTypeOfDisability2.setVisibility(View.GONE);
-//                    }
-//                    if(typeOfDisability3.equals(d3)) {
-//                        displayTypeOfDisability3.setText(typeOfDisability3);
-//                    }else{
-//                        displayTypeOfDisability3.setVisibility(View.GONE);
-//                    }
-//                    if(typeOfDisabilityMore.equals(d4)) {
-//                        displayTypeOfDisabilityMore.setText(typeOfDisabilityMore);
-//                    }else{
-//                        displayTypeOfDisabilityMore.setVisibility(View.GONE);
-//                    }
-
-
+                    StringBuilder jobSkillList_builder = new StringBuilder();
+                    for(String jobSkillList1 : jobSkillList){
+                        jobSkillList_builder.append(jobSkillList1 + "\n");
+                    }
+                    jobDetailsSkill1.setText(jobSkillList_builder.toString());
 
                     try {
                         Picasso.get().load(image).placeholder(R.drawable.emp_placeholder)
