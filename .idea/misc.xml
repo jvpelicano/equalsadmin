@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/drawable-hdpi/ic_baseline_cloud_download_24.xml" value="0.35188968335035753" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/drawable-v24/cardview_shape.xml" value="0.35188968335035753" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/drawable/ic_applicants.xml" value="0.35188968335035753" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/drawable/ic_resumes.xml" value="0.35188968335035753" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_add_employer.xml" value="0.3385416666666667" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_add_job_post.xml" value="0.24682971014492755" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_add_post.xml" value="0.2572463768115942" />
@@ -12,6 +16,8 @@
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_post_details.xml" value="0.23125" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_pwddetails.xml" value="0.23125" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_register.xml" value="0.26856884057971014" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_view_resume_list.xml" value="0.3385416666666667" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/activity_view_resume_pdf.xml" value="0.3385416666666667" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/content_add_employee.xml" value="0.3385416666666667" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_emp.xml" value="0.2572463768115942" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_home.xml" value="0.24682971014492755" />
@@ -24,9 +30,11 @@
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_register_candidate_step2.xml" value="0.3385416666666667" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/fragment_register_candidate_step3.xml" value="0.33" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/post_item.xml" value="0.23125" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/resume_item.xml" value="0.3385416666666667" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/layout/toolbar.xml" value="0.3385416666666667" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/menu/add_menu.xml" value="0.3385416666666667" />
         <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/menu/delete.xml" value="0.31875" />
+        <entry key="..\:/Desktop/Equals/equalsadmin/app/src/main/res/mipmap-anydpi-v26/resume_icon.xml" value="0.35188968335035753" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/btn_login_effect.xml" value="0.159375" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/confirm.xml" value="0.1234375" />
         <entry key="..\:/Users/nHaj/Desktop/AndroidProjects/EqualsAdmin/app/src/main/res/drawable-v24/cursor.xml" value="0.1234375" />

@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -56,7 +57,7 @@ import java.util.List;
 public class AddJobPostActivity extends AppCompatActivity {
     //layout
     private TextInputLayout layout_yearsOfExp;
-    private TextView tv_jobTitle, tv_jobDescription, tv_yearsOfExp;
+    private TextInputEditText tv_jobTitle, tv_jobDescription, tv_yearsOfExp;
     private ImageView imageView;
     private RadioGroup rg_educAttainment, rg_workExp;
     private RadioButton rb_educAttainment;
@@ -279,8 +280,9 @@ public class AddJobPostActivity extends AppCompatActivity {
 
                                         hashmap_all_data.put("postTitle", tv_jobTitle.getText().toString().trim());
                                         hashmap_all_data.put("postDescription", tv_jobDescription.getText().toString().trim());
-                                        hashmap_all_data.put("educationalAttainment", rb_educAttainment.getText().toString());
+                                        hashmap_all_data.put("companyName", "PhilCode");
                                         hashmap_all_data.put("yearsOfExperience", tv_yearsOfExp.getText().toString().trim());
+                                        hashmap_all_data.put("educationalAttainment", rb_educAttainment.getText().toString());
                                         hashmap_all_data.put("uid", currentAdmin_uID);
                                         hashmap_all_data.put("postDate", postDate);
                                         hashmap_all_data.put("imageURL", imageURL);
@@ -289,7 +291,6 @@ public class AddJobPostActivity extends AppCompatActivity {
                                         hashmap_all_data.put("permission", "Approved");
                                         hashmap_all_data.put("city", "Manila");
                                         hashmap_all_data.put("postLocation", "Blk 1 Lot 2 Brngy. San Jose, Manila City Philippines");
-                                        hashmap_all_data.put("companyName", "PhilCode");
 
                                         //check if educational attainment requirement is on
                                         if(checkBox_toggle_educRequired.isChecked()){
