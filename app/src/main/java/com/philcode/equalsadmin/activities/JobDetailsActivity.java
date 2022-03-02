@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,8 +22,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,11 +48,15 @@ public class JobDetailsActivity extends AppCompatActivity {
 
     ImageView jobDetailsImg;
     RelativeLayout jobDetail;
+    private Animation fab_open, fab_close, fab_clock, fab_anticlock;
     private TextInputEditText jobDetailsCompany, jobDetailsAddress, jobDetailsDescription;
     private TextView jobDetailsTitle, jobDetailsPermission, jobDetailsEduc,
             jobDetailsWorkxp, jobDetailsDisability1, jobDetailsExpDate, jobDetailsCategory, jobDetailsSkill1;
     private Button updateJobStatus;
+    private FloatingActionButton fab_main;
     private String postJobId, image;
+
+    Boolean isOpen = false;
 
     private ProgressDialog pd;
 
@@ -87,8 +96,8 @@ public class JobDetailsActivity extends AppCompatActivity {
         updateJobStatus = findViewById(R.id.job_status_btn);
         jobDetail = findViewById(R.id.job_details_layout);
 
-
-
+        //floating button
+        fab_main = findViewById(R.id.fab);
 
         //init progress dialog
         pd = new ProgressDialog(this);
@@ -99,6 +108,16 @@ public class JobDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showDialog();
+            }
+        });
+
+        //Floating Buttons OnClickListeners
+        fab_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent viewResumeList = new Intent(JobDetailsActivity.this, ViewResumeListActivity.class);
+                viewResumeList.putExtra("POST_ID", postJobId);
+                startActivity(viewResumeList);
             }
         });
 

@@ -47,7 +47,7 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
 
     // layouts
     private MaterialButton btn_Submit;
-    private Bundle bundle;
+    private Bundle bundle = new Bundle();
 
     //data from previous activity
     private HashMap<String, String> hashMap_disability, hashMap_secondary_skills;
@@ -81,17 +81,30 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
             //database
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-
-
         pwdNode = firebaseDatabase.getReference().child("PWD");
 
+        //Initialize hashmaps
         hashMap_disability = new HashMap<>();
-        hashMap_secondary_skills =  new HashMap<>();
-
+        hashMap_secondary_skills = new HashMap<>();
 
         bundle = this.getArguments();
-        if(bundle!= null){
 
+        getExtras();
+
+        //layouts
+        btn_Submit = view.findViewById(R.id.btnNext_submit);
+        btn_Submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               uploadData();
+            }
+        });
+
+        return view;
+    }
+
+    private void getExtras() {
+        if(bundle!= null){
             firstName = bundle.getString("firstName");
             lastName = bundle.getString("lastName");
             contactNumber = bundle.getString("contactNumber");
@@ -102,23 +115,11 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
             workExperience = bundle.getString("workExperience");
             skill = bundle.getString("skill");
 
-            hashMap_disability = (HashMap<String, String>) bundle.getSerializable("hashMap_disability");
-            hashMap_secondary_skills = (HashMap<String, String>) bundle.getSerializable("hashmap_secondary_skills");
+            hashMap_disability = (HashMap<String, String>) bundle.getSerializable("hashMap_disabilities");
+            hashMap_secondary_skills = (HashMap<String, String>) bundle.getSerializable("hashMap_secondary_skills");
         }else{
             Toast.makeText(context, "Bundle is null", Toast.LENGTH_SHORT).show();
         }
-
-        //layouts
-        btn_Submit = view.findViewById(R.id.btnNext_submit);
-        btn_Submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String fullName = firstName + "" + lastName;
-                uploadData();
-            }
-        });
-
-        return view;
     }
 
     private void uploadData() {
