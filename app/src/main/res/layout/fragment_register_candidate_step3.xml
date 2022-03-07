@@ -61,7 +61,7 @@
             android:layout_marginTop="10dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageView_selectPWD_pfp"
+                android:id="@+id/pwd_image_profile"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_gravity="center"
@@ -70,13 +70,6 @@
 
             </de.hdodenhof.circleimageview.CircleImageView>
 
-            <ImageView
-                android:id="@+id/pwd_verified_icon"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/imageView_selectPWD_pfp"
-                android:layout_alignBottom="@+id/imageView_selectPWD_pfp"
-                android:src="@drawable/verified_user" />
         </RelativeLayout>
 
         <TextView

@@ -63,12 +63,13 @@
 
                     <TextView
                         android:id="@+id/job_details_permission"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="271dp"
+                        android:layout_height="28dp"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
                         android:fontFamily="@font/proxima_nova_regular"
+                        android:gravity="center"
                         android:text="Approved"
                         android:textColor="@color/green"></TextView>
 

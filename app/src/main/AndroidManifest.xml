@@ -21,10 +21,12 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.ViewResumePDFActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:theme="@style/Theme.EqualsAdmin"/>
         <activity
             android:name=".activities.ViewResumeListActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:theme="@style/Theme.EqualsAdmin"/>
         <activity
             android:name=".activities.UpdatePWDQualificationInfo"
             android:exported="true"

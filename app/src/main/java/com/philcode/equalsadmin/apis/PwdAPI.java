@@ -14,5 +14,5 @@ public interface PwdAPI {
     Call<Candidate> createCandidate(@Body Candidate candidate);
 
     @DELETE("delete-pwd/{uid}")
-    Call<Candidate> deleteCandidate(@Path("uid") String uid);
+    Call<Void> deleteCandidate(@Path("uid") String uid);
 }

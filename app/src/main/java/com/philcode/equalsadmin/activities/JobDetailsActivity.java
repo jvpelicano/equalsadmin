@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,10 +21,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -143,8 +140,7 @@ public class JobDetailsActivity extends AppCompatActivity {
                     String educ = "" + ds.child("educationalAttainment").getValue();
                     String experience = "" + ds.child("workExperience").getValue();
                     String expDate = "" + ds.child("expDate").getValue();
-                    String companyId = "" + ds.child("empValidID").getValue();
-                    String status = "" + ds.child("typeStatus").getValue();
+                    String status = "" + ds.child("permission").getValue();
                     String skill = "" + ds.child("skill").getValue();
                     ArrayList<String> jobSkillList = new ArrayList<>();
                     ArrayList<String> typeOfDisabilityList = new ArrayList<>();
@@ -161,28 +157,27 @@ public class JobDetailsActivity extends AppCompatActivity {
                         }
 
                     }
-//
-//                    if(status.equals("EMPApproved")){
-//                        empBadgeIcon.setVisibility(View.VISIBLE);
-//                        empBadge.setText("Verified Account");
-//                        empBadge.setTextColor(Color.parseColor("#008000"));
-//                        updateEmpStatus.setVisibility(View.GONE);
-//                    }
-//                    else if (status.equals("EMPPending")){
-//                        empBadgeIcon.setVisibility(View.GONE);
-//                        empBadge.setText("For Verification");
-//                        empBadge.setTextColor(Color.parseColor("#FF1414"));
-//                        updateEmpStatus.setVisibility(View.VISIBLE);
-//                    }
-//                    else{
-//                        empBadgeIcon.setVisibility(View.GONE);
-//                        empBadge.setText("Cancelled");
-//                        empBadge.setTextColor(Color.parseColor("#808080"));
-//                        updateEmpStatus.setVisibility(View.VISIBLE);
-//                    }
+
                     //set data
                     jobDetailsTitle.setText(title);
                     jobDetailsCompany.setText(company);
+                    if(status.equals("Approved")){
+                        jobDetailsPermission.setText("Approved");
+                        jobDetailsPermission.setTextColor(Color.parseColor("#008000"));
+                        updateJobStatus.setVisibility(View.VISIBLE);
+                    }
+                    else if(status.equals("pending")){
+                        jobDetailsPermission.setText("Awaiting Approval");
+                        jobDetailsPermission.setTextColor(Color.parseColor("#FF1414"));
+                        updateJobStatus.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        jobDetailsPermission.setText("Cancelled");
+                        jobDetailsPermission.setTextColor(Color.parseColor("#808080"));
+                        updateJobStatus.setVisibility(View.VISIBLE);
+                    }
+
+
                     jobDetailsDescription.setText(description);
                     jobDetailsAddress.setText(coAdd1 + " " + coAdd2);
                     jobDetailsEduc.setText(educ);

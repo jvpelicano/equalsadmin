@@ -182,10 +182,10 @@ public class RegisterEmployerStep2_Fragment extends Fragment {
                             progressDialog.dismiss();
 
 
-                             imgProfile = task.getResult().toString();
+                            imgProfile = task.getResult().toString();
                              saveUser(imgProfile, emp_company_id);
 
-                            Toast.makeText(getActivity(),  "New Employer has been published successfully", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(),  "New Employer has been created successfully", Toast.LENGTH_LONG).show();
                             getActivity().finish();
 
                         }

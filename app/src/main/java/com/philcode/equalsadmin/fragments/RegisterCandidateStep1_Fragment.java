@@ -154,7 +154,7 @@ public class RegisterCandidateStep1_Fragment extends Fragment {
                             String contactNumber = editText_PWDcontactNumber.getText().toString();
                             String address = editText_PWDaddress.getText().toString();
                             String city = spinner_PWDcity.getSelectedItem().toString();
-//                            imgId = task.getResult().toString();
+                            String imgId = task.getResult().toString();
                             Bundle fragment1_bundle_sendToFragment2 = new Bundle();
 
                             if(firstName.isEmpty() || lastName.isEmpty() || contactNumber.isEmpty() ||
@@ -167,6 +167,7 @@ public class RegisterCandidateStep1_Fragment extends Fragment {
                                 fragment1_bundle_sendToFragment2.putString("contactNumber", contactNumber);
                                 fragment1_bundle_sendToFragment2.putString("address", address);
                                 fragment1_bundle_sendToFragment2.putString("city", city);
+                                fragment1_bundle_sendToFragment2.putString("pwdId", imgId);
 
                                 //Send data to the next fragment
                                 FragmentManager fm = getActivity().getSupportFragmentManager();

@@ -216,12 +216,14 @@ public class RegisterCandidateStep2_Fragment extends Fragment {
             final String contactNumber = bundlefromFragment1.getString("contactNumber");
             final String address = bundlefromFragment1.getString("address");
             final String city = bundlefromFragment1.getString("city");
+            final String imgId = bundlefromFragment1.getString("pwdId");
 
             fragment2_bundle_sendToFragment3.putString("firstName", firstName);
             fragment2_bundle_sendToFragment3.putString("lastName", lastName);
             fragment2_bundle_sendToFragment3.putString("contactNumber", contactNumber);
             fragment2_bundle_sendToFragment3.putString("address", address);
             fragment2_bundle_sendToFragment3.putString("city", city);
+            fragment2_bundle_sendToFragment3.putString("pwd_Id", imgId);
         }
         checkTextFieldValidation(tv_yearsOfExp);
         checkTextFieldValidation(tv_yearsOfExp);
@@ -229,7 +231,7 @@ public class RegisterCandidateStep2_Fragment extends Fragment {
         if(valid){
             final String skill = spinner_skillCategory.getSelectedItem().toString();
             final String yearsOfExp = tv_yearsOfExp.getText().toString().trim();
-            final String educAttainment = tv_yearsOfExp.getText().toString().trim();
+            final String educAttainment = rb_educAttainment.getText().toString().trim();
             fragment2_bundle_sendToFragment3.putSerializable("hashMap_disabilities", hashMap_disability);
             fragment2_bundle_sendToFragment3.putSerializable("hashMap_secondary_skills", hashMap_secondary_skills);
             fragment2_bundle_sendToFragment3.putString("yearsOfExperience", yearsOfExp);
