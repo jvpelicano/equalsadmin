@@ -2,13 +2,15 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardUseCompatPadding="true"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="8dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/employer_item_layout"
     android:clickable="true"
     android:focusable="true"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="8dp"
+    android:padding="3dp"
+    android:layout_margin="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/employer_item_layout"
+
    >
 
     <LinearLayout
