@@ -183,7 +183,7 @@ public class UpdatePWDPersonalInfo extends AppCompatActivity {
 
                             if (imgProfile != null) {
 
-                                hashMap2.put("empProfilePic", imgProfile);
+                                hashMap2.put("pwdProfilePic", imgProfile);
                                 pwdDbRef.child(uid).updateChildren(hashMap2);
 
                             } else {

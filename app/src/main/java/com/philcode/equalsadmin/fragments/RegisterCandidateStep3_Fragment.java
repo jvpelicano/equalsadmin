@@ -86,7 +86,7 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
     //Storage
     private StorageReference storageReference;
     //path where images of traveler profile will be stored
-    private String storagePath1 = "Employee_IDs/";
+    private String storagePath1 = "PWD_Reg_Form/";
     private String pwdAvatar;
 
     private ProgressDialog progressDialog ;
