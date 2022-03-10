@@ -146,7 +146,7 @@ public class PostDetailsActivity extends AppCompatActivity {
 
 
                     try {
-                        Picasso.get().load(image).placeholder(R.drawable.camera)
+                        Picasso.get().load(image).placeholder(R.drawable.post_placeholder)
                                 .centerCrop().fit().into(viewPostImg);
                     }
                     catch (Exception e){
