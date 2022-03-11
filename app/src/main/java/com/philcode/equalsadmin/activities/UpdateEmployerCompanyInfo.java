@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ public class UpdateEmployerCompanyInfo extends AppCompatActivity {
     private TextView empCompanyNameEdit, empCompanyAddressEdit, empCompanyOverviewEdit;
     private Spinner empCityEdit;
     private MaterialButton empInfoBtn;
+    private String[] cities;
 
     //firebase auth
     private FirebaseAuth firebaseAuth;
@@ -74,6 +76,12 @@ public class UpdateEmployerCompanyInfo extends AppCompatActivity {
         Intent intent = getIntent();
         email = intent.getStringExtra("email");
 
+        cities = new String[146];
+
+        cities = getResources().getStringArray(R.array.City);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, cities);
+        empCityEdit.setAdapter(adapter);
+
         Query empQuery = employerDbRef.orderByChild("email").equalTo(email);
         empQuery.addValueEventListener(new ValueEventListener() {
             @Override
@@ -87,13 +95,13 @@ public class UpdateEmployerCompanyInfo extends AppCompatActivity {
                     String company = "" + ds.child("fullname").getValue();
                     String overView = "" + ds.child("companybg").getValue();
                     String coAddress = "" + ds.child("companyaddress").getValue();
-//                    String coCity = "" + ds.child("companycity").getValue();
+                    String coCity = "" + ds.child("companycity").getValue();
 
                     //set data
                     empCompanyNameEdit.setText(company);
                     empCompanyOverviewEdit.setText(overView);
                     empCompanyAddressEdit.setText(coAddress);
-//                    empCityEdit.setText(coAdd1 + " " + coAdd2);
+                    empCityEdit.setSelection(adapter.getPosition(coCity));
 
                 }
             }
