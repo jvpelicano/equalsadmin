@@ -1,28 +1,42 @@
 package com.philcode.equalsadmin.activities;
 
+import static com.google.firebase.storage.FirebaseStorage.getInstance;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,12 +46,24 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.philcode.equalsadmin.R;
+import com.philcode.equalsadmin.apis.PwdAPI;
+import com.philcode.equalsadmin.apis.UserAPI;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PWDDetailsActivity extends AppCompatActivity {
 
@@ -46,12 +72,17 @@ public class PWDDetailsActivity extends AppCompatActivity {
     RelativeLayout pwdDetail;
     private TextView viewPWDFname, viewPWDLname, pwdBadge, resumeLink;
     private TextInputEditText viewPWDEmail, viewPWDPhone, viewPWDAdd;
-    private TextView pwdDisability1, pwdDisability2, pwdDisability3, pwdDisability4;
+    private TextView pwdDisability1, editDoc, editQualificationInfo, editPersonalInfo, jobDetailsSkill1, pwdDetailCategory, pwdEduc, pwdWorkExp;
     private ImageView viewPWDId, pwdBadgeIcon;
-    private Button updatePWDStatus;
+    private Button updatePWDStatus, updatePwdIdBtn;
     private ProgressDialog pd;
     private String uid;
     private String resume;
+
+    private FloatingActionButton fab_main, fab1_call, fab2_mail;
+    private Animation fab_open, fab_close, fab_clock, fab_antiClock;
+    TextView textview_call, textview_mail;
+    Boolean isOpen = false;
 
 
     //firebase auth
@@ -59,12 +90,23 @@ public class PWDDetailsActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference pwdDbRef;
 
+    //Storage
+    private StorageReference storageReference;
+    //path where images of traveler profile will be stored
+    private String storagePath = "PWD_Reg_Form/";
+
+    //request codes
+    private int Image_Request_Code = 7;
+
+    //uri of picked image
+    private Uri filePathUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pwddetails);
 
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         getSupportActionBar().setTitle("Candidate Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -85,15 +127,104 @@ public class PWDDetailsActivity extends AppCompatActivity {
         pwdBadgeIcon = findViewById(R.id.pwd_verified_icon);
         updatePWDStatus = findViewById(R.id.pwd_update_status_btn);
         pwdDetail = findViewById(R.id.pwd_details_layout);
+        pwdDetailCategory = findViewById(R.id.pwd_details_category);
+        pwdEduc = findViewById(R.id.pwd_details_educ);
+        pwdWorkExp = findViewById(R.id.pwd_details_work_xp);
         resumeLink = findViewById(R.id.pwd_resume_link);
         pwdDisability1 = findViewById(R.id.pwd_details_disability1);
-        pwdDisability2 = findViewById(R.id.pwd_details_disability2);
-        pwdDisability3 = findViewById(R.id.pwd_details_disability3);
-        pwdDisability4 = findViewById(R.id.pwd_details_disability4);
+        jobDetailsSkill1 = findViewById(R.id.pwd_details_skill1);
+        editPersonalInfo = findViewById(R.id.pwd_personal_info_edit);
+        editQualificationInfo = findViewById(R.id.pwd_qualification_info_edit);
+        editDoc = findViewById(R.id.pwd_docs_edit);
+        updatePwdIdBtn = findViewById(R.id.pwd_id_img_btn_edit);
+
+        updatePwdIdBtn.setVisibility(View.GONE);
+
+        //firebase auth instance
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        pwdDbRef = firebaseDatabase.getReference("PWD");
+        storageReference = getInstance().getReference(); // firebase storage
 
         //init progress dialog
         pd = new ProgressDialog(this);
         pd.setMessage("Updating Status..");
+
+        //animation
+        fab_main = findViewById(R.id.fab);
+        fab1_call = findViewById(R.id.fab1);
+        fab2_mail = findViewById(R.id.fab2);
+        textview_call = findViewById(R.id.textview_call);
+        textview_mail = findViewById(R.id.textview_sendEmail);
+        fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+        fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+        fab_clock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotate_clock);
+        fab_antiClock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotate_anticlock);
+
+        fab_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (isOpen) {
+
+                    textview_mail.setVisibility(View.INVISIBLE);
+                    textview_call.setVisibility(View.INVISIBLE);
+                    fab2_mail.startAnimation(fab_close);
+                    fab1_call.startAnimation(fab_close);
+                    fab_main.startAnimation(fab_antiClock);
+                    fab2_mail.setClickable(false);
+                    fab1_call.setClickable(false);
+                    isOpen = false;
+                } else {
+                    textview_mail.setVisibility(View.VISIBLE);
+                    textview_call.setVisibility(View.VISIBLE);
+                    fab2_mail.startAnimation(fab_open);
+                    fab1_call.startAnimation(fab_open);
+                    fab_main.startAnimation(fab_clock);
+                    fab2_mail.setClickable(true);
+                    fab1_call.setClickable(true);
+                    isOpen = true;
+                }
+
+            }
+        });
+
+        fab2_mail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setData(Uri.parse("email"));
+                TextView email = findViewById(R.id.pwd_profile_email);
+                String [] emailP = {email.getText().toString()};
+                i.putExtra(Intent.EXTRA_EMAIL, emailP);
+                i.putExtra(Intent.EXTRA_SUBJECT, "Invitation for Job Interview");
+                i.putExtra(Intent.EXTRA_TEXT, "Put your details here.");
+                i.setType("message/rfc822");
+                Intent chooser = Intent.createChooser(i,"Choose Application");
+                startActivity(chooser);
+
+            }
+        });
+
+        fab1_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_CALL);
+                TextView contact = findViewById(R.id.pwd_profile_phone);
+                String contactNum = contact.getText().toString();
+                i.setData(Uri.parse("tel:"+contactNum));
+                if(ActivityCompat.checkSelfPermission(PWDDetailsActivity.this, Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED){
+                    requestPermission();
+                }else{
+                    startActivity(i);
+                }
+            }
+            private void requestPermission(){
+                ActivityCompat.requestPermissions(PWDDetailsActivity.this, new String[] {Manifest.permission.CALL_PHONE},1);
+            }
+
+        });
 
         //Click Update Button
         updatePWDStatus.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +237,7 @@ public class PWDDetailsActivity extends AppCompatActivity {
         resumeLink.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-               showLink();
+                showLink();
             }
         });
 
@@ -122,7 +253,7 @@ public class PWDDetailsActivity extends AppCompatActivity {
                 //check until required info is received
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
 
-                    uid = ds.getKey();
+                   uid = ds.getKey();
 
                     //get data
                     String emailAdd = "" + ds.child("email").getValue();
@@ -134,17 +265,32 @@ public class PWDDetailsActivity extends AppCompatActivity {
                     String homeAdd1 = "" + ds.child("address").getValue();
                     String homeAdd2 = "" + ds.child("city").getValue();
                     String status = "" + ds.child("typeStatus").getValue();
+                    String education = "" + ds.child("educationalAttainment").getValue();
+                    String workExp = "" + ds.child("workExperience").getValue();
                     resume = "" + ds.child("resumeFile").getValue();
-//                    String disability1 = "" + ds.child("typeOfDisability1").getValue();
-//                    String disability2 = "" + ds.child("typeOfDisability2").getValue();
-//                    String disability3 = "" + ds.child("typeOfDisability3").getValue();
-//                    String disability4 = "" + ds.child("typeOfDisability4").getValue();
+                    String category = "" + ds.child("skill").getValue();
+                    ArrayList<String> jobSkillList = new ArrayList<>();
+                    ArrayList<String> typeOfDisabilityList = new ArrayList<>();
+
+                    for(int counter = 0; counter <= 9; counter++){
+                        if(ds.hasChild("jobSkills" + counter) && !ds.child("jobSkills" + counter).getValue().toString().equals("")){
+                            jobSkillList.add(ds.child("jobSkills" + counter).getValue(String.class));
+                        }
+                    }
+
+                    for(int counter_a = 0; counter_a <= 2; counter_a++){
+                        if(ds.hasChild("typeOfDisability" + counter_a) && !ds.child("typeOfDisability" + counter_a).getValue().toString().equals("")){
+                            typeOfDisabilityList.add(ds.child("typeOfDisability" + counter_a).getValue(String.class));
+                        }
+
+                    }
+
 
                     if(status.equals("PWDApproved")){
                         pwdBadgeIcon.setVisibility(View.VISIBLE);
                         pwdBadge.setText("Verified Account");
                         pwdBadge.setTextColor(Color.parseColor("#008000"));
-                        updatePWDStatus.setVisibility(View.GONE);
+                        updatePWDStatus.setVisibility(View.VISIBLE);
                     }
                     else if (status.equals("PWDPending")){
                         pwdBadgeIcon.setVisibility(View.GONE);
@@ -164,30 +310,22 @@ public class PWDDetailsActivity extends AppCompatActivity {
                     viewPWDEmail.setText(emailAdd);
                     viewPWDPhone.setText(phone);
                     viewPWDAdd.setText(homeAdd1 + " " + homeAdd2);
+                    pwdDetailCategory.setText(category);
+                    pwdEduc.setText(education);
+                    pwdWorkExp.setText(workExp);
                     resumeLink.setText(R.string.resume);
 
-//                    if(disability1.equals("")) {
-//                        pwdDisability1.setVisibility(View.GONE);
-//                    }else{
-//                        pwdDisability1.setText(disability1);
-//                    }
-//                    if(typeOfDisability2.equals(d2)) {
-//                        displayTypeOfDisability2.setText(typeOfDisability2);
-//                    }else{
-//                        displayTypeOfDisability2.setVisibility(View.GONE);
-//                    }
-//                    if(typeOfDisability3.equals(d3)) {
-//                        displayTypeOfDisability3.setText(typeOfDisability3);
-//                    }else{
-//                        displayTypeOfDisability3.setVisibility(View.GONE);
-//                    }
-//                    if(typeOfDisabilityMore.equals(d4)) {
-//                        displayTypeOfDisabilityMore.setText(typeOfDisabilityMore);
-//                    }else{
-//                        displayTypeOfDisabilityMore.setVisibility(View.GONE);
-//                    }
+                    StringBuilder typeOfDisability_builder = new StringBuilder();
+                    for(String typeOfDisabilityList1 : typeOfDisabilityList) {
+                        typeOfDisability_builder.append(typeOfDisabilityList1 + "\n");
+                    }
+                    pwdDisability1.setText(typeOfDisability_builder.toString());
 
-
+                    StringBuilder jobSkillList_builder = new StringBuilder();
+                    for(String jobSkillList1 : jobSkillList){
+                        jobSkillList_builder.append(jobSkillList1 + "\n");
+                    }
+                    jobDetailsSkill1.setText(jobSkillList_builder.toString());
 
                     try {
                         Picasso.get().load(image).placeholder(R.drawable.emp_placeholder)
@@ -207,6 +345,47 @@ public class PWDDetailsActivity extends AppCompatActivity {
 
             }
         });
+
+        editPersonalInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(PWDDetailsActivity.this, UpdatePWDPersonalInfo.class);
+                intent2.putExtra("email", email );
+                startActivity(intent2);
+            }
+        });
+
+        editQualificationInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent(PWDDetailsActivity.this, UpdatePWDQualificationInfo.class);
+                intent3.putExtra("email", email );
+                startActivity(intent3);
+            }
+        });
+
+        editDoc.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent();
+                // Setting intent type as image to select image from phone storage.
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Please Select Image"), Image_Request_Code);
+
+                updatePwdIdBtn.setVisibility(View.VISIBLE);
+            }
+        });
+
+        updatePwdIdBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updatePwdId();
+            }
+        });
+
     }
 
     private void showLink() {
@@ -281,9 +460,11 @@ public class PWDDetailsActivity extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
                                 firebaseDatabase.getReference().child("PWD").child(uid).removeValue();
-                                Snackbar.make(pwdDetail, "PWD has been deleted", Snackbar.LENGTH_LONG).show();
+
+                                deleteUser(uid);
+
+                                Snackbar.make(pwdDetail, "PWD has been deleted" + uid, Snackbar.LENGTH_LONG).show();
                                 finish();
                             }
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -301,6 +482,95 @@ public class PWDDetailsActivity extends AppCompatActivity {
         }
     }
 
+
+    private void updatePwdId(){
+        if (filePathUri != null) {
+
+            pd.show();
+
+            final StorageReference ref = storageReference.child(storagePath + System.currentTimeMillis() + "." + GetFileExtension(filePathUri));
+            ref.putFile(filePathUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+
+                            pd.dismiss();
+
+
+                            final String pwdCardId = task.getResult().toString();
+
+                            HashMap<String, Object> hashMap2 = new HashMap<>();
+
+                            if (pwdCardId != null) {
+
+                                hashMap2.put("pwdIdCardNum", pwdCardId);
+                                pwdDbRef.child(uid).updateChildren(hashMap2);
+
+                            } else {
+                                Toast.makeText(PWDDetailsActivity.this, "Company Id has been updated successfully", Toast.LENGTH_LONG).show();
+                                finish();
+
+                            }
+
+                            Toast.makeText(PWDDetailsActivity.this, "Company Id has been updated successfully", Toast.LENGTH_LONG).show();
+                            finish();
+
+                        }
+
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    pd.dismiss();
+                    Toast.makeText(PWDDetailsActivity.this, "Failed:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    updatePwdIdBtn.setVisibility(View.GONE);
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                    pd.setMessage("Loading " + (int) progress + "%");
+                    pd.setCancelable(false);
+                }
+            });
+        }
+        else{
+            updatePwdIdBtn.setVisibility(View.GONE);
+            Toast.makeText(PWDDetailsActivity.this, "Walang laman", Toast.LENGTH_SHORT).show();
+            return;
+
+        }
+
+    }
+
+    public String GetFileExtension(Uri uri) {
+
+        ContentResolver contentResolver = getContentResolver();
+
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        // Returning the file Extension.
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Image_Request_Code && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            filePathUri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePathUri);
+                viewPWDId.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.delete, menu);
@@ -308,9 +578,32 @@ public class PWDDetailsActivity extends AppCompatActivity {
         return true;
     }
 
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+
+    private void deleteUser(String id){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        PwdAPI pwdAPI = retrofit.create(PwdAPI.class);
+
+        Call<Void> call = pwdAPI.deleteCandidate(id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Snackbar.make(pwdDetail, "User has been deleted", Snackbar.LENGTH_LONG).show();
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.getMessage();
+            }
+        });
     }
 }

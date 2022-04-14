@@ -28,7 +28,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@color/background"
-                android:src="@drawable/camera" />
+                android:src="@drawable/post_placeholder" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/add_post_layout"

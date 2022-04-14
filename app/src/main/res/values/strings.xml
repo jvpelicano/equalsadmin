@@ -28,5 +28,166 @@
         <item>Cancelled</item>
     </string-array>
 
+    <string-array name="City">
+        <item>Alaminos</item>
+        <item>Angeles</item>
+        <item>Antipolo</item>
+        <item>Bacolod</item>
+        <item>Bacoor</item>
+        <item>Bago</item>
+        <item>Baguio</item>
+        <item>Bais</item>
+        <item>Balanga</item>
+        <item>Batac</item>
+        <item>Batangas City</item>
+        <item>Bayawan</item>
+        <item>Baybay</item>
+        <item>Bayugan</item>
+        <item>Bislig</item>
+        <item>Biñan</item>
+        <item>Bogo</item>
+        <item>Borongan</item>
+        <item>Butuan</item>
+        <item>Cabadbaran</item>
+        <item>Cabanatuan</item>
+        <item>Cabuyao</item>
+        <item>Cadiz</item>
+        <item>Cagayan de Oro</item>
+        <item>Calamba</item>
+        <item>Calapan</item>
+        <item>Calbayog</item>
+        <item>Caloocan</item>
+        <item>Candon</item>
+        <item>Canlaon</item>
+        <item>Carcar</item>
+        <item>Catbalogan</item>
+        <item>Cauayan</item>
+        <item>Cavite City</item>
+        <item>Cebu City</item>
+        <item>Cotabato City</item>
+        <item>Dagupan</item>
+        <item>Danao</item>
+        <item>Dapitan</item>
+        <item>Dasmariñas</item>
+        <item>Davao City</item>
+        <item>Digos</item>
+        <item>Dipolog</item>
+        <item>Dumaguete</item>
+        <item>El Salvador</item>
+        <item>Escalante</item>
+        <item>Gapan</item>
+        <item>Calamba</item>
+        <item>General Santos</item>
+        <item>General Trias</item>
+        <item>Gingoog</item>
+        <item>Guihulngan</item>
+        <item>Himamaylan</item>
+        <item>Ilagan</item>
+        <item>Iligan</item>
+        <item>Iloilo City</item>
+        <item>Imus</item>
+        <item>Iriga</item>
+        <item>Isabela City</item>
+        <item>Kabankalan</item>
+        <item>Kidapawan</item>
+        <item>Koronadal</item>
+        <item>La Carlota</item>
+        <item>Lamitan</item>
+        <item>Laoag</item>
+        <item>Lapu-Lapu</item>
+        <item>Las Piñas</item>
+        <item>Legazpi</item>
+        <item>Ligao</item>
+        <item>Lipa</item>
+        <item>Lucena</item>
+        <item>Maasin</item>
+        <item>Mabalacat</item>
+        <item>Makati</item>
+        <item>Malabon</item>
+        <item>Malaybalay</item>
+        <item>Malolos</item>
+        <item>Mandaluyong</item>
+        <item>Mandaue</item>
+        <item>Manila</item>
+        <item>Marawi</item>
+        <item>Marikina</item>
+        <item>Masbate City</item>
+        <item>Mati</item>
+        <item>Meycauayan</item>
+        <item>Muntinlupa</item>
+        <item>Muñoz</item>
+        <item>Naga(Cebu)</item>
+        <item>Naga(Bicol)</item>
+        <item>Navotas</item>
+        <item>Olongapo</item>
+        <item>Ormoc</item>
+        <item>Oroquieta</item>
+        <item>Ozamiz</item>
+        <item>Pagadian</item>
+        <item>Palayan</item>
+        <item>Panabo</item>
+        <item>Parañaque</item>
+        <item>Pasay</item>
+        <item>Pasig</item>
+        <item>Passi</item>
+        <item>Puerto Princesa</item>
+        <item>Quezon City</item>
+        <item>Roxas City</item>
+        <item>Sagay</item>
+        <item>Samal</item>
+        <item>San Carlos(Negros)</item>
+        <item>San Carlos(Pangasinan)</item>
+        <item>San Fernando(La Union)</item>
+        <item>San Fernando(Pampanga)</item>
+        <item>San Jose</item>
+        <item>San Jose del Monte</item>
+        <item>San Juan</item>
+        <item>San Pablo</item>
+        <item>San Pedro</item>
+        <item>Santa Rosa</item>
+        <item>Santiago</item>
+        <item>Silay</item>
+        <item>Sipalay</item>
+        <item>Sorsogon City</item>
+        <item>Surigao City</item>
+        <item>Tabaco</item>
+        <item>Tabuk</item>
+        <item>Tacloban</item>
+        <item>Tacurong</item>
+        <item>Tagaytay</item>
+        <item>Tagbilaran</item>
+        <item>Taguig</item>
+        <item>Tagum</item>
+        <item>Talisay(Cebu)</item>
+        <item>Talisay(Negros)</item>
+        <item>Tanauan</item>
+        <item>Tandag</item>
+        <item>Tangub</item>
+        <item>Tanjay</item>
+        <item>Tarlac City</item>
+        <item>Tayabas</item>
+        <item>Toledo</item>
+        <item>Trece Martires</item>
+        <item>Tuguegarao</item>
+        <item>Urdaneta</item>
+        <item>Valencia</item>
+        <item>Valenzuela</item>
+        <item>Victorias</item>
+        <item>Vigan</item>
+        <item>Zamboanga City</item>
+    </string-array>
+
+    <string name="title_activity_add_employee">AddEmployeeActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
 

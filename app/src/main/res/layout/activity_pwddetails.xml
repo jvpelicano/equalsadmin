@@ -97,16 +97,18 @@
 
                     <Button
                         android:id="@+id/pwd_update_status_btn"
-                        android:text="Update Status"
-                        android:background="@android:color/transparent"
-                        android:layout_gravity="center"
-                        android:drawableEnd="@drawable/edit"
-                        android:drawablePadding="5dp"
-                        android:textAllCaps="false"
-                        android:textColor="#177ad0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/proxima_nova_regular"/>
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:drawableEnd="@drawable/edit"
+                        android:drawablePadding="5dp"
+                        android:fontFamily="@font/proxima_nova_regular"
+                        android:text="Update Status"
+                        android:textAllCaps="false"
+                        android:textColor="#1565C0" />
+
+
 
                 </LinearLayout>
 
@@ -119,15 +121,17 @@
                 android:layout_marginBottom="20dp">
 
                 <TextView
+                    android:id="@+id/pwd_personal_info_edit"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Personal Information"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"/>
+                    android:drawableEnd="@drawable/edit"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="Personal Information "
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/view_post_layout"
@@ -152,7 +156,6 @@
                         android:textColor="#232c33"
                         android:textCursorDrawable="@drawable/cursor"
                         android:textSize="16sp">
-
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -210,71 +213,178 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
+                    android:id="@+id/pwd_qualification_info_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Type of Disability"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
                     android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="5dp"/>
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="Qualifications"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:drawableEnd="@drawable/edit"
+                    />
+
+                <TextView
+                    android:id="@+id/pwd_label_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/postBackground"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Skill Category"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/pwd_details_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/postBackground"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Category"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/pwd_label_secondary_skill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/postBackground"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Secondary Skill(s) or Preferrably"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/pwd_details_skill1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/postBackground"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Skill 1"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"/>
+
+
+
+                <TextView
+                    android:id="@+id/pwd_label_educ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/postBackground"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Educational Attainment"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/pwd_details_educ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/postBackground"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Educational Degree"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/pwd_label_work_experience"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/postBackground"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Work Experience"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/pwd_details_work_xp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/postBackground"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Total Work Experience"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/pwd_label_type_disability"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/postBackground"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Type of Disability"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/pwd_details_disability1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Disability1 "
-                    android:textSize="14dp"
-                    android:gravity="start"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"/>
+                    android:background="@color/postBackground"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Disability 1"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"/>
 
                 <TextView
-                    android:id="@+id/pwd_details_disability2"
+                    android:id="@+id/pwd_docs_edit"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Disability 2 "
-                    android:textSize="14dp"
-                    android:gravity="start"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"/>
-
-                <TextView
-                    android:id="@+id/pwd_details_disability3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Disability3 "
-                    android:textSize="14dp"
-                    android:gravity="start"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"/>
-
-                <TextView
-                    android:id="@+id/pwd_details_disability4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Disability4 "
-                    android:textSize="14dp"
-                    android:gravity="start"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"/>
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Provided Document/s"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="5dp"/>
+                    android:drawableEnd="@drawable/edit"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="Provided Document/s "
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/pwd_resume_link"
@@ -294,7 +404,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/proxima_nova_regular"
                     android:text="*PWD ID "
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:textStyle="italic|bold"
                     android:gravity="start"
                     android:layout_marginStart="20dp"
@@ -309,10 +419,109 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:background="@color/background"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/pwd_id_img_btn_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Update PWD Id"
+                    app:backgroundTint="@color/btnColor"
+                    app:rippleColor="@android:color/darker_gray">
+                </com.google.android.material.button.MaterialButton>
+
             </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/textview_sendEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="186dp"
+        android:fontFamily="@font/proxima_nova_regular"
+        android:padding="8dp"
+        android:text="Send Email"
+        android:textColor="#177ad0"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="176dp"
+        android:layout_marginEnd="24dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:focusable="true"
+        app:borderWidth="2dp"
+        android:visibility="invisible"
+        app:backgroundTint="#ffffff"
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/email"
+        app:tint="@color/colorPrimary"
+        />
+
+    <TextView
+        android:id="@+id/textview_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="116dp"
+        android:fontFamily="@font/proxima_nova_regular"
+        android:padding="8dp"
+        android:text="Call"
+        android:textColor="#177ad0"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="106dp"
+        android:layout_marginEnd="24dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:focusable="true"
+        app:borderWidth="2dp"
+        android:visibility="invisible"
+        app:backgroundTint="#ffffff"
+        app:tint="@color/colorPrimary"
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/call" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:focusable="true"
+        android:src="@drawable/add"
+        app:backgroundTint="@color/colorPrimary"
+        app:tint="@color/white" />
 
 </RelativeLayout>

@@ -1,10 +1,13 @@
 package com.philcode.equalsadmin.fragments;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.philcode.equalsadmin.R;
+import com.philcode.equalsadmin.activities.AddJobPostActivity;
+import com.philcode.equalsadmin.activities.AddPWDActivity;
 import com.philcode.equalsadmin.activities.PostDetailsActivity;
 import com.philcode.equalsadmin.adapters.CandidateAdapter;
 import com.philcode.equalsadmin.models.Candidate;
@@ -43,6 +48,7 @@ public class PWDFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser mUSer;
     String uid;
+    Toolbar toolbar;
 
 
     @Override
@@ -61,6 +67,10 @@ public class PWDFragment extends Fragment {
         pwdAdapter = new CandidateAdapter( getContext(), candidates, getActivity());
         rvPwdItems.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rvPwdItems.setAdapter(pwdAdapter);
+
+        //set toolbar
+        toolbar = pwdRoot.findViewById(R.id.toolbar_pwd);
+        toolbar.inflateMenu(R.menu.add_menu);
 
         pwdReference =  FirebaseDatabase.getInstance().getReference().child("PWD");
         pwdReference.orderByChild("typeStatus").addValueEventListener(new ValueEventListener() {
@@ -95,18 +105,20 @@ public class PWDFragment extends Fragment {
         menu.clear();
         inflater.inflate(R.menu.add_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
-        menu.findItem(R.id.add);
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.post_add_menu:
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
+        toolbar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.post_add_menu:
+                    startActivity(new Intent(getContext(), AddPWDActivity.class));
+                    return true;
+                default:
+                    return false;
+            }
+        });
     }
 
 }

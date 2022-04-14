@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button btnSignIn, btnforgotpass;
     private EditText etEmail;
     private EditText etPassword;
-    private TextView tvSignup;
+   // private TextView tvSignup;
     RelativeLayout loginLayout;
 
     //progress dialog
@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         etPassword = findViewById(R.id.etPassword);
         btnSignIn = findViewById(R.id.btnSignin);
         btnforgotpass = findViewById(R.id.btnForgotpw);
-        tvSignup  = findViewById(R.id.tvSignUp);
+       // tvSignup  = findViewById(R.id.tvSignUp);
         loginLayout = findViewById(R.id.login_layout);
 
         progressDialog = new ProgressDialog(this);
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //attaching click listener
         btnSignIn.setOnClickListener(this);
         btnforgotpass.setOnClickListener(this);
-        tvSignup.setOnClickListener(this);
+       // tvSignup.setOnClickListener(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -139,10 +139,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         }
 
-        if(view == tvSignup){
-            finish();
-            startActivity(new Intent(this, RegisterActivity.class));
-        }
+      //  if(view == tvSignup){
+      //      finish();
+      //      startActivity(new Intent(this, RegisterActivity.class));
+      //  }
 
         if(view == btnforgotpass){
             finish();

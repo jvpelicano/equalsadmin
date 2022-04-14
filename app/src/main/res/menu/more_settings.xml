@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/job_add_category"
+        android:icon="@drawable/more_vert"
+        android:title="Add Category"
+        app:showAsAction="collapseActionView"
+        app:menu="@menu/more_settings"/>
+    <item android:id="@+id/post_add_menu"
+        android:icon="@drawable/add"
+        android:title="Add Job Post"
+        app:showAsAction="collapseActionView"
+        app:menu="@menu/more_settings"/>
+</menu>
