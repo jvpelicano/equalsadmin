@@ -3,6 +3,7 @@ package com.philcode.equalsadmin.models;
 public class Candidate {
 
     public String email;
+    public String password;
     public String typeStatus;
     public String firstName, lastName;
     public String address;
@@ -28,7 +29,7 @@ public class Candidate {
     public String educationalAttainment;
     public String skill;
     public String workExperience;
-    // public String totalYears;
+    public String totalYears;
 
     public String primarySkill1;
     public String primarySkill2;
@@ -42,7 +43,8 @@ public class Candidate {
     public String primarySkill10;
     public String primarySkillOther;
 
-    public Candidate(String email, String typeStatus, String firstName, String lastName, String address, String pwdIdCardNum, String jobSkill1, String jobSkill2, String jobSkill3, String jobSkill4, String jobSkill5, String jobSkill6, String jobSkill7, String jobSkill8, String jobSkill9, String jobSkill10, String contact, String city, String typeOfDisability1, String typeOfDisability2, String typeOfDisability3, String typeOfDisabilityMore, String pwdProfilePic, String educationalAttainment, String skill, String workExperience, String primarySkill1, String primarySkill2, String primarySkill3, String primarySkill4, String primarySkill5, String primarySkill6, String primarySkill7, String primarySkill8, String primarySkill9, String primarySkill10, String primarySkillOther) {
+    public Candidate(String email, String password, String totalYears, String typeStatus, String firstName, String lastName, String address, String pwdIdCardNum, String jobSkill1, String jobSkill2, String jobSkill3, String jobSkill4, String jobSkill5, String jobSkill6, String jobSkill7, String jobSkill8, String jobSkill9, String jobSkill10, String contact, String city, String typeOfDisability1, String typeOfDisability2, String typeOfDisability3, String typeOfDisabilityMore, String pwdProfilePic, String educationalAttainment, String skill, String workExperience, String primarySkill1, String primarySkill2, String primarySkill3, String primarySkill4, String primarySkill5, String primarySkill6, String primarySkill7, String primarySkill8, String primarySkill9, String primarySkill10, String primarySkillOther) {
+        this.password = password;
         this.email = email;
         this.typeStatus = typeStatus;
         this.firstName = firstName;
@@ -80,12 +82,29 @@ public class Candidate {
         this.primarySkill9 = primarySkill9;
         this.primarySkill10 = primarySkill10;
         this.primarySkillOther = primarySkillOther;
+        this.totalYears = totalYears;
     }
 
     public Candidate(){}
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getTotalYears() {
+        return totalYears;
+    }
+
+    public void setTotalYears(String totalYears) {
+        this.totalYears = totalYears;
     }
 
     public void setEmail(String email) {
@@ -292,91 +311,4 @@ public class Candidate {
         this.workExperience = workExperience;
     }
 
-    public String getPrimarySkill1() {
-        return primarySkill1;
-    }
-
-    public void setPrimarySkill1(String primarySkill1) {
-        this.primarySkill1 = primarySkill1;
-    }
-
-    public String getPrimarySkill2() {
-        return primarySkill2;
-    }
-
-    public void setPrimarySkill2(String primarySkill2) {
-        this.primarySkill2 = primarySkill2;
-    }
-
-    public String getPrimarySkill3() {
-        return primarySkill3;
-    }
-
-    public void setPrimarySkill3(String primarySkill3) {
-        this.primarySkill3 = primarySkill3;
-    }
-
-    public String getPrimarySkill4() {
-        return primarySkill4;
-    }
-
-    public void setPrimarySkill4(String primarySkill4) {
-        this.primarySkill4 = primarySkill4;
-    }
-
-    public String getPrimarySkill5() {
-        return primarySkill5;
-    }
-
-    public void setPrimarySkill5(String primarySkill5) {
-        this.primarySkill5 = primarySkill5;
-    }
-
-    public String getPrimarySkill6() {
-        return primarySkill6;
-    }
-
-    public void setPrimarySkill6(String primarySkill6) {
-        this.primarySkill6 = primarySkill6;
-    }
-
-    public String getPrimarySkill7() {
-        return primarySkill7;
-    }
-
-    public void setPrimarySkill7(String primarySkill7) {
-        this.primarySkill7 = primarySkill7;
-    }
-
-    public String getPrimarySkill8() {
-        return primarySkill8;
-    }
-
-    public void setPrimarySkill8(String primarySkill8) {
-        this.primarySkill8 = primarySkill8;
-    }
-
-    public String getPrimarySkill9() {
-        return primarySkill9;
-    }
-
-    public void setPrimarySkill9(String primarySkill9) {
-        this.primarySkill9 = primarySkill9;
-    }
-
-    public String getPrimarySkill10() {
-        return primarySkill10;
-    }
-
-    public void setPrimarySkill10(String primarySkill10) {
-        this.primarySkill10 = primarySkill10;
-    }
-
-    public String getPrimarySkillOther() {
-        return primarySkillOther;
-    }
-
-    public void setPrimarySkillOther(String primarySkillOther) {
-        this.primarySkillOther = primarySkillOther;
-    }
 }

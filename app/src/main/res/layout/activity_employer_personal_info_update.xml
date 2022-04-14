@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/emp_info_update_layout"
+    tools:context=".activities.EmployerPersonalInfoUpdate">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:id="@+id/rl_profile_img_edit"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@color/browser_actions_bg_grey">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/emp_img_edit"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:padding="2dp"
+                            android:src="@drawable/emp_placeholder">
+
+                        </de.hdodenhof.circleimageview.CircleImageView>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/emp_tap_to_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/proxima_nova_regular"
+                        android:text="*Tap Image to update"
+                        android:textStyle="italic">
+                </TextView>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/emp_personal_info_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="Update Personal Information "
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emp_firstname_edit_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:hint="First Name"
+                    app:boxStrokeColor="@color/btnColor"
+                    app:hintTextColor="@color/btnColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/emp_firstname_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/proxima_nova_regular"
+                        android:text="Juan"
+                        android:textColor="#232c33"
+                        android:textCursorDrawable="@drawable/cursor"
+                        android:textSize="16sp">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emp_lastname_layout2"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:hint="Last Name"
+                    app:boxStrokeColor="@color/btnColor"
+                    app:hintTextColor="@color/btnColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/emp_lastname_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/proxima_nova_regular"
+                        android:text="Dela Cruz"
+                        android:textColor="#232c33"
+                        android:textCursorDrawable="@drawable/cursor"
+                        android:textSize="16sp">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emp_phone_layout2"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:hint="Contact Number"
+                    app:boxStrokeColor="@color/btnColor"
+                    app:hintTextColor="@color/btnColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/emp_phone_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/proxima_nova_regular"
+                        android:text="09221234567"
+                        android:textColor="#232c33"
+                        android:textCursorDrawable="@drawable/cursor"
+                        android:textSize="16sp">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/emp_info_btn_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Update"
+                    app:backgroundTint="@color/btnColor"
+                    app:rippleColor="@android:color/darker_gray"></com.google.android.material.button.MaterialButton>
+
+            </LinearLayout>
+
+        </LinearLayout>
+</RelativeLayout>

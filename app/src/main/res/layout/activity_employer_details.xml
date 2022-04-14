@@ -119,15 +119,17 @@
             android:layout_marginBottom="20dp">
 
             <TextView
+                android:id="@+id/emp_personal_info_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/proxima_nova_regular"
-                android:text="Personal Information"
-                android:textSize="16dp"
+                android:text="Personal Information "
+                android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:drawableEnd="@drawable/edit"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/view_post_layout"
@@ -184,15 +186,17 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/emp_company_info_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/proxima_nova_regular"
-                android:text="Company Information"
-                android:textSize="16dp"
-                android:textStyle="bold"
                 android:layout_gravity="center"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"/>
+                android:drawableEnd="@drawable/edit"
+                android:fontFamily="@font/proxima_nova_regular"
+                android:text="Company Information "
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -236,7 +240,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/proxima_nova_regular"
-                    android:text="Block 1 Lot 2 Manila"
+                    android:text="Company Address"
+                    android:hint="Block 1 Lot 2 Manila"
                     android:textColor="#232c33"
                     android:focusable="false"
                     android:enabled="false"
@@ -273,15 +278,17 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/emp_docs_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/proxima_nova_regular"
-                android:text="Provided Document/s"
-                android:textSize="16dp"
+                android:text="Provided Document/s "
+                android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:drawableEnd="@drawable/edit"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -304,9 +311,112 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@color/background"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/emp_id_img_btn_edit"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Update Company Id"
+                app:backgroundTint="@color/btnColor"
+                app:rippleColor="@android:color/darker_gray">
+            </com.google.android.material.button.MaterialButton>
+
         </LinearLayout>
+
 
     </LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/textview_sendEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="186dp"
+        android:fontFamily="@font/proxima_nova_regular"
+        android:padding="8dp"
+        android:text="Send Email"
+        android:textColor="#177ad0"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="176dp"
+        android:layout_marginEnd="24dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:focusable="true"
+        app:borderWidth="2dp"
+        android:visibility="invisible"
+        app:backgroundTint="#ffffff"
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/email"
+        app:tint="@color/colorPrimary"
+        />
+
+    <TextView
+        android:id="@+id/textview_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="116dp"
+        android:fontFamily="@font/proxima_nova_regular"
+        android:padding="8dp"
+        android:text="Call"
+        android:textColor="#177ad0"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="106dp"
+        android:layout_marginEnd="24dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:focusable="true"
+        app:borderWidth="2dp"
+        android:visibility="invisible"
+        app:backgroundTint="#ffffff"
+        app:tint="@color/colorPrimary"
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/call" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:focusable="true"
+        android:src="@drawable/add"
+        app:backgroundTint="@color/colorPrimary"
+        app:tint="@color/white" />
+
+
+
 </RelativeLayout>

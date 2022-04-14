@@ -110,14 +110,14 @@
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
-        <TextView
+<!--        <TextView
             android:id="@+id/tvSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:text="Sign Up as Admin"
             android:fontFamily="@font/poppins"
-            android:textAlignment="center" />
+            android:textAlignment="center" />-->
 
     </LinearLayout>
 

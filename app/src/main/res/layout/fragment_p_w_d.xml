@@ -8,7 +8,6 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_pwd"
         android:layout_width="match_parent"
@@ -16,7 +15,7 @@
         android:background="@color/colorPrimary"
         app:title="Candidates"
         app:titleTextColor="@color/cardview_light_background"
-        app:menu="@menu/add_menu"
+        android:fitsSystemWindows="true"
         />
 
     <ScrollView

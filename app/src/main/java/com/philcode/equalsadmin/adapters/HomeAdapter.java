@@ -71,7 +71,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             Picasso.get().load(R.drawable.equalsplaceholder).centerCrop().fit().into(holder.postImage);
         }
 
-
         holder.postCardView.setOnClickListener(view -> {
             Intent intent = new Intent(context, PostDetailsActivity.class);
             intent.putExtra("postUid", homeModels.get(position).getPostUid());

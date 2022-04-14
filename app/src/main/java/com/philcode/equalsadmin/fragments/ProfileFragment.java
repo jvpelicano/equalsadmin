@@ -148,12 +148,12 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        adminImg.setOnClickListener(new View.OnClickListener() {
+      /*  adminImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showEditProfileDialog();
             }
-        });
+        });*/
 
         Query query = databaseReference.orderByChild("uid").equalTo(user.getUid());
         query.addValueEventListener(new ValueEventListener() {
@@ -301,7 +301,7 @@ public class ProfileFragment extends Fragment {
         ActivityCompat.requestPermissions(getActivity(),cameraPermissions, CAMERA_REQUEST_CODE);
     }
 
-    private void showEditProfileDialog() {
+   /* private void showEditProfileDialog() {
 
         String editProfilePic [] = {"Camera", "Gallery"};
 
@@ -337,7 +337,7 @@ public class ProfileFragment extends Fragment {
         });
 
         builder.create().show();
-    }
+    }*/
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
