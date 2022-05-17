@@ -16,6 +16,10 @@
                 android:title="Add skill category"
                 app:showAsAction="never"
                 />
+            <item android:id="@+id/go_to_category"
+                android:title="Category"
+                app:showAsAction="never"
+                />
         </menu>
     </item>
 

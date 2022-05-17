@@ -32,6 +32,7 @@ import com.philcode.equalsadmin.activities.AddPWDActivity;
 import com.philcode.equalsadmin.adapters.EmployerAdapter;
 import com.philcode.equalsadmin.models.Employer;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class EmpFragment extends Fragment {
@@ -69,7 +70,7 @@ public class EmpFragment extends Fragment {
         toolbar.inflateMenu(R.menu.add_menu);
 
         empReference =  FirebaseDatabase.getInstance().getReference().child("Employers");
-        empReference.addValueEventListener(new ValueEventListener() {
+        empReference.orderByChild("typeStatus").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 employers.clear();
@@ -86,6 +87,7 @@ public class EmpFragment extends Fragment {
                     }
 
                 }
+                Collections.reverse(employers);
                 //update data on Firebase when changes has been made
                 empAdapter.notifyDataSetChanged();
             }

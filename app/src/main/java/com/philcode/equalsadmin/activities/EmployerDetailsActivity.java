@@ -151,6 +151,7 @@ public class EmployerDetailsActivity extends AppCompatActivity {
         updateEmpStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 showDialog();
             }
         });
@@ -307,7 +308,7 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                         empBadgeIcon.setVisibility(View.VISIBLE);
                         empBadge.setText("Verified Account");
                         empBadge.setTextColor(Color.parseColor("#008000"));
-                        updateEmpStatus.setVisibility(View.GONE);
+                        updateEmpStatus.setVisibility(View.VISIBLE);
                     }
                     else if (status.equals("EMPPending")){
                         empBadgeIcon.setVisibility(View.GONE);

@@ -173,11 +173,6 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(mainLayout, "Network ERROR. Please check your internet connection", Snackbar.LENGTH_LONG).show();
             }
         });
-        String skill="skill";
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        reference = firebaseDatabase.getReference("Category/skill/skill1");
-        reference.child("primarySkill1").setValue("Time Management");
-//        reference.child(skill).child("skill1").child("primarySkill1").setValue("Time Management");
 
     }
 

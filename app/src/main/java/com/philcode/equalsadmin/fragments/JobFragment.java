@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -187,6 +188,10 @@ public class JobFragment extends Fragment {
                     return true;
                 case R.id.add_skill_category:
                     pop_up();
+                    return true;
+                case R.id.go_to_category:
+                    FragmentManager fm = getFragmentManager();
+
                     return true;
                 default:
                     return false;
