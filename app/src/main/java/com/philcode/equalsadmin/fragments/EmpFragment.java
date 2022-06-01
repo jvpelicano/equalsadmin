@@ -83,7 +83,7 @@ public class EmpFragment extends Fragment {
 
 
                     }catch (Exception e){
-                        Toast.makeText(getActivity(), "Error sa Image", Toast.LENGTH_LONG).show();
+
                     }
 
                 }
