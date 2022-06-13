@@ -83,7 +83,6 @@ public class EmpFragment extends Fragment {
 
 
                     }catch (Exception e){
-
                     }
 
                 }
