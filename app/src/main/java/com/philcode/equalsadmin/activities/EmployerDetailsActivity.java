@@ -77,12 +77,13 @@ public class EmployerDetailsActivity extends AppCompatActivity {
     private String email;
     RelativeLayout empDetail;
     private TextView viewEmpFname, viewEmpLname, empBadge, editDoc, editCompanyInfo, editPersonalInfo;
-    private TextInputEditText viewEmpEmail, viewEmpPhone, viewEmpCompany, viewEmpAdd, viewCoOverview;
+    private TextInputEditText viewEmpEmail, viewEmpPhone, viewEmpCompany, viewEmpAdd, viewCoOverview, viewCompanyPhone;
     private ImageView viewEmpId, empBadgeIcon;
     private Button updateEmpStatus;
     MaterialButton updateEmpIdBtn;
     private ProgressDialog pd, progressDialog;
     private String uid;
+    private HashMap<String, Object> hashmap_company = new HashMap<>();
 
     private FloatingActionButton fab_main, fab1_call, fab2_mail;
     private Animation fab_open, fab_close, fab_clock, fab_antiClock;
@@ -94,10 +95,14 @@ public class EmployerDetailsActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference employerDbRef;
+    private DatabaseReference companyDbRef;
     //Storage
     private StorageReference storageReference;
     //path where images of traveler profile will be stored
     private String storagePath = "Employee_IDs/";
+    private String status;
+    private String company;
+    private String compContact;
 
     //request codes
     private int Image_Request_Code = 7;
@@ -127,6 +132,7 @@ public class EmployerDetailsActivity extends AppCompatActivity {
         viewEmpAdd = findViewById(R.id.emp_profile_address);
         viewCoOverview = findViewById(R.id.emp_profile_overview);
         viewEmpId = findViewById(R.id.emp_profile_id);
+        viewCompanyPhone = findViewById(R.id.emp_company_contact);
         empBadge = findViewById(R.id.emp_verified_acc);
         empBadgeIcon = findViewById(R.id.emp_verified_icon);
         updateEmpStatus = findViewById(R.id.update_status_btn);
@@ -162,6 +168,7 @@ public class EmployerDetailsActivity extends AppCompatActivity {
         firebaseUser = firebaseAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         employerDbRef = firebaseDatabase.getReference("Employers");
+        companyDbRef = firebaseDatabase.getReference().child("Companies");;
         storageReference = getInstance().getReference(); // firebase storage
 
         //animation
@@ -296,19 +303,21 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                     String fName = "" + ds.child("firstname").getValue();
                     String image = "" + ds.child("empProfilePic").getValue();
                     String phone = "" + ds.child("contact").getValue();
-                    String company = "" + ds.child("fullname").getValue();
+                    company = "" + ds.child("fullname").getValue();
+                    compContact = "" + ds.child("companyTelNum").getValue();
                     String overView = "" + ds.child("companybg").getValue();
                     String companyId = "" + ds.child("empValidID").getValue();
                     String coAdd1 = "" + ds.child("companyaddress").getValue();
                     String coAdd2 = "" + ds.child("companycity").getValue();
 
-                    String status = "" + ds.child("typeStatus").getValue();
+                    status = "" + ds.child("typeStatus").getValue();
                     
                     if(status.equals("EMPApproved")){
                         empBadgeIcon.setVisibility(View.VISIBLE);
                         empBadge.setText("Verified Account");
                         empBadge.setTextColor(Color.parseColor("#008000"));
                         updateEmpStatus.setVisibility(View.VISIBLE);
+
                     }
                     else if (status.equals("EMPPending")){
                         empBadgeIcon.setVisibility(View.GONE);
@@ -329,6 +338,7 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                       viewEmpPhone.setText(phone);
                       viewEmpCompany.setText(company);
                       viewCoOverview.setText(overView);
+                      viewCompanyPhone.setText(compContact);
                       viewEmpAdd.setText(coAdd1 + " " + coAdd2);
 
 
@@ -350,6 +360,16 @@ public class EmployerDetailsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void saveCompany(String companyName, String contact){
+
+        final String pushKey = companyDbRef.push().getKey();
+
+        hashmap_company.put("companyName", companyName);
+        hashmap_company.put("companyContact", contact);
+        companyDbRef.child(pushKey).setValue(hashmap_company);
+
     }
 
     private void showDialog() {
@@ -378,6 +398,13 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                                 public void onSuccess(Void aVoid) {
                                     //updated dismiss progress
                                     pd.dismiss();
+
+                                    if (status.equals("EMPApproved")){
+                                        saveCompany(company, compContact);
+                                    }
+                                    else{
+                                        return;
+                                    }
                                     Snackbar.make(empDetail, "Status has been updated successfully", Snackbar.LENGTH_LONG).show();
                                 }
                             })

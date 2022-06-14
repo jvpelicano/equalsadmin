@@ -258,6 +258,33 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="15dp"
+                android:hint="Company Address"
+                app:boxStrokeColor="@color/btnColor"
+                app:hintTextColor="@color/btnColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emp_company_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/proxima_nova_regular"
+                    android:text="028826754"
+                    android:hint="Company Contact Details"
+                    android:textColor="#232c33"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:textSize="16sp">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
                 android:hint="Company Overview"
                 app:boxStrokeColor="@color/btnColor"
                 app:hintTextColor="@color/btnColor">
