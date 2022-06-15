@@ -67,7 +67,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder>{
         }
 
         holder.jobCompany.setText(currentItem.getCompanyName());
-        holder.jobTitle.setText(currentItem.getPostTitle());
+        holder.jobTitle.setText(currentItem.getJobTitle());
         holder.jobPosted.setText(currentItem.getPostDate());
 //        holder.jobPermission.setText(currentItem.getPermission());
         try {

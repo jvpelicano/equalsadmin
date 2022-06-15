@@ -132,7 +132,7 @@ public class JobDetailsActivity extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     //get data
                     image = "" + ds.child("imageURL").getValue();
-                    String title = "" + ds.child("postTitle").getValue();
+                    String title = "" + ds.child("jobTitle").getValue();
                     String company = "" + ds.child("companyName").getValue();
                     String description = "" + ds.child("postDescription").getValue();
                     String coAdd1 = "" + ds.child("postLocation").getValue();

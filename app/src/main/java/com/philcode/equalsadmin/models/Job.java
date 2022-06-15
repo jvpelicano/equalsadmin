@@ -3,7 +3,7 @@ package com.philcode.equalsadmin.models;
 public class Job {
 
     public String imageURL;
-    public String postTitle;
+    public String jobTitle;
     public String permission;
     public String companyName;
     public String postDate;
@@ -48,9 +48,9 @@ public class Job {
 
     public Job(){}
 
-    public Job(String imageURL, String postTitle, String permission, String companyName, String postDate, String postDescription, String postLocation, String typeOfDisability1, String typeOfDisability2, String typeOfDisability3, String typeOfDisabilityMore, String jobSkill1, String jobSkill2, String jobSkill3, String jobSkill4, String jobSkill5, String jobSkill6, String jobSkill7, String jobSkill8, String jobSkill9, String jobSkill10, String uid, String expDate, String city, String educationalAttainment, String workExperience, String primarySkill1, String primarySkill2, String primarySkill3, String primarySkill4, String primarySkill5, String primarySkill6, String primarySkill7, String primarySkill8, String primarySkill9, String primarySkill10, String primarySkillOther, String skill, int numberOfPrimarySkills, String educationalAttainmentRequirement, String postJobId) {
+    public Job(String imageURL, String jobTitle, String permission, String companyName, String postDate, String postDescription, String postLocation, String typeOfDisability1, String typeOfDisability2, String typeOfDisability3, String typeOfDisabilityMore, String jobSkill1, String jobSkill2, String jobSkill3, String jobSkill4, String jobSkill5, String jobSkill6, String jobSkill7, String jobSkill8, String jobSkill9, String jobSkill10, String uid, String expDate, String city, String educationalAttainment, String workExperience, String primarySkill1, String primarySkill2, String primarySkill3, String primarySkill4, String primarySkill5, String primarySkill6, String primarySkill7, String primarySkill8, String primarySkill9, String primarySkill10, String primarySkillOther, String skill, int numberOfPrimarySkills, String educationalAttainmentRequirement, String postJobId) {
         this.imageURL = imageURL;
-        this.postTitle = postTitle;
+        this.jobTitle = jobTitle;
         this.permission = permission;
         this.companyName = companyName;
         this.postDate = postDate;
@@ -100,12 +100,12 @@ public class Job {
         this.imageURL = imageURL;
     }
 
-    public String getPostTitle() {
-        return postTitle;
+    public String getJobTitle() {
+        return jobTitle;
     }
 
-    public void setPostTitle(String postTitle) {
-        this.postTitle = postTitle;
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
     public String getPermission() {

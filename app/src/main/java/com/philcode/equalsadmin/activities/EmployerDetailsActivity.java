@@ -103,6 +103,7 @@ public class EmployerDetailsActivity extends AppCompatActivity {
     private String status;
     private String company;
     private String compContact;
+    private String comBranch;
 
     //request codes
     private int Image_Request_Code = 7;
@@ -305,6 +306,13 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                     String phone = "" + ds.child("contact").getValue();
                     company = "" + ds.child("fullname").getValue();
                     compContact = "" + ds.child("companyTelNum").getValue();
+                    if(comBranch!=null){
+                        comBranch = "" + ds.child("branch").getValue();
+                    }
+                    else{
+                        comBranch = "";
+                    }
+
                     String overView = "" + ds.child("companybg").getValue();
                     String companyId = "" + ds.child("empValidID").getValue();
                     String coAdd1 = "" + ds.child("companyaddress").getValue();
@@ -362,12 +370,15 @@ public class EmployerDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void saveCompany(String companyName, String contact){
+    private void saveCompany(String companyName, String contact, String companyBranch){
 
         final String pushKey = companyDbRef.push().getKey();
 
-        hashmap_company.put("companyName", companyName);
-        hashmap_company.put("companyContact", contact);
+
+            hashmap_company.put("companyName", companyName);
+            hashmap_company.put("companyContact", contact);
+            hashmap_company.put("branch", companyBranch);
+
         companyDbRef.child(pushKey).setValue(hashmap_company);
 
     }
@@ -400,7 +411,7 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                                     pd.dismiss();
 
                                     if (status.equals("EMPApproved")){
-                                        saveCompany(company, compContact);
+                                        saveCompany(company, compContact, comBranch);
                                     }
                                     else{
                                         return;
