@@ -206,7 +206,7 @@ public class AddJobPostActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    skillCategory_contentList.add(ds.child("skill").getValue().toString());
+                    skillCategory_contentList.add(ds.child("jobtitle").getValue().toString());
                 }
                 spinner_skillCategory_adapter.notifyDataSetChanged();
             }
@@ -278,7 +278,7 @@ public class AddJobPostActivity extends AppCompatActivity {
                                         selected_educAttainment_ID = rg_educAttainment.getCheckedRadioButtonId();
                                         rb_educAttainment = findViewById(selected_educAttainment_ID);
 
-                                        hashmap_all_data.put("postTitle", tv_jobTitle.getText().toString().trim());
+                                        hashmap_all_data.put("jobTitle", tv_jobTitle.getText().toString().trim());
                                         hashmap_all_data.put("postDescription", tv_jobDescription.getText().toString().trim());
                                         hashmap_all_data.put("companyName", "PhilCode");
                                         hashmap_all_data.put("yearsOfExperience", tv_yearsOfExp.getText().toString().trim());
@@ -306,7 +306,7 @@ public class AddJobPostActivity extends AppCompatActivity {
                                                 && (hashmap_all_data.containsKey("typeOfDisability1") || hashmap_all_data.containsKey("typeOfDisability2") || hashmap_all_data.containsKey("typeOfDisability3")
                                                 || hashmap_all_data.containsKey("typeOfDisabilityMore"))
 
-                                                && hashmap_all_data.containsKey("postTitle") && hashmap_all_data.containsKey("postDescription")
+                                                && hashmap_all_data.containsKey("jobTitle") && hashmap_all_data.containsKey("postDescription")
                                                 && hashmap_all_data.containsKey("imageURL")){
 
                                             jobPostNode.child(pushKey).setValue(hashmap_all_data);

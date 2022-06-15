@@ -15,11 +15,13 @@ public class Employer {
     public String empValidID;
     public String companyaddress;
     public String companycity;
+    public String companyTelNum;
+    public String branch;
 
     public Employer(){
     }
 
-    public Employer(String email, String password, String typeStatus, String firstname, String lastname, String fullname, String companybg, String contact, String avatar, String empValidID, String companyaddress, String companycity) {
+    public Employer(String email, String password, String typeStatus, String firstname, String lastname, String fullname, String companybg, String contact, String avatar, String empValidID, String companyaddress, String companycity, String companyTelNum, String branch) {
         this.email = email;
         this.password = password;
         this.typeStatus = typeStatus;
@@ -32,6 +34,8 @@ public class Employer {
         this.empValidID = empValidID;
         this.companyaddress = companyaddress;
         this.companycity = companycity;
+        this.companyTelNum = companyTelNum;
+        this.branch = branch;
     }
 
     public String getEmail() {
@@ -128,5 +132,21 @@ public class Employer {
 
     public void setCompanycity(String companycity) {
         this.companycity = companycity;
+    }
+
+    public String getCompanyTelNum() {
+        return companyTelNum;
+    }
+
+    public void setCompanyTelNum(String companyTelNum) {
+        this.companyTelNum = companyTelNum;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 }
