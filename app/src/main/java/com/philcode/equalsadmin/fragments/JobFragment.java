@@ -220,7 +220,7 @@ public class JobFragment extends Fragment {
                             }
                             final int categoryListSize = categorySize.size();
                             categoryReference.child("skill" + categoryListSize).child("skill").setValue(newSkillCategory.getText().toString().trim());
-                            Toast.makeText(getActivity(), "New Skill Category Added.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "New Skill Category Added.", Toast.LENGTH_SHORT).show();
                         }
                     }
 

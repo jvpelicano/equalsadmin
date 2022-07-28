@@ -208,7 +208,7 @@ public class RegisterCandidateStep2_Fragment extends Fragment {
         selected_educAttainment_ID = rg_educAttainment.getCheckedRadioButtonId();
         rb_educAttainment = view.findViewById(selected_educAttainment_ID);
 
-        //from fragment 1 to bundle fragment 2 sending to fragment 3
+        //from unpacking fragment 1 to bundle fragment 2 sending to fragment 3
         bundlefromFragment1 = getArguments();
         if(bundlefromFragment1!= null){
             final String firstName = bundlefromFragment1.getString("firstName");
