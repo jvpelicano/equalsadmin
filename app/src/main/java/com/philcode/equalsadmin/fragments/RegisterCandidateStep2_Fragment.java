@@ -47,12 +47,12 @@ public class RegisterCandidateStep2_Fragment extends Fragment {
     private TextInputLayout layout_yearsOfExp, textInputLayout_degree;
     private TextInputEditText tv_yearsOfExp;
     private MaterialButton btnNext_fragment2;
-    private RadioGroup rg_educAttainment, rg_workExp;
-    private RadioButton rb_educAttainment, rb_workExp;
+    private RadioGroup rg_educAttainment, rg_workExp, rg_workSetUp;
+    private RadioButton rb_educAttainment, rb_workExp, rb_workSetUp;
     private CheckBox checkBox_typeOfDisability_Other;
     private ProgressDialog progressDialog;
 
-    private RadioButton radio_1, radio_2, radio_3, radio_4, radio_5, radio_6, radioButton_workSetUp;
+    private RadioButton radio_1, radio_2, radio_3, radio_4, radio_5, radio_6;
 
     //Arrays
     private Integer[] type_of_disabilities_checkboxIDs;
@@ -67,7 +67,7 @@ public class RegisterCandidateStep2_Fragment extends Fragment {
     private ArrayAdapter<String> exposedDropdownList_skillCategory_adapter, exposedDropdownList_jobtitle_adapter, exposedDropdownList_typeOfEmployment_adapter;
 
     //Int
-    private int selected_workExpRg_ID, selected_educAttainment_ID;
+    private int selected_workExpRg_ID, selected_educAttainment_ID, selected_workSetUp_ID;
     private int rb_withWorkExp_ID, rb_withoutWorkExpID;
 
     //String
@@ -105,6 +105,7 @@ public class RegisterCandidateStep2_Fragment extends Fragment {
 
         rg_educAttainment = view.findViewById(R.id.rg_educ);
         rg_workExp = view.findViewById(R.id.rg_work);
+        rg_workSetUp = view.findViewById(R.id.radioGroup_workSetUp);
 
             //initialize autocomplete edit text views
                 autoComplete_degree = view.findViewById(R.id.autoComplete_skillCategory);
@@ -362,6 +363,9 @@ public class RegisterCandidateStep2_Fragment extends Fragment {
         selected_educAttainment_ID = rg_educAttainment.getCheckedRadioButtonId();
         rb_educAttainment = view.findViewById(selected_educAttainment_ID);
 
+        selected_workSetUp_ID = rg_workSetUp.getCheckedRadioButtonId();
+        rb_workSetUp = view.findViewById(selected_workSetUp_ID);
+
         //from fragment 1 to bundle fragment 2 sending to fragment 3
         bundlefromFragment1 = getArguments();
         if(bundlefromFragment1!= null){
@@ -383,15 +387,39 @@ public class RegisterCandidateStep2_Fragment extends Fragment {
         checkTextFieldValidation(tv_yearsOfExp);
 
         if(valid){
-           // final String skill = spinner_skillCategory.getSelectedItem().toString();
             final String yearsOfExp = tv_yearsOfExp.getText().toString().trim();
             final String educAttainment = rb_educAttainment.getText().toString().trim();
-            fragment2_bundle_sendToFragment3.putSerializable("hashMap_disabilities", hashMap_disability);
-            fragment2_bundle_sendToFragment3.putSerializable("hashMap_secondary_skills", hashMap_secondary_skills);
-            fragment2_bundle_sendToFragment3.putString("yearsOfExperience", yearsOfExp);
-            fragment2_bundle_sendToFragment3.putString("educationalAttainment",educAttainment);
-            fragment2_bundle_sendToFragment3.putString("workExperience", workExperience);
-            //fragment2_bundle_sendToFragment3.putString("skill", skill);
+            final String jobTitle = autoComplete_jobTitle.getText().toString().trim();
+            final String typeOfEmployment = autoComplete_typeOfEmployment.getText().toString().trim();
+            final String workSetUp = rb_workSetUp.getText().toString().trim();
+            final String skill = autoComplete_degree.getText().toString();
+
+            if(autoComplete_degree.getText().toString().isEmpty()){
+
+                fragment2_bundle_sendToFragment3.putSerializable("hashMap_disabilities", hashMap_disability);
+                fragment2_bundle_sendToFragment3.putSerializable("hashMap_secondary_skills", hashMap_secondary_skills);
+                fragment2_bundle_sendToFragment3.putString("yearsOfExperience", yearsOfExp);
+                fragment2_bundle_sendToFragment3.putString("educationalAttainment",educAttainment);
+                fragment2_bundle_sendToFragment3.putString("workExperience", workExperience);
+                fragment2_bundle_sendToFragment3.putString("jobTitle", jobTitle);
+                fragment2_bundle_sendToFragment3.putString("typeOfEmployment", typeOfEmployment);
+                fragment2_bundle_sendToFragment3.putString("workSetUp", workSetUp);
+
+            }else if(!autoComplete_degree.getText().toString().isEmpty()){
+
+                fragment2_bundle_sendToFragment3.putSerializable("hashMap_disabilities", hashMap_disability);
+                fragment2_bundle_sendToFragment3.putSerializable("hashMap_secondary_skills", hashMap_secondary_skills);
+                fragment2_bundle_sendToFragment3.putString("yearsOfExperience", yearsOfExp);
+                fragment2_bundle_sendToFragment3.putString("educationalAttainment",educAttainment);
+                fragment2_bundle_sendToFragment3.putString("workExperience", workExperience);
+                fragment2_bundle_sendToFragment3.putString("jobTitle", jobTitle);
+                fragment2_bundle_sendToFragment3.putString("skill", skill);
+                fragment2_bundle_sendToFragment3.putString("typeOfEmployment", typeOfEmployment);
+                fragment2_bundle_sendToFragment3.putString("workSetUp", workSetUp);
+
+            }else{
+                Toast.makeText(context, "Please complete the form.", Toast.LENGTH_SHORT).show();
+            }
 
             FragmentManager fm = getActivity().getSupportFragmentManager();
             Fragment fragment3 = new RegisterCandidateStep3_Fragment();
@@ -407,7 +435,7 @@ public class RegisterCandidateStep2_Fragment extends Fragment {
 
 
         }else{
-            Toast.makeText(context, "Please fill out the form completely.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Please complete the form.", Toast.LENGTH_SHORT).show();
         }
     }
     private Boolean checkTextFieldValidation(TextInputEditText textInputEditText) {

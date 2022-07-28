@@ -43,6 +43,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.philcode.equalsadmin.R;
 import com.philcode.equalsadmin.activities.MainActivity;
+import com.philcode.equalsadmin.activities.RegisterActivity;
 import com.philcode.equalsadmin.apis.PwdAPI;
 import com.philcode.equalsadmin.apis.UserAPI;
 import com.philcode.equalsadmin.models.Candidate;
@@ -73,7 +74,7 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
     private HashMap<String, String> hashMap_disability, hashMap_secondary_skills;
     private String firstName, lastName, contactNumber,
             address, city, yearsOfExperience, educationalAttainment, workExperience,
-            skill, imgId, email, password, confirmPass;
+            skill, imgId, email, password, confirmPass, jobTitle, typeOfEmployment, workSetUp;
 
     //Boolean
     private Boolean valid = true;
@@ -167,6 +168,11 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
             workExperience = bundle.getString("workExperience");
             skill = bundle.getString("skill");
             imgId = bundle.getString("pwd_Id");
+
+            //newly added
+            jobTitle = bundle.getString("jobTitle");
+            typeOfEmployment = bundle.getString("typeOfEmployment");
+            workSetUp = bundle.getString("workSetUp");
 
             hashMap_disability = (HashMap<String, String>) bundle.getSerializable("hashMap_disabilities");
             hashMap_secondary_skills = (HashMap<String, String>) bundle.getSerializable("hashMap_secondary_skills");
