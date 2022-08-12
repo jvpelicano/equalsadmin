@@ -84,7 +84,6 @@
 <!--                    />-->
 
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -155,6 +154,30 @@
                     android:layout_marginLeft="5dp"
                     android:fontFamily="@font/proxima_nova_regular"
                     android:textColor="@color/textColor"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_branch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_branch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Branch:"
+                    android:fontFamily="@font/proxima_nova_regular"/>
+
+                <TextView
+                    android:id="@+id/emp_branch_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Makati"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/textColor"
+                    android:fontFamily="@font/proxima_nova_regular"/>
+
 
             </LinearLayout>
 

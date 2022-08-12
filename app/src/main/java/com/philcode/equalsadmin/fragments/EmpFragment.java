@@ -76,10 +76,12 @@ public class EmpFragment extends Fragment {
                 employers.clear();
                 for (DataSnapshot snapShot : dataSnapshot.getChildren()) {
                     Employer empModel = snapShot.getValue(Employer.class);
-
+                    employers.add(empModel);
                     try {
+//
+                    if(snapShot.hasChild("empProfilePic")){
                         empModel.setAvatar(snapShot.child("empProfilePic").getValue().toString());
-                        employers.add(empModel);
+                    }
 
 
                     }catch (Exception e){

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,11 +71,24 @@ public class EmployerAdapter extends RecyclerView.Adapter<EmployerAdapter.Employ
             holder.empStatus.setTextColor(Color.parseColor("#808080"));
         }
 
+         String branch = currentItem.getBranch();
+
+         if (branch.equals("")){
+             holder.empLabelBranch.setVisibility(View.GONE);
+             holder.empBranch.setVisibility(View.GONE);
+             holder.branchLayout.setVisibility(View.GONE);
+         }
+         else if(branch != null){
+             holder.empLabelBranch.setVisibility(View.VISIBLE);
+             holder.empBranch.setVisibility(View.VISIBLE);
+         }
+
         holder.empCompany.setText(currentItem.getFullname());
         holder.empFname.setText(currentItem.getFirstname());
         holder.empLname.setText(currentItem.getLastname());
         holder.empEmail.setText(currentItem.getEmail());
         holder.empPhone.setText(currentItem.getContact());
+        holder.empBranch.setText(currentItem.getBranch());
 
         try {
             Picasso.get().load(employerModels.get(position).getAvatar())
@@ -102,8 +116,9 @@ public class EmployerAdapter extends RecyclerView.Adapter<EmployerAdapter.Employ
 
         public CircleImageView empImage;
         public ImageView empVerified;
-        public TextView empFname, empLname,empCompany, empEmail, empPhone, empStatus;
+        public TextView empFname, empLname,empCompany, empEmail, empPhone, empStatus, empBranch, empLabelBranch;
         public MaterialCardView empCardView;
+        public LinearLayout branchLayout;
 
         public EmployerViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -117,6 +132,9 @@ public class EmployerAdapter extends RecyclerView.Adapter<EmployerAdapter.Employ
             empStatus = itemView.findViewById(R.id.emp_status_item);
             empVerified = itemView.findViewById(R.id.img_verified_indicator);
             empCardView = itemView.findViewById(R.id.employer_item_layout);
+            empBranch = itemView.findViewById(R.id.emp_branch_item);
+            branchLayout = itemView.findViewById(R.id.layout_branch);
+            empLabelBranch = itemView.findViewById(R.id.tv_branch);
         }
     }
 

@@ -206,7 +206,10 @@ public class AddJobPostActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    skillCategory_contentList.add(ds.child("jobtitle").getValue().toString());
+                    if(ds.child("jobtitle").getValue().toString() != null){
+                        skillCategory_contentList.add(ds.child("jobtitle").getValue().toString());
+                    }
+
                 }
                 spinner_skillCategory_adapter.notifyDataSetChanged();
             }

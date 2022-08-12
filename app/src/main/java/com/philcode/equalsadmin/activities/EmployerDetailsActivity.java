@@ -89,6 +89,7 @@ public class EmployerDetailsActivity extends AppCompatActivity {
     private Animation fab_open, fab_close, fab_clock, fab_antiClock;
     TextView textview_call, textview_mail;
     Boolean isOpen = false;
+    Boolean isCompanyExists;
 
     //firebase auth
     private FirebaseAuth firebaseAuth;
@@ -298,6 +299,7 @@ public class EmployerDetailsActivity extends AppCompatActivity {
 
                     uid = ds.getKey();
 
+
                     //get data
                     String emailAdd = "" + ds.child("email").getValue();
                     String lName = "" + ds.child("lastname").getValue();
@@ -306,12 +308,15 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                     String phone = "" + ds.child("contact").getValue();
                     company = "" + ds.child("fullname").getValue();
                     compContact = "" + ds.child("companyTelNum").getValue();
-                    if(comBranch!=null){
-                        comBranch = "" + ds.child("branch").getValue();
-                    }
-                    else{
-                        comBranch = "";
-                    }
+
+                    String branch = (comBranch!=null)? comBranch = "" + ds.child("branch").getValue(): "";
+
+//                     if(comBranch!=null){
+//                         comBranch = "" + ds.child("branch").getValue();
+//                     }
+//                     else{
+//                         comBranch = "";
+//                     }
 
                     String overView = "" + ds.child("companybg").getValue();
                     String companyId = "" + ds.child("empValidID").getValue();
@@ -319,7 +324,8 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                     String coAdd2 = "" + ds.child("companycity").getValue();
 
                     status = "" + ds.child("typeStatus").getValue();
-                    
+//                    Boolean exist = ifCompanyExist(company, comBranch);
+
                     if(status.equals("EMPApproved")){
                         empBadgeIcon.setVisibility(View.VISIBLE);
                         empBadge.setText("Verified Account");
@@ -329,7 +335,14 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                     }
                     else if (status.equals("EMPPending")){
                         empBadgeIcon.setVisibility(View.GONE);
-                        empBadge.setText("For Verification");
+                        Toast.makeText(EmployerDetailsActivity.this, "Company " + company + branch, Toast.LENGTH_LONG).show();
+//                        if(ifCompanyExist(company, comBranch)){
+//                            empBadge.setText("Company On the list");
+//                        }
+//                        else{
+                            empBadge.setText("For Verification");
+//                        }
+
                         empBadge.setTextColor(Color.parseColor("#FF1414"));
                         updateEmpStatus.setVisibility(View.VISIBLE);
                     }
@@ -360,6 +373,7 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                         Picasso.get().load(R.drawable.emp_placeholder).centerCrop().fit().into(empDetailsImg);
                         Picasso.get().load(R.drawable.equalsplaceholder).centerCrop().fit().into(viewEmpId);
                     }
+//                    Toast.makeText(EmployerDetailsActivity.this, "Company " + company + comBranch, Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -368,20 +382,27 @@ public class EmployerDetailsActivity extends AppCompatActivity {
 
             }
         });
-    }
 
-    private void saveCompany(String companyName, String contact, String companyBranch){
-
-        final String pushKey = companyDbRef.push().getKey();
-
-
-            hashmap_company.put("companyName", companyName);
-            hashmap_company.put("companyContact", contact);
-            hashmap_company.put("branch", companyBranch);
-
-        companyDbRef.child(pushKey).setValue(hashmap_company);
+//        Boolean exist = ifCompanyExist(company, comBranch);
+//
+//        if (exist){
+//            Toast.makeText(EmployerDetailsActivity.this, "Company already exists on the list" + company + comBranch, Toast.LENGTH_LONG).show();
+//        }
 
     }
+
+     private void saveCompany(String companyName, String contact, String companyBranch){
+
+         final String pushKey = companyDbRef.push().getKey();
+
+
+             hashmap_company.put("companyName", companyName);
+             hashmap_company.put("companyContact", contact);
+             hashmap_company.put("branch", companyBranch);
+
+         companyDbRef.child(pushKey).setValue(hashmap_company);
+
+     }
 
     private void showDialog() {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
@@ -409,14 +430,18 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                                 public void onSuccess(Void aVoid) {
                                     //updated dismiss progress
                                     pd.dismiss();
+//                                    Snackbar.make(empDetail, "Status has been updated successfully", Snackbar.LENGTH_LONG).show();
+//                                    return;
 
-                                    if (status.equals("EMPApproved")){
-                                        saveCompany(company, compContact, comBranch);
-                                    }
-                                    else{
-                                        return;
-                                    }
-                                    Snackbar.make(empDetail, "Status has been updated successfully", Snackbar.LENGTH_LONG).show();
+
+                                     if (status.equals("EMPApproved")){
+                                         saveCompany(company, compContact, comBranch);
+                                     }
+                                     else{
+                                         return;
+                                     }
+
+
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -598,5 +623,36 @@ public class EmployerDetailsActivity extends AppCompatActivity {
                 t.getMessage();
             }
         });
+    }
+
+    public Boolean ifCompanyExist(String cmpany, String branch){
+
+        DatabaseReference companyRoot = FirebaseDatabase.getInstance().getReference().child("Companies");
+        Query coQuery = companyRoot.orderByChild("companyName").equalTo(company);
+        coQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    //get data
+                    String companyName= "" + ds.child("companyName").getValue();
+                    String coBranch = "" + ds.child("branch").getValue();
+
+                    if (companyName.equalsIgnoreCase(cmpany)  && coBranch.equalsIgnoreCase(branch)){
+                        Toast.makeText(getApplicationContext(), "DUPLICATE ACCOUNT FOR Company :"+ companyName + " -" + coBranch +", Contact Equals Admin" , Toast.LENGTH_LONG).show();
+                        isCompanyExists = true;
+                    }
+                    else{
+                        isCompanyExists = false;
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return isCompanyExists;
     }
 }

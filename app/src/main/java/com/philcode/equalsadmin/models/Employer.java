@@ -37,6 +37,20 @@ public class Employer {
         this.companyTelNum = companyTelNum;
         this.branch = branch;
     }
+    public Employer(String email, String password, String typeStatus, String firstname, String lastname, String fullname, String companybg, String contact, String avatar, String empValidID, String companyaddress, String companycity) {
+        this.email = email;
+        this.password = password;
+        this.typeStatus = typeStatus;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.fullname = fullname;
+        this.companybg = companybg;
+        this.contact = contact;
+        this.avatar = avatar;
+        this.empValidID = empValidID;
+        this.companyaddress = companyaddress;
+        this.companycity = companycity;
+    }
 
     public String getEmail() {
         return email;
