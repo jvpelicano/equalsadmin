@@ -101,12 +101,12 @@ public class JobDetailsActivity extends AppCompatActivity {
         pd.setMessage("Updating Status..");
 
         //Click Update Button
-        updateJobStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog();
-            }
-        });
+//        updateJobStatus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showDialog();
+//            }
+//        });
 
         //Floating Buttons OnClickListeners
         fab_main.setOnClickListener(new View.OnClickListener() {

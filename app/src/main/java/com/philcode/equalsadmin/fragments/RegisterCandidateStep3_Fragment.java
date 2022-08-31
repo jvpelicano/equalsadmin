@@ -246,49 +246,49 @@ public class RegisterCandidateStep3_Fragment extends Fragment {
         newPwd.setPwdProfilePic(pwdProfile);
         newPwd.setPwdIdCardNum(pwdId);
 
-        if(hashMap_disability.containsKey("typeOfDisability1")){
-            newPwd.setTypeOfDisability1("Orthopedic Disability");
-        }
-        if(hashMap_disability.containsKey("typeOfDisability2")){
-            newPwd.setTypeOfDisability2("Partial Vision");
-        }
-        if(hashMap_disability.containsKey("typeOfDisability3")){
-            newPwd.setTypeOfDisability3("Hearing Disability");
-        }
-        if(hashMap_disability.containsKey("typeOfDisabilityMore")){
-            newPwd.setTypeOfDisabilityMore("Other Disability");
-        }
+        // if(hashMap_disability.containsKey("typeOfDisability1")){
+        //     newPwd.setTypeOfDisability1("Orthopedic Disability");
+        // }
+        // if(hashMap_disability.containsKey("typeOfDisability2")){
+        //     newPwd.setTypeOfDisability2("Partial Vision");
+        // }
+        // if(hashMap_disability.containsKey("typeOfDisability3")){
+        //     newPwd.setTypeOfDisability3("Hearing Disability");
+        // }
+        // if(hashMap_disability.containsKey("typeOfDisabilityMore")){
+        //     newPwd.setTypeOfDisabilityMore("Other Disability");
+        // }
 
-        if (hashMap_secondary_skills.containsKey("jobSkill1")){
-            newPwd.setJobSkill1("Active Listening");
-        }
-        if (hashMap_secondary_skills.containsKey("jobSkill2")){
-            newPwd.setJobSkill2("Communication");
-        }
-        if (hashMap_secondary_skills.containsKey("jobSkill3")){
-            newPwd.setJobSkill3("Computer Skills");
-        }
-        if (hashMap_secondary_skills.containsKey("jobSkill4")){
-            newPwd.setJobSkill4("Customer Service");
-        }
-        if (hashMap_secondary_skills.containsKey("jobSkill5")){
-            newPwd.setJobSkill5("Interpersonal Skills");
-        }
-        if (hashMap_secondary_skills.containsKey("jobSkill6")){
-            newPwd.setJobSkill6("Leadership");
-        }
-        if (hashMap_secondary_skills.containsKey("jobSkill7")){
-            newPwd.setJobSkill7("Management Skills");
-        }
-        if (hashMap_secondary_skills.containsKey("jobSkill8")){
-            newPwd.setJobSkill8("Problem Solving");
-        }
-        if (hashMap_secondary_skills.containsKey("jobSkill9")){
-            newPwd.setJobSkill9("Time Management");
-        }
-        if (hashMap_secondary_skills.containsKey("jobSkill10")){
-            newPwd.setJobSkill10("Transferable Skills");
-        }
+        // if (hashMap_secondary_skills.containsKey("jobSkill1")){
+        //     newPwd.setJobSkill1("Active Listening");
+        // }
+        // if (hashMap_secondary_skills.containsKey("jobSkill2")){
+        //     newPwd.setJobSkill2("Communication");
+        // }
+        // if (hashMap_secondary_skills.containsKey("jobSkill3")){
+        //     newPwd.setJobSkill3("Computer Skills");
+        // }
+        // if (hashMap_secondary_skills.containsKey("jobSkill4")){
+        //     newPwd.setJobSkill4("Customer Service");
+        // }
+        // if (hashMap_secondary_skills.containsKey("jobSkill5")){
+        //     newPwd.setJobSkill5("Interpersonal Skills");
+        // }
+        // if (hashMap_secondary_skills.containsKey("jobSkill6")){
+        //     newPwd.setJobSkill6("Leadership");
+        // }
+        // if (hashMap_secondary_skills.containsKey("jobSkill7")){
+        //     newPwd.setJobSkill7("Management Skills");
+        // }
+        // if (hashMap_secondary_skills.containsKey("jobSkill8")){
+        //     newPwd.setJobSkill8("Problem Solving");
+        // }
+        // if (hashMap_secondary_skills.containsKey("jobSkill9")){
+        //     newPwd.setJobSkill9("Time Management");
+        // }
+        // if (hashMap_secondary_skills.containsKey("jobSkill10")){
+        //     newPwd.setJobSkill10("Transferable Skills");
+        // }
 
         Call<Candidate> call = pwdAPI.createCandidate(newPwd);
 
