@@ -61,30 +61,30 @@
                             android:textSize="25sp" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/job_details_permission"
-                        android:layout_width="271dp"
-                        android:layout_height="28dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/proxima_nova_regular"
-                        android:gravity="center"
-                        android:text="Approved"
-                        android:textColor="@color/green"></TextView>
+<!--                    <TextView-->
+<!--                        android:id="@+id/job_details_permission"-->
+<!--                        android:layout_width="271dp"-->
+<!--                        android:layout_height="28dp"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:fontFamily="@font/proxima_nova_regular"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="Approved"-->
+<!--                        android:textColor="@color/green"></TextView>-->
 
-                    <Button
-                        android:id="@+id/job_status_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@android:color/transparent"
-                        android:drawableEnd="@drawable/edit"
-                        android:drawablePadding="5dp"
-                        android:fontFamily="@font/proxima_nova_regular"
-                        android:text="Update Status"
-                        android:textAllCaps="false"
-                        android:textColor="#177ad0" />
+<!--                    <Button-->
+<!--                        android:id="@+id/job_status_btn"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:drawableEnd="@drawable/edit"-->
+<!--                        android:drawablePadding="5dp"-->
+<!--                        android:fontFamily="@font/proxima_nova_regular"-->
+<!--                        android:text="Update Status"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="#177ad0" />-->
 
                 </LinearLayout>
 
