@@ -67,7 +67,7 @@ public class EmpFragment extends Fragment {
 
         //set toolbar and toolbar menu
         toolbar = root.findViewById(R.id.toolbar_emp);
-        toolbar.inflateMenu(R.menu.add_menu);
+//        toolbar.inflateMenu(R.menu.add_menu);
 
         empReference =  FirebaseDatabase.getInstance().getReference().child("Employers");
         empReference.orderByChild("typeStatus").addValueEventListener(new ValueEventListener() {
@@ -107,25 +107,25 @@ public class EmpFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.add_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        menu.clear();
+//        inflater.inflate(R.menu.add_menu, menu);
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        toolbar.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.post_add_menu:
-                    startActivity(new Intent(getContext(), AddEmployerActivity.class));
-                    return true;
-                default:
-                    return false;
-            }
-        });
-    }
+//    @Override
+//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+//
+//        toolbar.setOnMenuItemClickListener(item -> {
+//            switch (item.getItemId()) {
+//                case R.id.post_add_menu:
+//                    startActivity(new Intent(getContext(), AddEmployerActivity.class));
+//                    return true;
+//                default:
+//                    return false;
+//            }
+//        });
+//    }
 
 }

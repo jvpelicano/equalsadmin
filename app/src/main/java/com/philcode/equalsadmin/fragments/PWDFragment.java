@@ -70,7 +70,7 @@ public class PWDFragment extends Fragment {
 
         //set toolbar
         toolbar = pwdRoot.findViewById(R.id.toolbar_pwd);
-        toolbar.inflateMenu(R.menu.add_menu);
+//        toolbar.inflateMenu(R.menu.add_menu);
 
         pwdReference =  FirebaseDatabase.getInstance().getReference().child("PWD");
         pwdReference.orderByChild("typeStatus").addValueEventListener(new ValueEventListener() {

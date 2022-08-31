@@ -71,7 +71,7 @@ public class JobFragment extends Fragment {
 
         //set toolbar
         toolbar = jobRoot.findViewById(R.id.toolbar_job);
-        toolbar.inflateMenu(R.menu.more_menu);
+//        toolbar.inflateMenu(R.menu.more_menu);
 
         mAuth = FirebaseAuth.getInstance();
         mUSer = mAuth.getCurrentUser();
