@@ -83,14 +83,14 @@ public class JobDetailsActivity extends AppCompatActivity {
         jobDetailsCompany = findViewById(R.id.job_details_company);
         jobDetailsAddress = findViewById(R.id.job_details_address);
         jobDetailsDescription = findViewById(R.id.job_details_description);
-        jobDetailsPermission = findViewById(R.id.job_details_permission);
+//        jobDetailsPermission = findViewById(R.id.job_details_permission);
         jobDetailsCategory = findViewById(R.id.job_details_category);
         jobDetailsSkill1 = findViewById(R.id.job_details_skill1);
         jobDetailsEduc = findViewById(R.id.job_details_educ);
         jobDetailsWorkxp = findViewById(R.id.job_details_work_xp);
         jobDetailsDisability1 = findViewById(R.id.job_details_disability1);
         jobDetailsExpDate = findViewById(R.id.job_details_exp_date);
-        updateJobStatus = findViewById(R.id.job_status_btn);
+//        updateJobStatus = findViewById(R.id.job_status_btn);
         jobDetail = findViewById(R.id.job_details_layout);
 
         //floating button
@@ -161,21 +161,7 @@ public class JobDetailsActivity extends AppCompatActivity {
                     //set data
                     jobDetailsTitle.setText(title);
                     jobDetailsCompany.setText(company);
-                    if(status.equals("Approved")){
-                        jobDetailsPermission.setText("Approved");
-                        jobDetailsPermission.setTextColor(Color.parseColor("#008000"));
-                        updateJobStatus.setVisibility(View.VISIBLE);
-                    }
-                    else if(status.equals("pending")){
-                        jobDetailsPermission.setText("Awaiting Approval");
-                        jobDetailsPermission.setTextColor(Color.parseColor("#FF1414"));
-                        updateJobStatus.setVisibility(View.VISIBLE);
-                    }
-                    else{
-                        jobDetailsPermission.setText("Cancelled");
-                        jobDetailsPermission.setTextColor(Color.parseColor("#808080"));
-                        updateJobStatus.setVisibility(View.VISIBLE);
-                    }
+//                  t
 
 
                     jobDetailsDescription.setText(description);
